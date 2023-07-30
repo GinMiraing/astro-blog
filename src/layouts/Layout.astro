@@ -14,6 +14,7 @@ import "@fontsource/noto-sans-sc/700.css";
 
 import "../styles/global.css";
 import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 ---
 
 <!DOCTYPE html>
@@ -29,5 +30,6 @@ import { Header } from "@/components/Header";
     <main>
       <slot />
     </main>
+    <Footer client:load />
   </body>
 </html>
