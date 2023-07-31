@@ -26,9 +26,9 @@ import { Footer } from "@/components/Footer";
     <meta name="referrer" content="same-origin" />
     <title>{title}</title>
   </head>
-  <body>
+  <body class="antialiased">
     <Header client:load />
-    <main>
+    <main class="mx-auto px-4 sm:px-8 py-8 max-w-5xl">
       <slot />
     </main>
     <Footer client:load />
