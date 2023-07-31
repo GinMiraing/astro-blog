@@ -5,7 +5,7 @@ export const Footer = () => {
         <div className="text-sm">©️ 2023 Yin. All rights reserved.</div>
         <div className="text-sm mt-2 md:mt-0">
           {"Based on "}
-          <a href={"https://nextjs.org/"}>Next.js</a>
+          <a href={"https://astro.build/"}>Astro</a>
         </div>
       </div>
     </footer>
