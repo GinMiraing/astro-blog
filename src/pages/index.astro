@@ -3,11 +3,11 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { PostCard } from "../components/PostCard";
 
-const allBlogs = await getCollection("blog");
+const allPosts = await getCollection("blog");
 ---
 
 <Layout title="Welcome to Astro.">
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-    {allBlogs.map((post) => <PostCard post={post} />)}
+    {allPosts.map((post) => <PostCard post={post} />)}
   </div>
 </Layout>
