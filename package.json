@@ -13,7 +13,6 @@
     "@astrojs/mdx": "^0.19.7",
     "@astrojs/react": "^2.2.1",
     "@astrojs/tailwind": "^4.0.0",
-    "@fontsource/noto-sans-sc": "^5.0.5",
     "@fontsource/noto-serif-sc": "^5.0.5",
     "@types/react": "^18.2.17",
     "@types/react-dom": "^18.2.7",

@@ -19,7 +19,7 @@ export const PostCard = ({ post }: PostCardProps) => {
         </a>
       </div>
       <div className="px-4 my-3">
-        <h1 className="text-xl font-serif font-medium text-stone-900">
+        <h1 className="text-xl font-medium text-stone-900">
           <a
             className="hover:text-rose-400 transition-colors"
             href={`/p/${post.slug}`}
@@ -27,12 +27,12 @@ export const PostCard = ({ post }: PostCardProps) => {
             {post.data.title}
           </a>
         </h1>
-        <time className="block font-serif mt-2 text-stone-600">
+        <time className="block mt-2 text-stone-600">
           {dayjs(post.data.date).format("YYYY-MM-DD")}
         </time>
       </div>
       <div className="px-4 my-3 flex-grow">
-        <p className="text-justify font-serif line-clamp-2 text-stone-900">
+        <p className="text-justify line-clamp-2 text-stone-900">
           <a
             className="hover:text-rose-400 transition-colors"
             href={`/p/${post.slug}`}
@@ -41,7 +41,7 @@ export const PostCard = ({ post }: PostCardProps) => {
           </a>
         </p>
       </div>
-      <div className="px-4 mt-2 text-sm font-serif text-stone-600 font-medium pb-4">{`# ${post.data.category}`}</div>
+      <div className="px-4 mt-2 text-sm text-stone-600 font-medium pb-4">{`# ${post.data.category}`}</div>
     </div>
   );
 };
