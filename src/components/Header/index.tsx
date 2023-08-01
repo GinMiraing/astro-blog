@@ -8,7 +8,7 @@ export const Header = () => {
   return (
     <header
       className={cn(
-        "w-full h-16 md:h-16 transition-all sticky shadow-md bg-white",
+        "w-full h-16 md:h-16 transition-all fixed top-0 z-50 shadow-md bg-white",
         {
           "h-80": mobileMenuOpen,
         }

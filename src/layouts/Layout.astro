@@ -12,6 +12,7 @@ import "@fontsource/noto-serif-sc/600.css";
 import "../styles/global.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import LazyImage from "@/components/LazyImage";
 ---
 
 <!DOCTYPE html>
@@ -25,9 +26,7 @@ import { Footer } from "@/components/Footer";
   </head>
   <body class="antialiased font-serif">
     <Header client:load />
-    <main class="mx-auto px-4 sm:px-8 py-8 max-w-5xl">
-      <slot />
-    </main>
+    <slot />
     <Footer client:load />
   </body>
 </html>
