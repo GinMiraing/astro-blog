@@ -9,17 +9,17 @@ const allPosts = await getCollection("blog");
 
 <Layout title="Welcome to Astro.">
   <main class="mt-16">
-    <div class="w-full h-96">
+    <div class="w-full h-72 md:h-auto">
       <LazyImage
         client:load
         src="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
         alt="banner"
         width="1920"
-        height="800"
+        height="600"
       />
     </div>
     <div class="mx-auto px-4 sm:px-8 py-8 max-w-5xl">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
         {allPosts.map((post) => <PostCard client:load post={post} />)}
       </div>
     </div>
