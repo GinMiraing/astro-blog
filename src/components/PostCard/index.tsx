@@ -1,5 +1,6 @@
 import type { CollectionEntry } from "astro:content";
 import dayjs from "dayjs";
+import LazyImage from "../LazyImage";
 
 type PostCardProps = {
   post: CollectionEntry<"blog">;
@@ -10,11 +11,12 @@ export const PostCard = ({ post }: PostCardProps) => {
     <div className="flex flex-col border-stone-300 hover:border-rose-300 border rounded-lg overflow-hidden">
       <div className="w-full h-48 overflow-hidden">
         <a href={`/p/${post.slug}`}>
-          <img
-            loading="lazy"
-            className="w-full h-full object-cover hover:scale-150 transition-transform"
+          <LazyImage
             src={post.data.cover}
             alt={post.data.title}
+            width="800"
+            height="400"
+            className="hover:scale-150 transition-transform"
           />
         </a>
       </div>
