@@ -12,14 +12,14 @@ type LazyImageProps = {
 const LazyImage = ({ src, alt, width, height, className }: LazyImageProps) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    rootMargin: "50px 0px",
+    rootMargin: "10px 0px",
   });
 
   return (
     <div
       ref={ref}
       data-inview={inView}
-      className="relative data-[inview=true]:blur-none blur-sm duration-500 transition-all h-full w-full overflow-hidden"
+      className="relative data-[inview=true]:blur-none blur-sm duration-700 transition-all h-full w-full overflow-hidden"
     >
       <img
         alt={alt}
