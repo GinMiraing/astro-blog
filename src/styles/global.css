@@ -6,4 +6,15 @@
   main {
     min-height: calc(100vh - 129px);
   }
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgb(253 164 175);
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-corner {
+    background-color: transparent;
+  }
 }
