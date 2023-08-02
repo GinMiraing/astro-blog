@@ -8,7 +8,7 @@ type PostCardProps = {
 
 export const PostCard = ({ post }: PostCardProps) => {
   return (
-    <div className="flex flex-col border-stone-300 bg-gray-50 hover:border-rose-300 border rounded-lg overflow-hidden">
+    <div className="flex flex-col border-cardborder bg-cardbg hover:border-primary border rounded-lg overflow-hidden">
       <div className="w-full h-48 overflow-hidden">
         <a href={`/p/${post.slug}`}>
           <LazyImage
@@ -23,7 +23,7 @@ export const PostCard = ({ post }: PostCardProps) => {
       <div className="px-4 my-3">
         <h1 className="text-xl font-medium text-primarytext">
           <a
-            className="hover:text-rose-400 transition-colors"
+            className="hover:text-primary transition-colors"
             href={`/p/${post.slug}`}
           >
             {post.data.title}
@@ -36,7 +36,7 @@ export const PostCard = ({ post }: PostCardProps) => {
       <div className="px-4 my-3 flex-grow">
         <p className="text-justify line-clamp-2 text-primarytext">
           <a
-            className="hover:text-rose-400 transition-colors"
+            className="hover:text-primary transition-colors"
             href={`/p/${post.slug}`}
           >
             {post.data.description}
