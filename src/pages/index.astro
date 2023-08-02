@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import { PostCard } from "../components/PostCard";
 import LazyImage from "@/components/LazyImage";
+import { ChevronRight } from "lucide-react";
 
 const allPosts = await getCollection("blog");
 ---
@@ -19,8 +20,24 @@ const allPosts = await getCollection("blog");
       />
     </div>
     <div class="mx-auto px-4 sm:px-8 py-8 max-w-5xl">
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-        {allPosts.map((post) => <PostCard client:load post={post} />)}
+      <div class="flex items-center justify-between mt-2 mb-4">
+        <div class="text-center font-extrabold text-3xl text-primarytext">
+          最新文章
+        </div>
+        <div
+          class="text-primarytext flex items-center font-bold text-lg hover:text-primary transition-colors"
+        >
+          <a href="/post/1">更多文章</a><ChevronRight className="inline" />
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        {
+          allPosts.reverse().map((post, index) => {
+            if (index < 6) {
+              return <PostCard client:load post={post} />;
+            }
+          })
+        }
       </div>
     </div>
   </main>
