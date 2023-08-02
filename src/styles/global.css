@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --text-primary: #444;
+    --text-secondary: #888;
+  }
   main {
     min-height: calc(100vh - 129px);
   }

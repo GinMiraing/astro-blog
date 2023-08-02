@@ -7,6 +7,10 @@ module.exports = {
       fontFamily: {
         serif: ["Noto Serif SC", "serif"],
       },
+      colors: {
+        primarytext: "var(--text-primary)",
+        secondarytext: "var(--text-secondary)",
+      },
     },
   },
 };
