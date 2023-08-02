@@ -6,6 +6,10 @@
   :root {
     --text-primary: #444;
     --text-secondary: #888;
+    --primary: #ff6b81;
+    --body-bg: #fff;
+    --card-bg: #fafafa;
+    --card-border: #a4b0be;
   }
   main {
     min-height: calc(100vh - 129px);
@@ -15,7 +19,7 @@
     height: 5px;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: rgb(253 164 175);
+    background-color: #ff6b81;
     border-radius: 5px;
   }
   ::-webkit-scrollbar-corner {

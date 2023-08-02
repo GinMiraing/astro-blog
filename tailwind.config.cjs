@@ -10,6 +10,10 @@ module.exports = {
       colors: {
         primarytext: "var(--text-primary)",
         secondarytext: "var(--text-secondary)",
+        bodybg: "var(--body-bg)",
+        cardbg: "var(--card-bg)",
+        cardborder: "var(--card-border)",
+        primary: "var(--primary)",
       },
     },
   },
