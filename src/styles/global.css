@@ -4,12 +4,12 @@
 
 @layer base {
   :root {
-    --text-primary: #444;
+    --text-primary: #363636;
     --text-secondary: #888;
     --primary: #ff6b81;
-    --body-bg: #fff;
-    --card-bg: #fafafa;
-    --card-border: #a4b0be;
+    --body-bg: #f7f9fe;
+    --card-bg: #fff;
+    --card-border: #e3e8f7;
   }
   main {
     min-height: calc(100vh - 129px);
