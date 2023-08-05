@@ -4,11 +4,20 @@
 
 @layer base {
   :root {
+<<<<<<< HEAD
     --text-primary: #333;
     --text-secondary: #bbb;
     --primary: #ff6b81;
     --card-bg: #fff;
     --body-bg: #f7f7f7;
+=======
+    --text-primary: #363636;
+    --text-secondary: #888;
+    --primary: #ff6b81;
+    --body-bg: #f7f9fe;
+    --card-bg: #fff;
+    --card-border: #e3e8f7;
+>>>>>>> 45b1a84a515a5a24540f3c8eea9875f1c3be65fb
   }
   body {
     background-image: url("https://cdn.zengjunyin.com/9B54A4959F1F0AB9DDB324F5CE8195A5.png");
