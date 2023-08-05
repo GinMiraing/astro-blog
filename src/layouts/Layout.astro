@@ -9,10 +9,9 @@ import "@fontsource/noto-serif-sc/400.css";
 import "@fontsource/noto-serif-sc/500.css";
 import "@fontsource/noto-serif-sc/600.css";
 
+import Footer from "@/components/Footer/index.astro";
+
 import "../styles/global.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import LazyImage from "@/components/LazyImage";
 ---
 
 <!DOCTYPE html>
@@ -24,9 +23,12 @@ import LazyImage from "@/components/LazyImage";
     <meta name="referrer" content="same-origin" />
     <title>{title}</title>
   </head>
-  <body class="antialiased font-serif bg-bodybg">
-    <Header client:load />
-    <slot />
-    <Footer client:load />
+  <body class="antialiased font-serif text-primary">
+    <main
+      class="sm:mt-24 p-4 sm:p-8 md:p-16 lg:mx-auto max-w-4xl sm:mx-4 md:mx-8 shadow-lg rounded-sm bg-primary"
+    >
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

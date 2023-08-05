@@ -1,44 +1,55 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import { PostCard } from "../components/PostCard";
-import LazyImage from "@/components/LazyImage";
+import TitleWithUnderline from "@/components/TitleWithUnderline/index.astro";
+import PostCard from "../components/PostCard/index.astro";
 import { ChevronRight } from "lucide-react";
 
 const allPosts = await getCollection("blog");
 ---
 
 <Layout title="Welcome to Astro.">
-  <main class="mt-16">
-    <div class="w-full h-72 md:h-auto">
-      <LazyImage
-        client:load
-        src="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
-        alt="banner"
-        width="1920"
-        height="600"
-      />
-    </div>
-    <div class="mx-auto px-4 sm:px-8 py-8 max-w-5xl">
-      <div class="flex items-center justify-between mt-2 mb-4">
-        <div class="text-center font-extrabold text-3xl text-primarytext">
-          最新文章
-        </div>
-        <div
-          class="text-primarytext flex items-center font-bold text-lg hover:text-primary transition-colors"
-        >
-          <a href="/post/1">更多文章</a><ChevronRight className="inline" />
-        </div>
+  <div class="w-full">
+    <div class="flex items-center justify-between">
+      <h1 class="text-3xl font-extrabold">胤的博客</h1>
+      <div class="w-12 h-12 rounded-full overflow-hidden">
+        <img
+          src="https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png@.webp"
+          alt="avatar"
+        />
       </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {
-          allPosts.reverse().map((post, index) => {
-            if (index < 6) {
-              return <PostCard client:load post={post} />;
-            }
-          })
+    </div>
+    <div class="text-sm mt-4">『 所念皆星河 』</div>
+  </div>
+  <hr class="my-6" />
+  <div class="w-full h-60 rounded-lg overflow-hidden">
+    <img
+      class="object-cover w-full h-full transition-all duration-700 hover:blur-sm"
+      src="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png@.webp"
+      alt="banner"
+    />
+  </div>
+  <hr class="my-6" />
+  <div class="w-full">
+    <TitleWithUnderline title="最新文章" />
+  </div>
+  <div class="grid grid-cols-1 gap-4 last:border-none">
+    {
+      allPosts.reverse().map((post, index) => {
+        if (index < 5) {
+          return <PostCard post={post} />;
         }
-      </div>
-    </div>
-  </main>
+      })
+    }
+  </div>
+  <div
+    class="flex items-center hover:text-pink transition-colors justify-end mt-2"
+  >
+    <a class="font-medium" href="/">所有文章</a>
+    <ChevronRight className="h-4 w-4" />
+  </div>
+
+  <div class="w-full mt-6">
+    <TitleWithUnderline title="最新说说" />
+  </div>
 </Layout>
