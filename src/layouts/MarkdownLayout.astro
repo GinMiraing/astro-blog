@@ -1,0 +1,74 @@
+---
+import "@fontsource/noto-serif-sc/400.css";
+import "@fontsource/noto-serif-sc/500.css";
+import "@fontsource/noto-serif-sc/600.css";
+
+import Footer from "@/components/Footer/index.astro";
+
+import "../styles/global.css";
+import type { CollectionEntry } from "astro:content";
+import { LazyImage } from "@/components/LazyImage";
+import dayjs from "dayjs";
+
+interface Props {
+  title: string;
+  blog: CollectionEntry<"blog">;
+}
+
+const { title, blog } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="referrer" content="same-origin" />
+    <title>{title}</title>
+  </head>
+  <body class="antialiased font-serif text-primary">
+    <main
+      class="sm:mt-24 lg:mx-auto max-w-4xl sm:mx-4 md:mx-8 shadow-lg rounded-sm bg-primary"
+    >
+      <div class="h-80 relative overflow-hidden">
+        <LazyImage
+          client:load
+          src={blog.data.cover}
+          alt={blog.data.title}
+          width="800"
+          height="400"
+          className="-z-10"
+        />
+        <div
+          class="absolute h-48 left-0 right-0 bottom-0 from-black/[.4] to-transparent bg-gradient-to-t"
+        >
+        </div>
+        <div class="absolute z-20 text-white bottom-6 left-12 right-12">
+          <div class="flex justify-between items-center">
+            <div>
+              <h1 class="text-2xl font-black mb-4">{blog.data.title}</h1>
+              <div class="flex space-x-4 text-sm">
+                <span>{blog.data.author}</span>
+                <span>/</span>
+                <span>{dayjs(blog.data.date).format("YYYY.MM.DD")}</span>
+                <span>/</span>
+                <span>{blog.data.category}</span>
+              </div>
+            </div>
+            <div class="w-12 h-12 rounded-full overflow-hidden">
+              <img
+                src="https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png@.webp"
+                alt="avatar"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="markdown px-4 pb-4 sm:px-8 md:px-16">
+        <slot />
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

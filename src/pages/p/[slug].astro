@@ -1,5 +1,5 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import MarkdownLayout from "@/layouts/MarkdownLayout.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 
 interface Props {
@@ -17,6 +17,19 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<Layout title={entry.data.title}>
+<MarkdownLayout blog={entry} title={entry.data.title}>
   <Content />
-</Layout>
+</MarkdownLayout>
+
+<script>
+  import { Fancybox as NativeFancybox } from "@fancyapps/ui";
+  NativeFancybox.bind("[data-fancybox]", {
+    Toolbar: {
+      display: {
+        left: [],
+        middle: [],
+        right: ["close"],
+      },
+    },
+  });
+</script>
