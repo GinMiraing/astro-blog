@@ -1,0 +1,35 @@
+---
+import MarkdownLayout from "@/layouts/MarkdownLayout.astro";
+import { CollectionEntry, getCollection } from "astro:content";
+
+interface Props {
+  entry: CollectionEntry<"blog">;
+}
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection("blog");
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<MarkdownLayout blog={entry} title={entry.data.title}>
+  <Content />
+</MarkdownLayout>
+
+<script>
+  import { Fancybox as NativeFancybox } from "@fancyapps/ui";
+  NativeFancybox.bind("[data-fancybox]", {
+    Toolbar: {
+      display: {
+        left: [],
+        middle: [],
+        right: ["close"],
+      },
+    },
+  });
+</script>

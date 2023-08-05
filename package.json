@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "blog",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -10,6 +10,23 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^2.9.6"
+    "@astrojs/mdx": "^0.19.7",
+    "@astrojs/react": "^2.2.1",
+    "@astrojs/tailwind": "^4.0.0",
+    "@fancyapps/ui": "^5.0.20",
+    "@fontsource/noto-serif-sc": "^5.0.5",
+    "@types/react": "^18.2.17",
+    "@types/react-dom": "^18.2.7",
+    "astro": "^2.9.6",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "dayjs": "^1.11.9",
+    "lucide-react": "^0.263.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-intersection-observer": "^9.5.2",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss": "^3.3.3",
+    "tailwindcss-animate": "^1.0.6"
   }
 }

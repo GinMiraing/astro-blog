@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from "astro:content";
+import dayjs from "dayjs";
+import { LazyImage } from "../LazyImage";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+---
+
+<div class="flex py-2 justify-between border-b h-40 md:h-48">
+  <div class="basis-3/5 shrink-0 h-full flex flex-col justify-between">
+    <h3 class="text-xl font-semibold">
+      <a class="hover:text-link transition-colors" href={`/p/${post.slug}`}
+        >{post.data.title}</a
+      >
+    </h3>
+    <p
+      class="leading-6 md:leading-8 my-4 flex-grow-0 line-clamp-2 text-justify"
+    >
+      {post.data.description}
+    </p>
+    <div class="text-secondary text-sm space-x-4">
+      <span>{post.data.author}</span>
+      <span>/</span>
+      <span>{dayjs(post.data.date).format("YYYY.MM.DD")}</span>
+      <span>/</span>
+      <span>{post.data.category}</span>
+    </div>
+  </div>
+  <div class="flex ml-4 items-center">
+    <div class="overflow-hidden rounded-sm shadow-md h-20 md:h-32">
+      <a href={`/p/${post.slug}`}>
+        <LazyImage
+          client:load
+          src={post.data.cover}
+          alt={post.data.title}
+          width="800"
+          height="400"
+          className="hover:scale-150 transition-transform"
+        />
+      </a>
+    </div>
+  </div>
+</div>
