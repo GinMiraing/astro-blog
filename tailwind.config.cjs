@@ -7,13 +7,16 @@ module.exports = {
       fontFamily: {
         serif: ["Noto Serif SC", "serif"],
       },
+      textColor: {
+        primary: "var(--text-primary)",
+        secondary: "var(--text-secondary)",
+        link: "var(--primary)",
+      },
+      backgroundColor: {
+        primary: "var(--card-bg)",
+      },
       colors: {
-        primarytext: "var(--text-primary)",
-        secondarytext: "var(--text-secondary)",
-        bodybg: "var(--body-bg)",
-        cardbg: "var(--card-bg)",
-        cardborder: "var(--card-border)",
-        primary: "var(--primary)",
+        pink: "var(--primary)",
       },
     },
   },

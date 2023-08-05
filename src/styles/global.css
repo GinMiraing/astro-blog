@@ -4,25 +4,43 @@
 
 @layer base {
   :root {
-    --text-primary: #444;
-    --text-secondary: #888;
+    --text-primary: #333;
+    --text-secondary: #bbb;
     --primary: #ff6b81;
-    --body-bg: #fff;
-    --card-bg: #fafafa;
-    --card-border: #a4b0be;
+    --card-bg: #fff;
+    --body-bg: #f7f7f7;
   }
-  main {
-    min-height: calc(100vh - 129px);
+  body {
+    background-image: url("https://cdn.zengjunyin.com/9B54A4959F1F0AB9DDB324F5CE8195A5.png");
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-color: var(--body-bg);
+  }
+  hr {
+    background-color: var(--text-secondary);
   }
   ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: #ff6b81;
+    background-color: var(--primary);
     border-radius: 5px;
   }
   ::-webkit-scrollbar-corner {
     background-color: transparent;
+  }
+  *,
+  ::after,
+  ::before {
+    box-sizing: border-box;
+  }
+  .markdown p {
+    text-align: justify;
+    line-height: 2;
+  }
+
+  .markdown * {
+    margin: 1rem 0;
   }
 }
