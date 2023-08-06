@@ -1,6 +1,7 @@
 ---
-import { PostCard } from "@/components/PostCard";
 import Layout from "@/layouts/Layout.astro";
+import TitleWithUnderline from "@/components/TitleWithUnderline/index.astro";
+import PostCard from "@/components/PostCard/index.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -27,37 +28,41 @@ interface Props {
 
 export async function getStaticPaths({ paginate }: GetStaticPathsProps) {
   const allPosts = await getCollection("blog");
-  return paginate(allPosts, { pageSize: 9 });
+  const reverseAllPosts = allPosts.reverse();
+  return paginate(reverseAllPosts, { pageSize: 100 });
 }
 
 const { page } = Astro.props;
 ---
 
 <Layout title={`全部文章 - ${page.currentPage}`}>
-  <main class="mx-auto mt-20 px-4 sm:px-8 py-8 max-w-5xl">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      {page.data.map((post) => <PostCard client:load post={post} />)}
-    </div>
-    <div class="flex text-primarytext justify-center mt-4">
-      <a href={page.url.prev}>
-        <button
-          disabled={!page.url.prev}
-          class="w-12 disabled:text-secondarytext h-12 hover:bg-cardbg hover:text-primary transition-colors rounded-md flex items-center justify-center"
-        >
-          <ChevronLeft />
-        </button>
-      </a>
-      <div class="h-12 w-12 rounded-md flex items-center justify-center">
-        {page.currentPage}
-      </div>
-      <a href={page.url.next}>
-        <button
-          disabled={!page.url.next}
-          class="w-12 h-12 flex rounded-md disabled:text-secondarytext items-center hover:bg-cardbg hover:text-primary transition-colors justify-center"
-        >
-          <ChevronRight />
-        </button>
-      </a>
-    </div>
-  </main>
+  <div class="w-full">
+    <TitleWithUnderline title="所有文章" />
+  </div>
+  <div class="grid grid-cols-1 gap-4 last:border-none">
+    {
+      page.data.map((post) => {
+        return <PostCard post={post} />;
+      })
+    }
+  </div>
 </Layout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const lazyImages = document.querySelectorAll("img.lazyload");
+    const lazyImageObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const image = entry.target as HTMLElement;
+          image.classList.remove("lazyload");
+          image.setAttribute("src", image.dataset.src ? image.dataset.src : "");
+          lazyImageObserver.unobserve(image);
+        }
+      });
+    });
+    lazyImages.forEach((image) => {
+      lazyImageObserver.observe(image);
+    });
+  });
+</script>

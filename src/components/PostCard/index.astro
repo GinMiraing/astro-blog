@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import dayjs from "dayjs";
-import { LazyImage } from "../LazyImage";
+import Image from "@/components/Image/index.astro";
 
 interface Props {
   post: CollectionEntry<"blog">;
@@ -33,13 +33,13 @@ const { post } = Astro.props;
   <div class="flex ml-4 items-center">
     <div class="overflow-hidden rounded-sm shadow-md h-20 md:h-32">
       <a href={`/p/${post.slug}`}>
-        <LazyImage
-          client:load
+        <Image
           src={post.data.cover}
           alt={post.data.title}
           width="800"
           height="400"
           className="hover:scale-150 transition-transform"
+          withFancyBox={false}
         />
       </a>
     </div>

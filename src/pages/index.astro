@@ -1,9 +1,10 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
 import TitleWithUnderline from "@/components/TitleWithUnderline/index.astro";
-import PostCard from "../components/PostCard/index.astro";
+import PostCard from "@/components/PostCard/index.astro";
 import { ChevronRight } from "lucide-react";
+import { getCollection } from "astro:content";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 const allPosts = await getCollection("blog");
 ---
@@ -45,7 +46,7 @@ const allPosts = await getCollection("blog");
   <div
     class="flex items-center hover:text-pink transition-colors justify-end mt-2"
   >
-    <a class="font-medium" href="/">所有文章</a>
+    <a class="font-medium" href="/post/1">所有文章</a>
     <ChevronRight className="h-4 w-4" />
   </div>
 
@@ -53,3 +54,34 @@ const allPosts = await getCollection("blog");
     <TitleWithUnderline title="最新说说" />
   </div>
 </Layout>
+
+<script>
+  import { Fancybox } from "@fancyapps/ui";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const lazyImages = document.querySelectorAll("img.lazyload");
+    const lazyImageObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const image = entry.target as HTMLElement;
+          image.classList.remove("lazyload");
+          image.setAttribute("src", image.dataset.src ? image.dataset.src : "");
+          lazyImageObserver.unobserve(image);
+        }
+      });
+    });
+    lazyImages.forEach((image) => {
+      lazyImageObserver.observe(image);
+    });
+    Fancybox.bind("[data-fancybox]", {
+      Thumbs: false,
+      Toolbar: {
+        display: {
+          left: [],
+          middle: [],
+          right: ["close"],
+        },
+      },
+    });
+  });
+</script>
