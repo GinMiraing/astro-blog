@@ -20,21 +20,21 @@ const placeholder = `https://article.biliimg.com/bfs/article/18d1e2d11b9e00ea443
 
 {
   withFancyBox ? (
-    <a
-      class="hover:brightness-90 transition-all"
-      data-fancybox
-      data-caption={alt ? alt : ""}
-      href={src}
-    >
-      <div class={cn("h-full w-full overflow-hidden", className)}>
+    <div class={cn("h-full w-full overflow-hidden", className)}>
+      <a
+        class="hover:brightness-90 transition-all"
+        data-fancybox
+        data-caption={alt ? alt : ""}
+        href={src}
+      >
         <img
           src={placeholder}
           data-src={`${src}@${srcSuffix}`}
           class="lazyload object-cover h-full w-full"
           alt={alt ? alt : ""}
         />
-      </div>
-    </a>
+      </a>
+    </div>
   ) : (
     <div class={cn("h-full w-full overflow-hidden", className)}>
       <img
