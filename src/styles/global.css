@@ -35,11 +35,14 @@
   ::before {
     box-sizing: border-box;
   }
+  .markdown * {
+    margin: 1rem 0;
+  }
   .markdown p {
     text-align: justify;
     line-height: 2;
   }
-  .markdown * {
-    margin: 1rem 0;
+  .markdown a {
+    color: var(--primary);
   }
 }
