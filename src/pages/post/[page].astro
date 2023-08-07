@@ -2,8 +2,10 @@
 import Layout from "@/layouts/Layout.astro";
 import TitleWithUnderline from "@/components/TitleWithUnderline/index.astro";
 import PostCard from "@/components/PostCard/index.astro";
+import Navbar from "@/components/Navbar/index.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type GetStaticPathsProps = {
   paginate: Function;
@@ -29,13 +31,14 @@ interface Props {
 export async function getStaticPaths({ paginate }: GetStaticPathsProps) {
   const allPosts = await getCollection("blog");
   const reverseAllPosts = allPosts.reverse();
-  return paginate(reverseAllPosts, { pageSize: 100 });
+  return paginate(reverseAllPosts, { pageSize: 8 });
 }
 
 const { page } = Astro.props;
 ---
 
 <Layout title={`全部文章 - ${page.currentPage}`}>
+  <Navbar />
   <div class="w-full">
     <TitleWithUnderline title="所有文章" />
   </div>
@@ -45,6 +48,24 @@ const { page } = Astro.props;
         return <PostCard post={post} />;
       })
     }
+  </div>
+  <div class="w-full flex items-center justify-between font-medium mt-4">
+    <div
+      class={cn("hover:text-pink flex items-center transition-colors", {
+        invisible: !page.url.prev,
+      })}
+    >
+      <ChevronLeft className="h-4 w-4" />
+      <a href={page.url.prev}>上一页</a>
+    </div>
+    <div
+      class={cn("hover:text-pink flex items-center transition-colors", {
+        invisible: !page.url.next,
+      })}
+    >
+      <a href={page.url.next}>下一页</a>
+      <ChevronRight className="h-4 w-4" />
+    </div>
   </div>
 </Layout>
 
