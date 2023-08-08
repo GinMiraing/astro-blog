@@ -1,0 +1,19 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+  title: string;
+  link: string;
+  active: boolean;
+}
+
+const { title, link, active } = Astro.props;
+---
+
+<div
+  class={cn("hover:text-pink transition-colors p-1", {
+    "border-b-pink border-b-4": active,
+  })}
+>
+  <a href={link}>{title}</a>
+</div>

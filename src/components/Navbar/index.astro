@@ -1,5 +1,40 @@
-<div class="w-full flex">
-  <div><a href="/">主页</a></div>
-  <div><a href="/post/1">文章</a></div>
-  <div><a href="/">友链</a></div>
+---
+import NavbarItem from "@/components/NavbarItem/index.astro";
+
+interface Props {
+  select: number;
+}
+
+const { select } = Astro.props;
+
+const itemList = [
+  {
+    title: "主页",
+    link: "/",
+  },
+  {
+    title: "文章",
+    link: "/post/1",
+  },
+  {
+    title: "说说",
+    link: "/",
+  },
+  {
+    title: "友链",
+    link: "/",
+  },
+];
+---
+
+<div class="w-full flex space-x-4 my-4">
+  {
+    itemList.map((item, index) => (
+      <NavbarItem
+        title={item.title}
+        link={item.link}
+        active={index === select ? true : false}
+      />
+    ))
+  }
 </div>
