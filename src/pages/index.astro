@@ -11,10 +11,10 @@ const allPosts = await getCollection("blog");
 ---
 
 <Layout title="胤的博客">
-  <Navbar />
+  <Navbar select={0} />
   <div class="w-full">
     <div class="flex items-center justify-between">
-      <h1 class="text-3xl font-extrabold">胤的博客</h1>
+      <h1 class="text-3xl font-bold">胤的博客</h1>
       <div class="w-12 h-12 rounded-full overflow-hidden">
         <img
           src="https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png@.webp"
@@ -48,7 +48,7 @@ const allPosts = await getCollection("blog");
   <div
     class="flex items-center hover:text-pink transition-colors justify-end mt-2"
   >
-    <a class="font-medium" href="/post/1">所有文章</a>
+    <a href="/post/1">所有文章</a>
     <ChevronRight className="h-4 w-4" />
   </div>
 

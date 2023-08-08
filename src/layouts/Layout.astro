@@ -5,10 +5,6 @@ interface Props {
 
 const { title } = Astro.props;
 
-import "@fontsource/noto-serif-sc/400.css";
-import "@fontsource/noto-serif-sc/500.css";
-import "@fontsource/noto-serif-sc/600.css";
-
 import Footer from "@/components/Footer/index.astro";
 
 import "../styles/global.css";
@@ -19,11 +15,19 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.staticfile.org/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-bold.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.staticfile.org/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-regular.min.css"
+    />
     <meta name="referrer" content="same-origin" />
     <title>{title}</title>
   </head>
-  <body class="antialiased font-serif text-primary tracking-widest">
+  <body class="text-primary tracking-widest">
     <main
       class="sm:mt-24 p-4 sm:p-8 md:p-16 lg:mx-auto max-w-4xl sm:mx-4 md:mx-8 shadow-lg rounded-sm bg-primary"
     >

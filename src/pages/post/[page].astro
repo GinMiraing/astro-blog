@@ -38,7 +38,7 @@ const { page } = Astro.props;
 ---
 
 <Layout title={`全部文章 - ${page.currentPage}`}>
-  <Navbar />
+  <Navbar select={1} />
   <div class="w-full">
     <TitleWithUnderline title="所有文章" />
   </div>
@@ -49,7 +49,7 @@ const { page } = Astro.props;
       })
     }
   </div>
-  <div class="w-full flex items-center justify-between font-medium mt-4">
+  <div class="w-full flex items-center justify-between mt-4">
     <div
       class={cn("hover:text-pink flex items-center transition-colors", {
         invisible: !page.url.prev,

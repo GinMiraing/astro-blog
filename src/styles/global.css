@@ -15,6 +15,10 @@
     background-repeat: repeat;
     background-attachment: fixed;
     background-color: var(--body-bg);
+    font-family: "LXGW WenKai", sans-serif;
+    font-display: swap;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   hr {
     background-color: var(--text-secondary);
