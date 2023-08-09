@@ -1,5 +1,4 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import dayjs from "dayjs";
 import Image from "@/components/Image/index.astro";
 
@@ -13,7 +12,6 @@ interface Props {
     category: string;
   };
   slug: string;
-  // post: CollectionEntry<"blog">;
 }
 
 const { post, slug } = Astro.props;
