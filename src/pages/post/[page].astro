@@ -1,8 +1,7 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import TitleWithUnderline from "@/components/TitleWithUnderline/index.astro";
+import Image from "@/components/Image/index.astro";
 import PostCard from "@/components/PostCard/index.astro";
-import Navbar from "@/components/Navbar/index.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -37,19 +36,25 @@ export async function getStaticPaths({ paginate }: GetStaticPathsProps) {
 const { page } = Astro.props;
 ---
 
-<Layout title={`全部文章 - ${page.currentPage}`}>
-  <Navbar select={1} />
-  <div class="w-full">
-    <TitleWithUnderline title="所有文章" />
+<Layout select={1} title={`全部文章 - ${page.currentPage}`}>
+  <!-- banner -->
+  <div class="w-full h-60 rounded-lg overflow-hidden">
+    <Image
+      alt="banner"
+      withFancyBox={false}
+      src="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
+    />
   </div>
-  <div class="grid grid-cols-1 gap-4 last:border-none">
+  <!-- post -->
+  <div class="grid my-6 grid-cols-1 gap-4 border-y divide-y">
     {
       page.data.map((post) => {
         return <PostCard post={post} />;
       })
     }
   </div>
-  <div class="w-full flex items-center justify-between mt-4">
+  <!-- footer -->
+  <div class="w-full flex items-center justify-between">
     <div
       class={cn("hover:text-pink flex items-center transition-colors", {
         invisible: !page.url.prev,

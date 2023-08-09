@@ -3,7 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import TitleWithUnderline from "@/components/TitleWithUnderline/index.astro";
 import PostCard from "@/components/PostCard/index.astro";
 import IssueCard from "@/components/IssueCard/index.astro";
-import Navbar from "@/components/Navbar/index.astro";
+import Image from "@/components/Image/index.astro";
 import { ChevronRight } from "lucide-react";
 import { getCollection, getEntry } from "astro:content";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
@@ -13,8 +13,8 @@ const issueOrigin = await getEntry("issue", "index");
 const issues = issueOrigin.data.issues.map((item) => item);
 ---
 
-<Layout title="胤的博客">
-  <Navbar select={0} />
+<Layout select={0} title="胤的博客">
+  <!-- header -->
   <div class="w-full">
     <div class="flex items-center justify-between">
       <h1 class="text-3xl font-bold">胤的博客</h1>
@@ -28,36 +28,70 @@ const issues = issueOrigin.data.issues.map((item) => item);
     <div class="text-sm mt-4">『 所念皆星河 』</div>
   </div>
   <hr class="my-6" />
+  <!-- banner -->
   <div class="w-full h-60 rounded-lg overflow-hidden">
-    <img
-      class="object-cover w-full h-full transition-all duration-700 hover:blur-sm"
-      src="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png@.webp"
+    <Image
       alt="banner"
+      withFancyBox={false}
+      src="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
     />
   </div>
   <hr class="my-6" />
+  <!-- post -->
   <div class="w-full">
     <TitleWithUnderline title="最新文章" />
+    <div class="grid grid-cols-1 border-b divide-y">
+      {
+        allPosts.reverse().map((post, index) => {
+          if (index < 5) {
+            return <PostCard post={post} />;
+          }
+        })
+      }
+    </div>
+    <div
+      class="flex items-center hover:text-pink transition-colors justify-end mt-2"
+    >
+      <a href="/post/1">所有文章</a>
+      <ChevronRight className="h-4 w-4" />
+    </div>
   </div>
-  <div class="grid grid-cols-1 gap-4 last:border-none">
-    {
-      allPosts.reverse().map((post, index) => {
-        if (index < 5) {
-          return <PostCard post={post} />;
-        }
-      })
-    }
-  </div>
-  <div
-    class="flex items-center hover:text-pink transition-colors justify-end mt-2"
-  >
-    <a href="/post/1">所有文章</a>
-    <ChevronRight className="h-4 w-4" />
-  </div>
-
+  <!-- issue -->
   <div class="w-full mt-6">
     <TitleWithUnderline title="最新说说" />
-    {issues.map((item) => <IssueCard issue={item} />)}
+    <div class="grid grid-cols-1 border-b divide-y">
+      {issues.reverse().map((item) => <IssueCard issue={item} />)}
+    </div>
+    <div
+      class="flex items-center hover:text-pink transition-colors justify-end mt-2"
+    >
+      <a href="/post/1">所有说说</a>
+      <ChevronRight className="h-4 w-4" />
+    </div>
+  </div>
+  <!-- about -->
+  <div class="w-full mt-6">
+    <TitleWithUnderline title="关于我" />
+    <div class="flex flex-col items-center">
+      <div
+        class="h-36 w-36 sm:h-52 sm:w-52 md:w-80 md:h-80 overflow-hidden rounded-sm my-4"
+      >
+        <Image
+          alt="我"
+          withFancyBox={true}
+          width="800"
+          height="800"
+          src="https://article.biliimg.com/bfs/article/b3c4fab8f53b782a0b4306766bc9af3f93dbfa24.jpg"
+        />
+      </div>
+      <p class="w-full xl:text-lg/10 text-base/8 text-justify tracking-wider">
+        我是『 胤 @GinMiraing 』，毕业于厦门大学的<span
+          class="text-pink underline underline-offset-4">哲学</span
+        >专业，目前在厦门的互联网公司从事<span
+          class="text-pink underline underline-offset-4">前端开发</span
+        >工作。我这个人挺魔幻的，明明学的是文科专业的知识，工作却是和程序代码有关的；明明是一个男生，却留着长发。
+      </p>
+    </div>
   </div>
 </Layout>
 
