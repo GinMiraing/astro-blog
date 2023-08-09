@@ -1,0 +1,33 @@
+---
+import Image from "@/components/Image/index.astro";
+
+interface Props {
+  issue: {
+    message: string;
+    author: string;
+    id: number;
+    time: string;
+    avatar: string;
+  };
+}
+
+const { issue } = Astro.props;
+---
+
+<div class="w-full flex items-center">
+  <div class="overflow-hidden rounded-full w-12 h-12">
+    <Image withFancyBox={false} src={issue.avatar} width="100" height="100" />
+  </div>
+  <div class="flex flex-col ml-4 w-full">
+    <div class="flex items-center justify-between text-sm">
+      <div class="">
+        <span>{issue.time}</span>
+        <span>{issue.author}</span>
+      </div>
+      <div>
+        {`# ${issue.id}`}
+      </div>
+    </div>
+    <p>{issue.message}</p>
+  </div>
+</div>
