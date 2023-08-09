@@ -13,6 +13,14 @@
       "author": "胤",
       "avatar": "https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png",
       "message": "想从公司润了，感觉没有任何的收获。"
+    },
+    {
+      "id": 3,
+      "time": "2023-08-10 00:01",
+      "author": "胤",
+      "avatar": "https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png",
+      "message": "这是一个渲染图片的测试说说。",
+      "picture": "https://article.biliimg.com/bfs/article/3a8ffbe4130743fa353253f177cd5d948bd940af.jpg"
     }
   ]
 }

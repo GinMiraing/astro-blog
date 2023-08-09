@@ -19,6 +19,7 @@ const issueSchema = z.object({
   author: z.string(),
   avatar: z.string(),
   message: z.string(),
+  picture: z.string().optional(),
 });
 
 const IssueCollection = defineCollection({
