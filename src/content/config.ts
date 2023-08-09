@@ -13,7 +13,23 @@ const blogCollection = defineCollection({
   }),
 });
 
+const issueSchema = z.object({
+  id: z.number(),
+  time: z.string(),
+  author: z.string(),
+  avatar: z.string(),
+  message: z.string(),
+});
+
+const IssueCollection = defineCollection({
+  type: "data",
+  schema: z.object({
+    issues: z.array(issueSchema),
+  }),
+});
+
 // 3. Export a single `collections` object to register your collection(s)
 export const collections = {
   blog: blogCollection,
+  issue: IssueCollection,
 };
