@@ -8,7 +8,7 @@ import { ChevronRight } from "lucide-react";
 import { getCollection, getEntry } from "astro:content";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
-const allPosts = await getCollection("blog");
+const posts = await getCollection("blog");
 const issueOrigin = await getEntry("issue", "index");
 const issues = issueOrigin.data.issues.map((item) => item);
 ---
@@ -42,9 +42,9 @@ const issues = issueOrigin.data.issues.map((item) => item);
     <TitleWithUnderline title="最新文章" />
     <div class="grid grid-cols-1 border-b divide-y">
       {
-        allPosts.reverse().map((post, index) => {
+        posts.reverse().map((post, index) => {
           if (index < 5) {
-            return <PostCard post={post} />;
+            return <PostCard post={post.data} slug={post.slug} />;
           }
         })
       }

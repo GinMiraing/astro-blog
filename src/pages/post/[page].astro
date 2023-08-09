@@ -28,9 +28,9 @@ interface Props {
 }
 
 export async function getStaticPaths({ paginate }: GetStaticPathsProps) {
-  const allPosts = await getCollection("blog");
-  const reverseAllPosts = allPosts.reverse();
-  return paginate(reverseAllPosts, { pageSize: 8 });
+  const posts = await getCollection("blog");
+  const reversePosts = posts.reverse();
+  return paginate(reversePosts, { pageSize: 8 });
 }
 
 const { page } = Astro.props;
@@ -49,7 +49,7 @@ const { page } = Astro.props;
   <div class="grid my-6 grid-cols-1 gap-4 border-y divide-y">
     {
       page.data.map((post) => {
-        return <PostCard post={post} />;
+        return <PostCard post={post.data} slug={post.slug} />;
       })
     }
   </div>
