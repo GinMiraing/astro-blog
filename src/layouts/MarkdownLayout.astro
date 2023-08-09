@@ -20,13 +20,11 @@ const { title, blog } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://cdn.staticfile.org/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-bold.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.staticfile.org/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-regular.min.css"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap"
     />
     <meta name="referrer" content="same-origin" />
     <title>{title}</title>
@@ -45,10 +43,12 @@ const { title, blog } = Astro.props;
           withFancyBox={false}
         />
         <div
-          class="absolute h-48 left-0 right-0 bottom-0 from-black/[.4] to-transparent bg-gradient-to-t"
+          class="absolute h-48 hidden sm:block left-0 right-0 bottom-0 from-black/[.4] to-transparent bg-gradient-to-t"
         >
         </div>
-        <div class="absolute z-20 text-white bottom-6 left-12 right-12">
+        <div
+          class="absolute hidden sm:block z-20 text-white bottom-6 left-12 right-12"
+        >
           <div class="flex justify-between items-center">
             <div>
               <h1 class="text-2xl font-bold mb-4">{blog.data.title}</h1>
@@ -67,6 +67,18 @@ const { title, blog } = Astro.props;
               />
             </div>
           </div>
+        </div>
+      </div>
+      <div
+        class="flex sm:hidden flex-col items-center py-4 mx-4 border-b border-pink border-dashed"
+      >
+        <h1 class="font-bold text-2xl">{blog.data.title}</h1>
+        <div class="text-sm space-x-2 text-secondary mt-4">
+          <span>{blog.data.author}</span>
+          <span>/</span>
+          <span>{dayjs(blog.data.date).format("YYYY.MM.DD")}</span>
+          <span>/</span>
+          <span>{blog.data.category}</span>
         </div>
       </div>
       <div class="markdown px-4 pb-4 sm:px-8 md:px-16">

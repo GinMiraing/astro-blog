@@ -1,11 +1,13 @@
 ---
 interface Props {
   title: string;
+  select: number;
 }
 
-const { title } = Astro.props;
+const { title, select } = Astro.props;
 
 import Footer from "@/components/Footer/index.astro";
+import Navbar from "@/components/Navbar/index.astro";
 
 import "../styles/global.css";
 ---
@@ -16,13 +18,11 @@ import "../styles/global.css";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://cdn.staticfile.org/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-bold.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.staticfile.org/lxgw-wenkai-webfont/1.7.0/lxgwwenkai-regular.min.css"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap"
     />
     <meta name="referrer" content="same-origin" />
     <title>{title}</title>
@@ -31,6 +31,7 @@ import "../styles/global.css";
     <main
       class="sm:mt-24 p-4 sm:p-8 md:p-16 lg:mx-auto max-w-4xl sm:mx-4 md:mx-8 shadow-lg rounded-sm bg-primary"
     >
+      <Navbar select={select} />
       <slot />
     </main>
     <Footer />
