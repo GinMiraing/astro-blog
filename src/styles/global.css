@@ -15,32 +15,35 @@
     background-repeat: repeat;
     background-attachment: fixed;
     background-color: var(--body-bg);
+    font-family: "Noto Serif SC", sans-serif;
+    font-display: swap;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   hr {
     background-color: var(--text-secondary);
   }
   ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    @apply w-1 h-1;
   }
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--primary);
-    border-radius: 5px;
+  ::-webkitbg-transparent {
+    @apply bg-pink rounded-md;
   }
   ::-webkit-scrollbar-corner {
-    background-color: transparent;
+    @apply bg-transparent;
   }
   *,
   ::after,
   ::before {
-    box-sizing: border-box;
+    @apply box-border;
+  }
+  .markdown * {
+    @apply my-4;
   }
   .markdown p {
-    text-align: justify;
-    line-height: 2;
+    @apply xl:text-lg/10 text-base/8 text-justify tracking-wider;
   }
-
-  .markdown * {
-    margin: 1rem 0;
+  .markdown a {
+    @apply text-pink;
   }
 }

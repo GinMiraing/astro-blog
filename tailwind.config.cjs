@@ -4,9 +4,6 @@ module.exports = {
   content: ["./src/**/*.{astro,ts,tsx}"],
   theme: {
     extend: {
-      fontFamily: {
-        serif: ["Noto Serif SC", "serif"],
-      },
       textColor: {
         primary: "var(--text-primary)",
         secondary: "var(--text-secondary)",
