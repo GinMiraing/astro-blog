@@ -1,0 +1,51 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Image from "@/components/Image.astro";
+import LinksItem from "@/components/LinksItem.astro";
+import { cn } from "@/lib/utils";
+
+const items = [
+  {
+    link: "https://www.baidu.com",
+    name: "123",
+    description: "123",
+    avatar: "123",
+  },
+];
+---
+
+<Layout select={3} title={"胤的博客 - 友情链接"}>
+  <!-- banner -->
+  <div class="w-full h-60 rounded-lg overflow-hidden">
+    <Image
+      alt="banner"
+      withFancyBox={false}
+      src="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
+    />
+  </div>
+  <!-- post -->
+  <div class="w-full grid grid-cols-2 mt-4 gap-4">
+    {items.map((item) => <LinksItem item={item} />)}
+  </div>
+
+  <!-- footer -->
+</Layout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const lazyImages = document.querySelectorAll("img.lazyload");
+    const lazyImageObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const image = entry.target as HTMLElement;
+          image.classList.remove("lazyload");
+          image.setAttribute("src", image.dataset.src ? image.dataset.src : "");
+          lazyImageObserver.unobserve(image);
+        }
+      });
+    });
+    lazyImages.forEach((image) => {
+      lazyImageObserver.observe(image);
+    });
+  });
+</script>

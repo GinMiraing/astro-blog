@@ -15,6 +15,10 @@ const itemList = [
     title: "说说",
     link: "/issue/1",
   },
+  {
+    title: "友链",
+    link: "/links/",
+  },
 ];
 
 const Header = () => {

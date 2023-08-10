@@ -1,0 +1,26 @@
+---
+import Image from "@/components/Image.astro";
+
+interface Props {
+  item: {
+    link: string;
+    name: string;
+    description: string;
+    avatar: string;
+  };
+}
+
+const { item } = Astro.props;
+---
+
+<a class="hover:bg-red-200 transition-colors rounded-xl" href={item.link}>
+  <div class="flex space-x-4 p-4">
+    <div class="w-16 h-16 rounded-full overflow-hidden">
+      <Image src={item.avatar} withFancyBox={false} />
+    </div>
+    <div class="flex flex-col">
+      <div class="font-medium">{item.name}</div>
+      <div class="text-sm">{item.description}</div>
+    </div>
+  </div>
+</a>
