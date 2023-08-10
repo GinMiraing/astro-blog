@@ -1,5 +1,6 @@
 ---
 import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header";
 import Image from "@/components/Image.astro";
 import "@/styles/global.css";
 import type { CollectionEntry } from "astro:content";
@@ -29,6 +30,7 @@ const { title, blog } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="text-primary">
+    <Header client:load />
     <main
       class="sm:mt-24 lg:mx-auto max-w-4xl sm:mx-4 md:mx-8 shadow-lg rounded-sm bg-primary"
     >
