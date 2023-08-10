@@ -1,0 +1,103 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Image from "@/components/Image.astro";
+import IssueCard from "@/components/IssueCard.astro";
+import { getEntry } from "astro:content";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+type GetStaticPathsProps = {
+  paginate: Function;
+};
+
+type Issue = {
+  time: string;
+  message: string;
+  author: string;
+  id: number;
+  avatar: string;
+  picture?: string;
+};
+
+interface Props {
+  page: {
+    data: Issue[];
+    start: number;
+    end: number;
+    total: number;
+    currentPage: number;
+    size: number;
+    lastPage: number;
+    url: {
+      current: string;
+      prev: string | undefined;
+      next: string | undefined;
+    };
+  };
+}
+
+export async function getStaticPaths({ paginate }: GetStaticPathsProps) {
+  const issueOrigin = await getEntry("issue", "index");
+  const issues = issueOrigin.data.issues.reverse().map((item) => item);
+  return paginate(issues, { pageSize: 8 });
+}
+
+const { page } = Astro.props;
+---
+
+<Layout select={2} title={`胤的博客 - 全部说说 - ${page.currentPage}`}>
+  <!-- banner -->
+  <div class="w-full h-60 rounded-lg overflow-hidden">
+    <Image
+      alt="banner"
+      withFancyBox={false}
+      src="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
+    />
+  </div>
+  <!-- post -->
+  <div class="grid my-6 grid-cols-1 gap-4 border-y divide-y">
+    {
+      page.data.map((issue) => {
+        return <IssueCard issue={issue} />;
+      })
+    }
+  </div>
+  <!-- footer -->
+  <div class="w-full flex items-center justify-between">
+    <div
+      class={cn("hover:text-pink flex items-center transition-colors", {
+        invisible: !page.url.prev,
+      })}
+    >
+      <ChevronLeft className="h-4 w-4" />
+      <a href={page.url.prev}>上一页</a>
+    </div>
+    <div
+      class={cn("hover:text-pink flex items-center transition-colors", {
+        invisible: !page.url.next,
+      })}
+    >
+      <a href={page.url.next}>下一页</a>
+      <ChevronRight className="h-4 w-4" />
+    </div>
+  </div>
+</Layout>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const lazyImages = document.querySelectorAll("img.lazyload");
+    const lazyImageObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const image = entry.target as HTMLElement;
+          image.classList.remove("lazyload");
+          image.setAttribute("src", image.dataset.src ? image.dataset.src : "");
+          lazyImageObserver.unobserve(image);
+        }
+      });
+    });
+    lazyImages.forEach((image) => {
+      lazyImageObserver.observe(image);
+    });
+  });
+</script>

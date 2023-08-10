@@ -11,6 +11,10 @@ const itemList = [
     title: "文章",
     link: "/post/1",
   },
+  {
+    title: "说说",
+    link: "/issue/1",
+  },
 ];
 
 const Header = () => {
