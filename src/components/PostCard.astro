@@ -39,7 +39,7 @@ const { post, slug } = Astro.props;
   </div>
   <div class="flex ml-4 items-center">
     <div class="overflow-hidden rounded-sm h-20 md:h-32">
-      <a href={`/p/${slug}`}>
+      <a class="block" href={`/p/${slug}`}>
         <Image
           src={post.cover}
           alt={post.title}

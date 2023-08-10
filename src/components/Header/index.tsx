@@ -34,12 +34,14 @@ const Header = () => {
       )}
     >
       <div className="flex items-center px-4 w-full h-16 justify-between">
-        <div className="w-8 h-8 rounded-full overflow-hidden">
-          <img
-            src="https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png@.webp"
-            alt="avatar"
-          />
-        </div>
+        <a className="block" href="/">
+          <div className="w-8 h-8 rounded-full overflow-hidden">
+            <img
+              src="https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png@.webp"
+              alt="avatar"
+            />
+          </div>
+        </a>
         <div className="flex h-16 items-center space-x-4">
           <div className="cursor-pointer" onClick={() => scrollTo(0, 0)}>
             <ArrowUp className="h-6 w-6 text-primary" />

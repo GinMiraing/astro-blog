@@ -13,7 +13,7 @@ interface Props {
 const { item } = Astro.props;
 ---
 
-<a class="hover:bg-red-200 transition-colors rounded-xl" href={item.link}>
+<a class="hover:bg-red-200 block transition-colors rounded-xl" href={item.link}>
   <div class="flex space-x-4 p-4">
     <div class="w-16 h-16 rounded-full overflow-hidden">
       <Image src={item.avatar} withFancyBox={false} />
