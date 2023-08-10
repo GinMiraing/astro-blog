@@ -46,4 +46,21 @@
   .markdown a {
     @apply text-pink;
   }
+  .markdown .data-footnote-backref {
+    @apply hidden;
+  }
+  .markdown .footnotes h2 {
+    @apply hidden;
+  }
+  .markdown .footnotes p {
+    @apply text-sm/8;
+  }
+  .markdown sup::before {
+    @apply text-pink;
+    content: "[";
+  }
+  .markdown sup::after {
+    @apply text-pink;
+    content: "]";
+  }
 }
