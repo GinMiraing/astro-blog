@@ -13,12 +13,16 @@ module.exports = {
         primary: "var(--card-bg)",
         hr: "var(--hr-bg)",
         body: "var(--body-bg)",
+        hover: "var(--hover-bg)",
       },
       colors: {
         pink: "var(--primary)",
       },
       fontFamily: {
         noto: ["Noto Serif SC", "sans-serif"],
+      },
+      minHeight: {
+        main: "calc(100vh - 4rem)",
       },
     },
   },

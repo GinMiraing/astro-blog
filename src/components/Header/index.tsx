@@ -26,7 +26,7 @@ const Header = () => {
   return (
     <header
       className={cn(
-        "fixed top-0 w-full overflow-hidden shadow-md duration-500 transition-all bg-rose-100 z-10 sm:hidden",
+        "fixed top-0 w-full overflow-hidden shadow-md duration-500 transition-all bg-white z-10 sm:hidden",
         {
           "max-h-16": !toggle,
           "max-h-screen": toggle,
@@ -58,7 +58,7 @@ const Header = () => {
         {itemList.map((item) => (
           <div key={item.title} className="w-full px-4 py-1">
             <a
-              className="w-full h-8 rounded-sm leading-8 block text-center transition-colors hover:text-pink hover:bg-black/10"
+              className="w-full h-10 rounded-sm leading-10 block text-center transition-colors hover:text-pink hover:bg-hover"
               href={item.link}
             >
               {item.title}
