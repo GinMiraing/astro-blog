@@ -1,11 +1,10 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import Image from "@/components/Image.astro";
 import IssueCard from "@/components/IssueCard.astro";
 import Pagination from "@/components/Pagination.astro";
 import { getEntry } from "astro:content";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import BannerHeader from "@/components/BannerHeader.astro";
 
 type GetStaticPathsProps = {
   paginate: Function;
@@ -48,15 +47,13 @@ const { page } = Astro.props;
 
 <Layout select={2} title={`胤的博客 - 全部说说 - ${page.currentPage}`}>
   <!-- banner -->
-  <div class="w-full h-60 rounded-lg overflow-hidden">
-    <Image
-      alt="banner"
-      withFancyBox={false}
-      src="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
-    />
-  </div>
+  <BannerHeader
+    title="全部说说"
+    description="『 简短的一言一语 』"
+    imgsrc="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png@.webp"
+  />
   <!-- post -->
-  <div class="grid my-6 grid-cols-1 gap-4 border-y divide-y">
+  <div class="grid my-6 grid-cols-1 gap-4 divide-y">
     {
       page.data.map((issue) => {
         return <IssueCard issue={issue} />;
@@ -68,6 +65,8 @@ const { page } = Astro.props;
 </Layout>
 
 <script>
+  import { Fancybox } from "@fancyapps/ui";
+
   document.addEventListener("DOMContentLoaded", () => {
     const lazyImages = document.querySelectorAll("img.lazyload");
     const lazyImageObserver = new IntersectionObserver((entries) => {
@@ -82,6 +81,16 @@ const { page } = Astro.props;
     });
     lazyImages.forEach((image) => {
       lazyImageObserver.observe(image);
+    });
+    Fancybox.bind("[data-fancybox]", {
+      Thumbs: false,
+      Toolbar: {
+        display: {
+          left: [],
+          middle: [],
+          right: ["close"],
+        },
+      },
     });
   });
 </script>

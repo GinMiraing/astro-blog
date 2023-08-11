@@ -7,6 +7,7 @@ import Image from "@/components/Image.astro";
 import More from "@/components/More.astro";
 import { getCollection, getEntry } from "astro:content";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import BannerHeader from "@/components/BannerHeader.astro";
 
 const posts = await getCollection("blog");
 const issueOrigin = await getEntry("issue", "index");
@@ -15,28 +16,11 @@ const issues = issueOrigin.data.issues.map((item) => item);
 
 <Layout select={0} title="胤的博客">
   <!-- header -->
-  <div class="w-full">
-    <div class="flex items-center justify-between">
-      <h1 class="text-2xl sm:text-3xl font-bold">胤的博客</h1>
-      <div class="w-12 h-12 rounded-full overflow-hidden">
-        <img
-          src="https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png@.webp"
-          alt="avatar"
-        />
-      </div>
-    </div>
-    <div class="text-sm mt-4">『 所念皆星河 』</div>
-  </div>
-  <hr class="my-6" />
-  <!-- banner -->
-  <div class="w-full h-60 rounded-lg overflow-hidden">
-    <Image
-      alt="banner"
-      withFancyBox={false}
-      src="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
-    />
-  </div>
-  <hr class="my-6" />
+  <BannerHeader
+    title="胤的博客"
+    description="『 所念皆星河 』"
+    imgsrc="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png@.webp"
+  />
   <!-- post -->
   <div class="w-full">
     <TitleWithUnderline title="最新文章" />

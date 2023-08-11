@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import Image from "@/components/Image.astro";
 import LinksItem from "@/components/LinksItem.astro";
 import { cn } from "@/lib/utils";
+import BannerHeader from "@/components/BannerHeader.astro";
 
 const items = [
   {
@@ -56,13 +57,11 @@ const items = [
 
 <Layout select={3} title={"胤的博客 - 友情链接"}>
   <!-- banner -->
-  <div class="w-full h-60 rounded-lg overflow-hidden">
-    <Image
-      alt="banner"
-      withFancyBox={false}
-      src="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
-    />
-  </div>
+  <BannerHeader
+    title="友情链接"
+    description="『 一些可爱的朋友们 』"
+    imgsrc="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png@.webp"
+  />
   <!-- post -->
   <div class="w-full grid grid-cols-1 sm:grid-cols-2 mt-4 gap-4">
     {items.map((item) => <LinksItem item={item} />)}

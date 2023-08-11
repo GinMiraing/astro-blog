@@ -6,6 +6,7 @@ import Pagination from "@/components/Pagination.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import BannerHeader from "@/components/BannerHeader.astro";
 
 type GetStaticPathsProps = {
   paginate: Function;
@@ -39,15 +40,13 @@ const { page } = Astro.props;
 
 <Layout select={1} title={`胤的博客 - 全部文章 - ${page.currentPage}`}>
   <!-- banner -->
-  <div class="w-full h-60 rounded-lg overflow-hidden">
-    <Image
-      alt="banner"
-      withFancyBox={false}
-      src="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
-    />
-  </div>
+  <BannerHeader
+    title="全部文章"
+    description="『 记录生活中的那些事，那些人 』"
+    imgsrc="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png@.webp"
+  />
   <!-- post -->
-  <div class="grid my-6 grid-cols-1 gap-4 border-y divide-y">
+  <div class="grid my-6 grid-cols-1 gap-4 divide-y">
     {
       page.data.map((post) => {
         return <PostCard post={post.data} slug={post.slug} />;

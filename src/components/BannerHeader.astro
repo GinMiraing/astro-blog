@@ -1,0 +1,17 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  imgsrc: string;
+}
+
+const { title, description, imgsrc } = Astro.props;
+---
+
+<div class="w-full my-6">
+  <h1 class="text-xl sm:text-2xl font-bold">{title}</h1>
+  <div class="text-sm mt-4 text-secondary font-medium">{description}</div>
+  <div class="w-full h-40 sm:h-60 mt-4 rounded-sm overflow-hidden">
+    <img class="object-cover w-full h-full" src={imgsrc} />
+  </div>
+</div>
