@@ -1,4 +1,5 @@
 ---
+import BackTop from "@/components/BackTop";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header";
 import Image from "@/components/Image.astro";
@@ -91,6 +92,7 @@ const { title, blog } = Astro.props;
         </div>
       </div>
     </main>
+    <BackTop client:load />
     <Footer />
   </body>
 </html>

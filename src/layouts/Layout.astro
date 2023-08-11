@@ -9,6 +9,7 @@ const { title, select } = Astro.props;
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar.astro";
+import BackTop from "@/components/BackTop";
 
 import "@/styles/global.css";
 ---
@@ -31,11 +32,12 @@ import "@/styles/global.css";
   <body class="text-primary tracking-widest">
     <Header client:load />
     <main
-      class="sm:mt-24 p-4 sm:p-8 md:p-16 mt-16 sm:min-h-0 min-h-main lg:mx-auto max-w-4xl sm:mx-4 md:mx-8 shadow-lg rounded-sm bg-primary"
+      class="sm:mt-24 p-4 sm:p-8 md:p-16 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
     >
       <Navbar select={select} />
       <slot />
     </main>
+    <BackTop client:load />
     <Footer />
   </body>
 </html>
