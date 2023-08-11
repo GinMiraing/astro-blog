@@ -1,6 +1,4 @@
 ---
-import Image from "@/components/Image.astro";
-
 interface Props {
   item: {
     link: string;
@@ -13,10 +11,20 @@ interface Props {
 const { item } = Astro.props;
 ---
 
-<a class="hover:bg-red-200 block transition-colors rounded-xl" href={item.link}>
+<a
+  class="hover:bg-red-200 block transition-colors rounded-xl"
+  referrerpolicy="no-referrer"
+  target="_blank"
+  href={item.link}
+>
   <div class="flex space-x-4 p-4">
-    <div class="w-16 h-16 rounded-full overflow-hidden">
-      <Image src={item.avatar} withFancyBox={false} />
+    <div class="w-12 h-12 rounded-full shrink-0 overflow-hidden">
+      <img
+        src={item.avatar}
+        alt={item.avatar}
+        class="object-cover w-full h-full"
+        onerror="this.onerror=null; this.src='https://article.biliimg.com/bfs/article/fe739a158cc128f70f780eb5fa96f388b81d478f.png@.webp'"
+      />
     </div>
     <div class="flex flex-col">
       <div class="font-medium">{item.name}</div>
