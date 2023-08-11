@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import Image from "@/components/Image.astro";
 import PostCard from "@/components/PostCard.astro";
+import Pagination from "@/components/Pagination.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -54,24 +55,7 @@ const { page } = Astro.props;
     }
   </div>
   <!-- footer -->
-  <div class="w-full flex items-center justify-between">
-    <div
-      class={cn("hover:text-pink flex items-center transition-colors", {
-        invisible: !page.url.prev,
-      })}
-    >
-      <ChevronLeft className="h-4 w-4" />
-      <a href={page.url.prev}>上一页</a>
-    </div>
-    <div
-      class={cn("hover:text-pink flex items-center transition-colors", {
-        invisible: !page.url.next,
-      })}
-    >
-      <a href={page.url.next}>下一页</a>
-      <ChevronRight className="h-4 w-4" />
-    </div>
-  </div>
+  <Pagination next={page.url.next} prev={page.url.prev} />
 </Layout>
 
 <script>
