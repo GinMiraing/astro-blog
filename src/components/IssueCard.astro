@@ -21,17 +21,17 @@ const { issue } = Astro.props;
   </div>
   <div class="flex flex-col ml-4 pt-2 w-full">
     <div class="flex items-center justify-between text-sm">
-      <div class="space-x-4">
+      <div class="space-x-4 text-xs sm:text-sm">
         <span>{issue.time}</span>
         <span class="border px-1 rounded text-pink bg-rose-100 border-rose-300"
           >{issue.author}</span
         >
       </div>
-      <div>
+      <div class="text-xs">
         {`# ${issue.id}`}
       </div>
     </div>
-    <p class="mt-2">{issue.message}</p>
+    <p class="text-sm/8 sm:text-base/8 mt-2">{issue.message}</p>
     {
       issue.picture && (
         <div class="h-32 mt-2 w-32 rounded-sm overflow-hidden">

@@ -17,19 +17,21 @@ interface Props {
 const { post, slug } = Astro.props;
 ---
 
-<div class="flex py-4 justify-between h-40 md:h-48">
+<div class="flex py-4 justify-between h-40 sm:h-48">
   <div class="basis-3/5 shrink-0 h-full flex flex-col justify-between">
-    <h3 class="text-xl font-medium">
+    <h3 class="text-lg sm:text-xl font-semibold">
       <a class="hover:text-link transition-colors" href={`/p/${slug}`}
         >{post.title}</a
       >
     </h3>
     <p
-      class="leading-6 md:leading-8 my-4 flex-grow-0 text-sm sm:text-base xl:text-lg line-clamp-2 text-justify"
+      class="my-4 flex-grow-0 text-sm/6 sm:text-base/6 line-clamp-2 text-justify"
     >
       {post.description}
     </p>
-    <div class="text-secondary text-sm space-x-2 md:space-x-4">
+    <div
+      class="text-secondary truncate sm:text-sm text-xs space-x-2 sm:space-x-4"
+    >
       <span>{post.author}</span>
       <span>/</span>
       <span>{dayjs(post.date).format("YYYY.MM.DD")}</span>
@@ -38,8 +40,8 @@ const { post, slug } = Astro.props;
     </div>
   </div>
   <div class="flex ml-4 items-center">
-    <div class="overflow-hidden rounded-sm h-20 md:h-32">
-      <a class="block" href={`/p/${slug}`}>
+    <div class="overflow-hidden rounded-sm w-20 sm:w-auto h-20 sm:h-32">
+      <a class="block w-full h-full" href={`/p/${slug}`}>
         <Image
           src={post.cover}
           alt={post.title}

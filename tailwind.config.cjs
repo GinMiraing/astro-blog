@@ -11,9 +11,14 @@ module.exports = {
       },
       backgroundColor: {
         primary: "var(--card-bg)",
+        hr: "var(--hr-bg)",
+        body: "var(--body-bg)",
       },
       colors: {
         pink: "var(--primary)",
+      },
+      fontFamily: {
+        noto: ["Noto Serif SC", "sans-serif"],
       },
     },
   },
