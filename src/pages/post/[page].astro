@@ -31,7 +31,7 @@ interface Props {
 
 export async function getStaticPaths({ paginate }: GetStaticPathsProps) {
   const posts = await getCollection("blog");
-  const reversePosts = posts.reverse();
+  const reversePosts = posts.sort((a, b) => b.data.id - a.data.id);
   return paginate(reversePosts, { pageSize: 8 });
 }
 

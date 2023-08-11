@@ -10,6 +10,7 @@ const blogCollection = defineCollection({
     description: z.string(),
     author: z.string(),
     category: z.string(),
+    id: z.number(),
   }),
 });
 

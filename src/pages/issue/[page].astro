@@ -38,7 +38,9 @@ interface Props {
 
 export async function getStaticPaths({ paginate }: GetStaticPathsProps) {
   const issueOrigin = await getEntry("issue", "index");
-  const issues = issueOrigin.data.issues.reverse().map((item) => item);
+  const issues = issueOrigin.data.issues
+    .map((item) => item)
+    .sort((a, b) => b.id - a.id);
   return paginate(issues, { pageSize: 8 });
 }
 

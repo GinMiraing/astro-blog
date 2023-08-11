@@ -11,7 +11,9 @@ import BannerHeader from "@/components/BannerHeader.astro";
 
 const posts = await getCollection("blog");
 const issueOrigin = await getEntry("issue", "index");
-const issues = issueOrigin.data.issues.map((item) => item);
+const issues = issueOrigin.data.issues
+  .map((item) => item)
+  .sort((a, b) => b.id - a.id);
 ---
 
 <Layout select={0} title="胤的博客">
@@ -26,11 +28,13 @@ const issues = issueOrigin.data.issues.map((item) => item);
     <TitleWithUnderline title="最新文章" />
     <div class="grid grid-cols-1 border-b divide-y">
       {
-        posts.reverse().map((post, index) => {
-          if (index < 5) {
-            return <PostCard post={post.data} slug={post.slug} />;
-          }
-        })
+        posts
+          .sort((a, b) => b.data.id - a.data.id)
+          .map((post, index) => {
+            if (index < 5) {
+              return <PostCard post={post.data} slug={post.slug} />;
+            }
+          })
       }
     </div>
     <More link="/post/1" title="所有文章" />
