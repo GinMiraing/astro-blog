@@ -1,11 +1,8 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import Image from "@/components/Image.astro";
 import PostCard from "@/components/PostCard.astro";
 import Pagination from "@/components/Pagination.astro";
 import { CollectionEntry, getCollection } from "astro:content";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
 import BannerHeader from "@/components/BannerHeader.astro";
 
 type GetStaticPathsProps = {
