@@ -1,12 +1,12 @@
 ---
-import Layout from "@/layouts/Layout.astro";
+import IndexLayout from "@/layouts/IndexLayout.astro";
 import TitleWithUnderline from "@/components/TitleWithUnderline.astro";
 import PostCard from "@/components/PostCard.astro";
 import IssueCard from "@/components/IssueCard.astro";
 import Image from "@/components/Image.astro";
 import More from "@/components/More.astro";
 import { getCollection, getEntry } from "astro:content";
-import BannerHeader from "@/components/BannerHeader.astro";
+import BannerHeader from "@/components/PageBanner.astro";
 
 const posts = await getCollection("blog");
 const issueOrigin = await getEntry("issue", "index");
@@ -15,13 +15,7 @@ const issues = issueOrigin.data.issues
   .sort((a, b) => b.id - a.id);
 ---
 
-<Layout select={0} title="胤的博客">
-  <!-- header -->
-  <BannerHeader
-    title="胤的博客"
-    description="『 所念皆星河 』"
-    imgsrc="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png@.webp"
-  />
+<IndexLayout title="胤的博客">
   <!-- post -->
   <div class="w-full">
     <TitleWithUnderline title="最新文章" />
@@ -82,4 +76,4 @@ const issues = issueOrigin.data.issues
       </p>
     </div>
   </div>
-</Layout>
+</IndexLayout>

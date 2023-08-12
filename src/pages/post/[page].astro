@@ -3,7 +3,6 @@ import Layout from "@/layouts/Layout.astro";
 import PostCard from "@/components/PostCard.astro";
 import Pagination from "@/components/Pagination.astro";
 import { CollectionEntry, getCollection } from "astro:content";
-import BannerHeader from "@/components/BannerHeader.astro";
 
 type GetStaticPathsProps = {
   paginate: Function;
@@ -35,14 +34,13 @@ export async function getStaticPaths({ paginate }: GetStaticPathsProps) {
 const { page } = Astro.props;
 ---
 
-<Layout select={1} title={`胤的博客 - 全部文章 - ${page.currentPage}`}>
-  <!-- banner -->
-  <BannerHeader
-    title="全部文章"
-    description="『 记录生活中的那些事，那些人 』"
-    imgsrc="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png@.webp"
-  />
-  <!-- post -->
+<Layout
+  select={1}
+  title={`胤的博客 - 全部文章 - ${page.currentPage}`}
+  header="全部文章"
+  description="『 那些景 那些事 那些人 』"
+  banner="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
+>
   <div class="grid my-6 grid-cols-1 gap-4 divide-y">
     {
       page.data.map((post) => {
@@ -50,6 +48,5 @@ const { page } = Astro.props;
       })
     }
   </div>
-  <!-- footer -->
   <Pagination next={page.url.next} prev={page.url.prev} />
 </Layout>

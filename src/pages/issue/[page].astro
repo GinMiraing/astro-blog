@@ -4,7 +4,7 @@ import IssueCard from "@/components/IssueCard.astro";
 import Pagination from "@/components/Pagination.astro";
 import { getEntry } from "astro:content";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
-import BannerHeader from "@/components/BannerHeader.astro";
+import BannerHeader from "@/components/PageBanner.astro";
 
 type GetStaticPathsProps = {
   paginate: Function;
@@ -47,14 +47,13 @@ export async function getStaticPaths({ paginate }: GetStaticPathsProps) {
 const { page } = Astro.props;
 ---
 
-<Layout select={2} title={`胤的博客 - 全部说说 - ${page.currentPage}`}>
-  <!-- banner -->
-  <BannerHeader
-    title="全部说说"
-    description="『 简短的一言一语 』"
-    imgsrc="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png@.webp"
-  />
-  <!-- post -->
+<Layout
+  select={2}
+  title={`胤的博客 - 全部说说 - ${page.currentPage}`}
+  header="全部说说"
+  description="『 简短的一言一语 』"
+  banner="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
+>
   <div class="grid my-6 grid-cols-1 gap-4 divide-y">
     {
       page.data.map((issue) => {
@@ -62,6 +61,5 @@ const { page } = Astro.props;
       })
     }
   </div>
-  <!-- footer -->
   <Pagination next={page.url.next} prev={page.url.prev} />
 </Layout>
