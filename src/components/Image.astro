@@ -48,8 +48,6 @@ const placeholder = `https://article.biliimg.com/bfs/article/18d1e2d11b9e00ea443
 }
 
 <script>
-  import { Fancybox } from "@fancyapps/ui";
-  import "@fancyapps/ui/dist/fancybox/fancybox.css";
   document.addEventListener("DOMContentLoaded", () => {
     const lazyImages = document.querySelectorAll("img.lazyload");
     const lazyImageObserver = new IntersectionObserver((entries) => {
@@ -64,17 +62,6 @@ const placeholder = `https://article.biliimg.com/bfs/article/18d1e2d11b9e00ea443
     });
     lazyImages.forEach((image) => {
       lazyImageObserver.observe(image);
-    });
-    Fancybox.bind("[data-fancybox]", {
-      groupAll: true,
-      Thumbs: false,
-      Toolbar: {
-        display: {
-          left: [],
-          middle: [],
-          right: ["close"],
-        },
-      },
     });
   });
 </script>

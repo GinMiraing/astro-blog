@@ -4,7 +4,6 @@ import IssueCard from "@/components/IssueCard.astro";
 import Pagination from "@/components/Pagination.astro";
 import { getEntry } from "astro:content";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
-import BannerHeader from "@/components/PageBanner.astro";
 
 type GetStaticPathsProps = {
   paginate: Function;
@@ -63,3 +62,10 @@ const { page } = Astro.props;
   </div>
   <Pagination next={page.url.next} prev={page.url.prev} />
 </Layout>
+
+<script>
+  import { bindFancybox } from "@/lib/utils";
+  document.addEventListener("DOMContentLoaded", () => {
+    bindFancybox(false);
+  });
+</script>

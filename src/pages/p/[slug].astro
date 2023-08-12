@@ -1,6 +1,7 @@
 ---
 import MarkdownLayout from "@/layouts/MarkdownLayout.astro";
 import { CollectionEntry, getCollection } from "astro:content";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 interface Props {
   entry: CollectionEntry<"blog">;
@@ -20,3 +21,10 @@ const { Content } = await entry.render();
 <MarkdownLayout blog={entry} title={entry.data.title}>
   <Content />
 </MarkdownLayout>
+
+<script>
+  import { bindFancybox } from "@/lib/utils";
+  document.addEventListener("DOMContentLoaded", () => {
+    bindFancybox(true);
+  });
+</script>
