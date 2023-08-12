@@ -1,0 +1,25 @@
+---
+import Footer from "@/components/Footer.astro";
+import Head from "@/components/Head.astro";
+import Header from "@/components/Header";
+import "@/styles/global.css";
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <Head title="404" />
+  <body class="text-primary tracking-widest">
+    <Header client:load />
+    <main
+      class="sm:mt-24 mt-16 flex flex-col items-center justify-center sm:min-h-0 h-80 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
+    >
+      <h1 class="sm:text-3xl text-2xl font-bold">404: 页面不见啦！</h1>
+
+      <a
+        class="text-lg hover:text-pink mt-8 font-semibold transition-colors"
+        href="/">返回首页</a
+      >
+    </main>
+    <Footer />
+  </body>
+</html>
