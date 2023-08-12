@@ -1,6 +1,5 @@
 ---
 import MarkdownLayout from "@/layouts/MarkdownLayout.astro";
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { CollectionEntry, getCollection } from "astro:content";
 
 interface Props {
@@ -21,35 +20,3 @@ const { Content } = await entry.render();
 <MarkdownLayout blog={entry} title={entry.data.title}>
   <Content />
 </MarkdownLayout>
-
-<script>
-  import { Fancybox } from "@fancyapps/ui";
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const lazyImages = document.querySelectorAll("img.lazyload");
-    const lazyImageObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const image = entry.target as HTMLElement;
-          image.classList.remove("lazyload");
-          image.setAttribute("src", image.dataset.src ? image.dataset.src : "");
-          lazyImageObserver.unobserve(image);
-        }
-      });
-    });
-    lazyImages.forEach((image) => {
-      lazyImageObserver.observe(image);
-    });
-    Fancybox.bind("[data-fancybox]", {
-      Thumbs: false,
-      groupAll: true,
-      Toolbar: {
-        display: {
-          left: [],
-          middle: [],
-          right: ["close"],
-        },
-      },
-    });
-  });
-</script>

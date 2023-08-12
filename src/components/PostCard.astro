@@ -1,0 +1,40 @@
+---
+import dayjs from "dayjs";
+import Image from "@/components/Image.astro";
+
+interface Props {
+  post: {
+    date: Date;
+    title: string;
+    cover: string;
+    description: string;
+    author: string;
+    category: string;
+  };
+  slug: string;
+}
+
+const { post, slug } = Astro.props;
+---
+
+<div class="flex flex-col justify-between py-4 h-48">
+  <h3 class="text-lg sm:text-xl font-semibold">
+    <a class="hover:text-link transition-colors" href={`/p/${slug}`}>
+      {post.title}
+    </a>
+  </h3>
+  <p
+    class="my-4 flex-grow-0 text-sm/8 sm:text-base/8 line-clamp-2 text-justify"
+  >
+    <a class="hover:text-link transition-colors" href={`/p/${slug}`}>
+      {post.description}
+    </a>
+  </p>
+  <div
+    class="text-secondary truncate sm:text-sm text-xs space-x-2 sm:space-x-4"
+  >
+    <span>{dayjs(post.date).format("YYYY.MM.DD")}</span>
+    <span>/</span>
+    <span>{post.category}</span>
+  </div>
+</div>

@@ -1,10 +1,8 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import Image from "@/components/Image/index.astro";
-import PostCard from "@/components/PostCard/index.astro";
+import PostCard from "@/components/PostCard.astro";
+import Pagination from "@/components/Pagination.astro";
 import { CollectionEntry, getCollection } from "astro:content";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 type GetStaticPathsProps = {
   paginate: Function;
@@ -29,66 +27,26 @@ interface Props {
 
 export async function getStaticPaths({ paginate }: GetStaticPathsProps) {
   const posts = await getCollection("blog");
-  const reversePosts = posts.reverse();
+  const reversePosts = posts.sort((a, b) => b.data.id - a.data.id);
   return paginate(reversePosts, { pageSize: 8 });
 }
 
 const { page } = Astro.props;
 ---
 
-<Layout select={1} title={`胤的博客 - 全部文章 - ${page.currentPage}`}>
-  <!-- banner -->
-  <div class="w-full h-60 rounded-lg overflow-hidden">
-    <Image
-      alt="banner"
-      withFancyBox={false}
-      src="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
-    />
-  </div>
-  <!-- post -->
-  <div class="grid my-6 grid-cols-1 gap-4 border-y divide-y">
+<Layout
+  select={1}
+  title={`胤的博客 - 全部文章 - ${page.currentPage}`}
+  header="全部文章"
+  description="『 那些景 那些事 那些人 』"
+  banner="https://article.biliimg.com/bfs/article/db21424ab03851de47b22d94dc054e4796b04f4c.jpg"
+>
+  <div class="grid my-6 grid-cols-1 gap-4 divide-y">
     {
       page.data.map((post) => {
         return <PostCard post={post.data} slug={post.slug} />;
       })
     }
   </div>
-  <!-- footer -->
-  <div class="w-full flex items-center justify-between">
-    <div
-      class={cn("hover:text-pink flex items-center transition-colors", {
-        invisible: !page.url.prev,
-      })}
-    >
-      <ChevronLeft className="h-4 w-4" />
-      <a href={page.url.prev}>上一页</a>
-    </div>
-    <div
-      class={cn("hover:text-pink flex items-center transition-colors", {
-        invisible: !page.url.next,
-      })}
-    >
-      <a href={page.url.next}>下一页</a>
-      <ChevronRight className="h-4 w-4" />
-    </div>
-  </div>
+  <Pagination next={page.url.next} prev={page.url.prev} />
 </Layout>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const lazyImages = document.querySelectorAll("img.lazyload");
-    const lazyImageObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const image = entry.target as HTMLElement;
-          image.classList.remove("lazyload");
-          image.setAttribute("src", image.dataset.src ? image.dataset.src : "");
-          lazyImageObserver.unobserve(image);
-        }
-      });
-    });
-    lazyImages.forEach((image) => {
-      lazyImageObserver.observe(image);
-    });
-  });
-</script>

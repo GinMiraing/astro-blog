@@ -7,21 +7,21 @@
     --text-primary: #333;
     --text-secondary: #bbb;
     --primary: #ff6b81;
+    --hr-bg: #bbb;
     --card-bg: #fff;
     --body-bg: #f7f7f7;
+    --hover-bg: rgba(0, 0, 0, 0.1);
+  }
+  html {
+    @apply scroll-smooth antialiased;
+    @apply font-noto;
   }
   body {
     background-image: url("https://cdn.zengjunyin.com/9B54A4959F1F0AB9DDB324F5CE8195A5.png");
-    background-repeat: repeat;
-    background-attachment: fixed;
-    background-color: var(--body-bg);
-    font-family: "Noto Serif SC", sans-serif;
-    font-display: swap;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    @apply bg-repeat bg-fixed bg-body;
   }
   hr {
-    background-color: var(--text-secondary);
+    @apply bg-hr;
   }
   ::-webkit-scrollbar {
     @apply w-1 h-1;
@@ -41,9 +41,26 @@
     @apply my-4;
   }
   .markdown p {
-    @apply xl:text-lg/10 text-base/8 text-justify tracking-wider;
+    @apply sm:text-base/8 text-sm/8 text-justify tracking-wider;
   }
   .markdown a {
     @apply text-pink;
+  }
+  .markdown .data-footnote-backref {
+    @apply hidden;
+  }
+  .markdown .footnotes h2 {
+    @apply hidden;
+  }
+  .markdown .footnotes p {
+    @apply text-sm/8;
+  }
+  .markdown sup::before {
+    @apply text-pink;
+    content: "[";
+  }
+  .markdown sup::after {
+    @apply text-pink;
+    content: "]";
   }
 }

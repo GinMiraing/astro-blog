@@ -1,0 +1,34 @@
+---
+interface Props {
+  item: {
+    link: string;
+    name: string;
+    description: string;
+    avatar: string;
+  };
+}
+
+const { item } = Astro.props;
+---
+
+<a
+  class="hover:bg-hover block transition-colors rounded-sm"
+  referrerpolicy="no-referrer"
+  target="_blank"
+  href={item.link}
+>
+  <div class="flex space-x-4 p-4">
+    <div class="w-12 h-12 rounded-full shrink-0 overflow-hidden">
+      <img
+        src={item.avatar}
+        alt={item.avatar}
+        class="object-cover w-full h-full"
+        onerror="this.onerror=null; this.src='https://article.biliimg.com/bfs/article/fe739a158cc128f70f780eb5fa96f388b81d478f.png@.webp'"
+      />
+    </div>
+    <div class="flex flex-col">
+      <div class="sm:text-base text-sm font-semibold">{item.name}</div>
+      <div class="text-xs sm:text-sm mt-1 line-clamp-2">{item.description}</div>
+    </div>
+  </div>
+</a>

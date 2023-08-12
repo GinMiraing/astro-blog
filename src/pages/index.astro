@@ -1,73 +1,44 @@
 ---
-import Layout from "@/layouts/Layout.astro";
-import TitleWithUnderline from "@/components/TitleWithUnderline/index.astro";
-import PostCard from "@/components/PostCard/index.astro";
-import IssueCard from "@/components/IssueCard/index.astro";
-import Image from "@/components/Image/index.astro";
-import { ChevronRight } from "lucide-react";
+import IndexLayout from "@/layouts/IndexLayout.astro";
+import TitleWithUnderline from "@/components/TitleWithUnderline.astro";
+import PostCard from "@/components/PostCard.astro";
+import IssueCard from "@/components/IssueCard.astro";
+import Image from "@/components/Image.astro";
+import More from "@/components/More.astro";
 import { getCollection, getEntry } from "astro:content";
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import BannerHeader from "@/components/PageBanner.astro";
 
 const posts = await getCollection("blog");
 const issueOrigin = await getEntry("issue", "index");
-const issues = issueOrigin.data.issues.map((item) => item);
+const issues = issueOrigin.data.issues
+  .map((item) => item)
+  .sort((a, b) => b.id - a.id);
 ---
 
-<Layout select={0} title="胤的博客">
-  <!-- header -->
-  <div class="w-full">
-    <div class="flex items-center justify-between">
-      <h1 class="text-3xl font-bold">胤的博客</h1>
-      <div class="w-12 h-12 rounded-full overflow-hidden">
-        <img
-          src="https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png@.webp"
-          alt="avatar"
-        />
-      </div>
-    </div>
-    <div class="text-sm mt-4">『 所念皆星河 』</div>
-  </div>
-  <hr class="my-6" />
-  <!-- banner -->
-  <div class="w-full h-60 rounded-lg overflow-hidden">
-    <Image
-      alt="banner"
-      withFancyBox={false}
-      src="https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
-    />
-  </div>
-  <hr class="my-6" />
+<IndexLayout title="胤的博客">
   <!-- post -->
   <div class="w-full">
     <TitleWithUnderline title="最新文章" />
     <div class="grid grid-cols-1 border-b divide-y">
       {
-        posts.reverse().map((post, index) => {
-          if (index < 5) {
-            return <PostCard post={post.data} slug={post.slug} />;
-          }
-        })
+        posts
+          .sort((a, b) => b.data.id - a.data.id)
+          .map((post, index) => {
+            if (index < 5) {
+              return <PostCard post={post.data} slug={post.slug} />;
+            }
+          })
       }
     </div>
-    <div
-      class="flex items-center hover:text-pink transition-colors justify-end mt-2"
-    >
-      <a href="/post/1">所有文章</a>
-      <ChevronRight className="h-4 w-4" />
-    </div>
+    <More link="/post/1" title="所有文章" />
   </div>
   <!-- issue -->
   <div class="w-full mt-6">
     <TitleWithUnderline title="最新说说" />
     <div class="grid grid-cols-1 border-b divide-y">
-      {issues.reverse().map((item) => <IssueCard issue={item} />)}
+      {issues.map((item) => <IssueCard issue={item} />)}
     </div>
-    <div
-      class="flex items-center hover:text-pink transition-colors justify-end mt-2"
-    >
-      <a href="/post/1">所有说说</a>
-      <ChevronRight className="h-4 w-4" />
-    </div>
+    <More link="/issue/1" title="所有说说" />
   </div>
   <!-- about -->
   <div class="w-full mt-6">
@@ -83,7 +54,7 @@ const issues = issueOrigin.data.issues.map((item) => item);
           src="https://article.biliimg.com/bfs/article/b3c4fab8f53b782a0b4306766bc9af3f93dbfa24.jpg"
         />
       </div>
-      <p class="w-full xl:text-lg/10 text-base/8 text-justify tracking-wider">
+      <p class="w-full sm:text-base/8 text-sm/8 text-justify tracking-wider">
         我是『 胤 @GinMiraing 』，毕业于厦门大学的<span
           class="text-pink underline underline-offset-4">哲学</span
         >专业，目前在厦门的互联网公司从事<span
@@ -93,7 +64,7 @@ const issues = issueOrigin.data.issues.map((item) => item);
           >生命可以随心所欲，但不能随波逐流。</span
         >”我认为，我所做的事正是我喜欢的，没有必要按照他人的要求充当一个“角色”。
       </p>
-      <p class="w-full xl:text-lg/10 text-base/8 text-justify tracking-wider">
+      <p class="w-full sm:text-base/8 text-sm/8 text-justify tracking-wider">
         目前我工作使用的框架是 React，因为学习了新的框架，所以我想把之前使用原生
         CSS 和 JS 编写的博客重构一下。这个博客使用的是 <a
           href="https://astro.build"
@@ -105,35 +76,4 @@ const issues = issueOrigin.data.issues.map((item) => item);
       </p>
     </div>
   </div>
-</Layout>
-
-<script>
-  import { Fancybox } from "@fancyapps/ui";
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const lazyImages = document.querySelectorAll("img.lazyload");
-    const lazyImageObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const image = entry.target as HTMLElement;
-          image.classList.remove("lazyload");
-          image.setAttribute("src", image.dataset.src ? image.dataset.src : "");
-          lazyImageObserver.unobserve(image);
-        }
-      });
-    });
-    lazyImages.forEach((image) => {
-      lazyImageObserver.observe(image);
-    });
-    Fancybox.bind("[data-fancybox]", {
-      Thumbs: false,
-      Toolbar: {
-        display: {
-          left: [],
-          middle: [],
-          right: ["close"],
-        },
-      },
-    });
-  });
-</script>
+</IndexLayout>
