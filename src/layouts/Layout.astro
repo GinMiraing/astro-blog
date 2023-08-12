@@ -1,41 +1,40 @@
 ---
 interface Props {
   title: string;
+  header: string;
+  description: string;
+  banner: string;
   select: number;
 }
 
-const { title, select } = Astro.props;
+const { title, select, header, description, banner } = Astro.props;
 
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header";
-import Navbar from "@/components/Navbar.astro";
 import BackTop from "@/components/BackTop";
 
 import "@/styles/global.css";
+import Head from "@/components/Head.astro";
+import PageBanner from "@/components/PageBanner.astro";
 ---
 
 <!DOCTYPE html>
 <html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap"
-    />
-    <meta name="referrer" content="same-origin" />
-    <title>{title}</title>
-  </head>
+  <Head title={title} />
   <body class="text-primary tracking-widest">
     <Header client:load />
     <main
-      class="sm:mt-24 p-4 sm:p-8 md:p-16 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
+      class="sm:mt-24 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
     >
-      <Navbar select={select} />
-      <slot />
+      <PageBanner
+        title={header}
+        description={description}
+        imgsrc={banner}
+        select={select}
+      />
+      <div class="content px-4 sm:px-12 pb-6 w-full">
+        <slot />
+      </div>
     </main>
     <BackTop client:load />
     <Footer />
