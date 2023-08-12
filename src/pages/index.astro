@@ -6,7 +6,7 @@ import IssueCard from "@/components/IssueCard.astro";
 import Image from "@/components/Image.astro";
 import More from "@/components/More.astro";
 import { getCollection, getEntry } from "astro:content";
-import BannerHeader from "@/components/PageBanner.astro";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 const posts = await getCollection("blog");
 const issueOrigin = await getEntry("issue", "index");
@@ -77,3 +77,10 @@ const issues = issueOrigin.data.issues
     </div>
   </div>
 </IndexLayout>
+
+<script>
+  import { bindFancybox } from "@/lib/utils";
+  document.addEventListener("DOMContentLoaded", () => {
+    bindFancybox(false);
+  });
+</script>
