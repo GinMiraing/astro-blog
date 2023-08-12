@@ -1,5 +1,6 @@
 ---
 import { cn } from "@/lib/utils";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 interface Props {
   src: string;
   alt?: string;
@@ -46,3 +47,34 @@ const placeholder = `https://article.biliimg.com/bfs/article/18d1e2d11b9e00ea443
     </div>
   )
 }
+
+<script>
+  import { Fancybox } from "@fancyapps/ui";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const lazyImages = document.querySelectorAll("img.lazyload");
+    const lazyImageObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const image = entry.target as HTMLElement;
+          image.classList.remove("lazyload");
+          image.setAttribute("src", image.dataset.src ? image.dataset.src : "");
+          lazyImageObserver.unobserve(image);
+        }
+      });
+    });
+    lazyImages.forEach((image) => {
+      lazyImageObserver.observe(image);
+    });
+    Fancybox.bind("[data-fancybox]", {
+      Thumbs: false,
+      Toolbar: {
+        display: {
+          left: [],
+          middle: [],
+          right: ["close"],
+        },
+      },
+    });
+  });
+</script>
