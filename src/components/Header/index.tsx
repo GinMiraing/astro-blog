@@ -42,16 +42,11 @@ const Header = () => {
             />
           </div>
         </a>
-        <div className="flex h-16 items-center space-x-4">
-          <div className="cursor-pointer" onClick={() => scrollTo(0, 0)}>
-            <ArrowUp className="h-6 w-6 text-primary" />
-          </div>
-          <div
-            className="cursor-pointer"
-            onClick={() => setToggle((prev) => !prev)}
-          >
-            <Menu className="h-6 w-6 text-primary" />
-          </div>
+        <div
+          className="cursor-pointer"
+          onClick={() => setToggle((prev) => !prev)}
+        >
+          <Menu className="h-6 w-6 text-primary" />
         </div>
       </div>
       <div className="flex pb-2 flex-col">
