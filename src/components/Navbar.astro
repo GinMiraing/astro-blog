@@ -1,5 +1,6 @@
 ---
 import NavbarItem from "@/components/NavbarItem.astro";
+import { cn } from "@/lib/utils";
 
 interface Props {
   select: number;
@@ -27,7 +28,12 @@ const itemList = [
 ];
 ---
 
-<div class="w-full hidden sm:flex space-x-4 my-4">
+<div
+  class={cn("w-full justify-end flex space-x-4", {
+    "text-white": select > 0,
+    "text-primary": select === 0,
+  })}
+>
   {
     itemList.map((item, index) => (
       <NavbarItem

@@ -17,40 +17,24 @@ interface Props {
 const { post, slug } = Astro.props;
 ---
 
-<div class="flex py-4 justify-between h-48 sm:h-56">
-  <div class="basis-3/5 shrink-0 h-full flex flex-col justify-between">
-    <h3 class="text-lg sm:text-xl font-semibold">
-      <a class="hover:text-link transition-colors" href={`/p/${slug}`}
-        >{post.title}</a
-      >
-    </h3>
-    <p
-      class="my-4 flex-grow-0 text-sm/6 sm:text-base/6 line-clamp-2 text-justify"
-    >
+<div class="flex flex-col justify-between py-4 h-48">
+  <h3 class="text-lg sm:text-xl font-semibold">
+    <a class="hover:text-link transition-colors" href={`/p/${slug}`}>
+      {post.title}
+    </a>
+  </h3>
+  <p
+    class="my-4 flex-grow-0 text-sm/8 sm:text-base/8 line-clamp-2 text-justify"
+  >
+    <a class="hover:text-link transition-colors" href={`/p/${slug}`}>
       {post.description}
-    </p>
-    <div
-      class="text-secondary truncate sm:text-sm text-xs space-x-2 sm:space-x-4"
-    >
-      <span>{post.author}</span>
-      <span>/</span>
-      <span>{dayjs(post.date).format("YYYY.MM.DD")}</span>
-      <span>/</span>
-      <span>{post.category}</span>
-    </div>
-  </div>
-  <div class="flex ml-4 items-center">
-    <div class="overflow-hidden rounded-sm w-20 sm:w-auto h-20 sm:h-32">
-      <a class="block w-full h-full" href={`/p/${slug}`}>
-        <Image
-          src={post.cover}
-          alt={post.title}
-          width="800"
-          height="400"
-          className="hover:scale-150 transition-transform"
-          withFancyBox={false}
-        />
-      </a>
-    </div>
+    </a>
+  </p>
+  <div
+    class="text-secondary truncate sm:text-sm text-xs space-x-2 sm:space-x-4"
+  >
+    <span>{dayjs(post.date).format("YYYY.MM.DD")}</span>
+    <span>/</span>
+    <span>{post.category}</span>
   </div>
 </div>
