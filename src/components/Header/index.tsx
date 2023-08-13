@@ -9,7 +9,7 @@ const itemList = [
   },
   {
     title: "文章",
-    link: "/post/1",
+    link: "/post/",
   },
   {
     title: "说说",

@@ -1,12 +1,12 @@
 ---
 import IndexLayout from "@/layouts/IndexLayout.astro";
 import TitleWithUnderline from "@/components/TitleWithUnderline.astro";
-import PostCard from "@/components/PostCard.astro";
 import IssueCard from "@/components/IssueCard.astro";
 import Image from "@/components/Image.astro";
 import More from "@/components/More.astro";
 import { getCollection, getEntry } from "astro:content";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import { IndexPost } from "@/components/Post";
 
 const posts = await getCollection("blog");
 const issueOrigin = await getEntry("issue", "index");
@@ -19,18 +19,11 @@ const issues = issueOrigin.data.issues
   <!-- post -->
   <div class="w-full">
     <TitleWithUnderline title="最新文章" />
+
     <div class="grid grid-cols-1 border-b divide-y">
-      {
-        posts
-          .sort((a, b) => b.data.id - a.data.id)
-          .map((post, index) => {
-            if (index < 5) {
-              return <PostCard post={post.data} slug={post.slug} />;
-            }
-          })
-      }
+      <IndexPost posts={posts} />
     </div>
-    <More link="/post/1" title="所有文章" />
+    <More link="/post/" title="所有文章" />
   </div>
   <!-- issue -->
   <div class="w-full mt-6">
