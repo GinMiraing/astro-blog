@@ -2,21 +2,21 @@
   "issues": [
     {
       "id": 1,
-      "time": "2023-08-09 14:15",
+      "time": "2023.08.09 14:15",
       "author": "胤",
       "avatar": "https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png",
       "message": "终于用 Astro 框架改完了博客。"
     },
     {
       "id": 2,
-      "time": "2023-08-09 22:01",
+      "time": "2023.08.09 22:01",
       "author": "胤",
       "avatar": "https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png",
       "message": "想从公司润了，感觉没有任何的收获。"
     },
     {
       "id": 3,
-      "time": "2023-08-10 00:01",
+      "time": "2023.08.10 00:01",
       "author": "胤",
       "avatar": "https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png",
       "message": "这是一个渲染图片的测试说说。",
@@ -24,7 +24,7 @@
     },
     {
       "id": 4,
-      "time": "2023-08-11 17:20",
+      "time": "2023.08.11 17:20",
       "author": "胤",
       "avatar": "https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png",
       "message": "在思考用什么评论系统，之前用的 Twikoo 自定义样式太麻烦了。"
