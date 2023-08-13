@@ -1,12 +1,12 @@
 ---
 import IndexLayout from "@/layouts/IndexLayout.astro";
 import TitleWithUnderline from "@/components/TitleWithUnderline.astro";
-import IssueCard from "@/components/IssueCard.astro";
-import Image from "@/components/Image.astro";
 import More from "@/components/More.astro";
 import { getCollection, getEntry } from "astro:content";
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { IndexPost } from "@/components/Post";
+import { IndexIssue } from "@/components/Issue";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import { LazyFancyboxImage } from "@/components/LazyImage";
 
 const posts = await getCollection("blog");
 const issueOrigin = await getEntry("issue", "index");
@@ -19,17 +19,14 @@ const issues = issueOrigin.data.issues
   <!-- post -->
   <div class="w-full">
     <TitleWithUnderline title="最新文章" />
-
-    <div class="grid grid-cols-1 border-b divide-y">
-      <IndexPost posts={posts} />
-    </div>
+    <IndexPost client:load posts={posts} />
     <More link="/post/" title="所有文章" />
   </div>
   <!-- issue -->
   <div class="w-full mt-6">
     <TitleWithUnderline title="最新说说" />
     <div class="grid grid-cols-1 border-b divide-y">
-      {issues.map((item) => <IssueCard issue={item} />)}
+      <IndexIssue client:load issues={issues} />
     </div>
     <More link="/issue/1" title="所有说说" />
   </div>
@@ -40,8 +37,7 @@ const issues = issueOrigin.data.issues
       <div
         class="h-36 w-36 sm:h-52 sm:w-52 md:w-80 md:h-80 overflow-hidden rounded-sm my-4"
       >
-        <Image
-          withFancyBox={true}
+        <LazyFancyboxImage
           width="800"
           height="800"
           src="https://article.biliimg.com/bfs/article/b3c4fab8f53b782a0b4306766bc9af3f93dbfa24.jpg"
@@ -74,6 +70,20 @@ const issues = issueOrigin.data.issues
 <script>
   import { bindFancybox } from "@/lib/utils";
   document.addEventListener("DOMContentLoaded", () => {
-    bindFancybox(false);
+    const lazyImages = document.querySelectorAll("img.lazyload");
+    const lazyImageObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const image = entry.target as HTMLElement;
+          image.classList.remove("lazyload");
+          image.setAttribute("src", image.dataset.src ? image.dataset.src : "");
+          lazyImageObserver.unobserve(image);
+        }
+      });
+    });
+    lazyImages.forEach((image) => {
+      lazyImageObserver.observe(image);
+    });
+    bindFancybox(true);
   });
 </script>

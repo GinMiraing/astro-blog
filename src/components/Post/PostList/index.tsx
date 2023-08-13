@@ -3,11 +3,7 @@ import { PostCard } from "../PostCard";
 import { cn } from "@/lib/utils";
 import type { CollectionEntry } from "astro:content";
 
-type PostListProps = {
-  posts: CollectionEntry<"blog">[];
-};
-
-export const PostList = ({ posts }: PostListProps) => {
+export const PostList = ({ posts }: { posts: CollectionEntry<"blog">[] }) => {
   const [currentList, setCurrentList] = useState<CollectionEntry<"blog">[]>(
     posts.slice(0, 7)
   );

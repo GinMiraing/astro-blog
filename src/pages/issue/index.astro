@@ -1,0 +1,42 @@
+---
+import { IssueList } from "@/components/Issue";
+import Layout from "@/layouts/Layout.astro";
+import { getEntry } from "astro:content";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+
+const issueOrigin = await getEntry("issue", "index");
+const issues = issueOrigin.data.issues
+  .map((item) => item)
+  .sort((a, b) => b.id - a.id);
+---
+
+<Layout
+  select={2}
+  title={"胤的博客 - 全部说说"}
+  header="全部说说"
+  description="『 简短的一言一语 』"
+  banner="https://article.biliimg.com/bfs/article/0b325f4cee4c7ff1e57661bac6999bfb820227d2.jpg"
+>
+  <IssueList client:load issues={issues} />
+</Layout>
+
+<script>
+  import { bindFancybox } from "@/lib/utils";
+  document.addEventListener("DOMContentLoaded", () => {
+    const lazyImages = document.querySelectorAll("img.lazyload");
+    const lazyImageObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const image = entry.target as HTMLElement;
+          image.classList.remove("lazyload");
+          image.setAttribute("src", image.dataset.src ? image.dataset.src : "");
+          lazyImageObserver.unobserve(image);
+        }
+      });
+    });
+    lazyImages.forEach((image) => {
+      lazyImageObserver.observe(image);
+    });
+    bindFancybox(true);
+  });
+</script>

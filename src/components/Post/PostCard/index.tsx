@@ -1,19 +1,16 @@
 import dayjs from "dayjs";
 
-type PostCardProps = {
-  post: {
-    title: string;
-    description: string;
-    date: Date;
-    category: string;
-    cover: string;
-    author: string;
-    id: number;
-  };
-  slug: string;
+type Post = {
+  title: string;
+  description: string;
+  date: Date;
+  category: string;
+  cover: string;
+  author: string;
+  id: number;
 };
 
-export const PostCard = ({ post, slug }: PostCardProps) => {
+export const PostCard = ({ post, slug }: { post: Post; slug: string }) => {
   return (
     <div className="flex flex-col justify-between py-4 h-48">
       <h3 className="text-lg sm:text-xl font-semibold">

@@ -13,7 +13,7 @@ const itemList = [
   },
   {
     title: "说说",
-    link: "/issue/1",
+    link: "/issue/",
   },
   {
     title: "友链",

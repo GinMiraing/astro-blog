@@ -13,7 +13,5 @@ const posts = await getCollection("blog");
   description="『 那些景 那些事 那些人 』"
   banner="https://article.biliimg.com/bfs/article/db21424ab03851de47b22d94dc054e4796b04f4c.jpg"
 >
-  <div class="grid my-6 grid-cols-1 gap-4 divide-y">
-    <PostList client:load posts={posts.sort((a, b) => b.data.id - a.data.id)} />
-  </div>
+  <PostList client:load posts={posts.sort((a, b) => b.data.id - a.data.id)} />
 </Layout>

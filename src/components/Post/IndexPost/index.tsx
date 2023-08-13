@@ -2,11 +2,7 @@ import type { CollectionEntry } from "astro:content";
 import { useMemo } from "react";
 import { PostCard } from "../PostCard";
 
-type IndexPostProps = {
-  posts: CollectionEntry<"blog">[];
-};
-
-export const IndexPost = ({ posts }: IndexPostProps) => {
+export const IndexPost = ({ posts }: { posts: CollectionEntry<"blog">[] }) => {
   const postList = useMemo<CollectionEntry<"blog">[]>(
     () => posts.sort((a, b) => b.data.id - a.data.id).slice(0, 5),
     [posts]
