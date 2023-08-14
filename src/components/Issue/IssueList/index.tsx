@@ -28,14 +28,16 @@ export const IssueList = ({ issues }: { issues: Issue[] }) => {
           <IssueCard key={issue.id} issue={issue} />
         ))}
       </div>
-      <button
-        className={cn("text-sm", {
-          hidden: offset >= issues.length,
-        })}
-        onClick={() => btnClickHandler()}
+      <div
+        className={cn(
+          "flex hover:text-pink transition-colors h-12 justify-center",
+          { hidden: offset >= issues.length }
+        )}
       >
-        - 加载更多 -
-      </button>
+        <button className="text-sm" onClick={() => btnClickHandler()}>
+          - 加载更多 -
+        </button>
+      </div>
     </>
   );
 };

@@ -22,14 +22,16 @@ export const PostList = ({ posts }: { posts: CollectionEntry<"blog">[] }) => {
           return <PostCard key={post.id} post={post.data} slug={post.slug} />;
         })}
       </div>
-      <button
-        className={cn("text-sm", {
-          hidden: offset >= posts.length,
-        })}
-        onClick={() => btnClickHandler()}
+      <div
+        className={cn(
+          "flex hover:text-pink transition-colors h-12 justify-center",
+          { hidden: offset >= posts.length }
+        )}
       >
-        - 加载更多 -
-      </button>
+        <button className="text-sm" onClick={() => btnClickHandler()}>
+          - 加载更多 -
+        </button>
+      </div>
     </>
   );
 };
