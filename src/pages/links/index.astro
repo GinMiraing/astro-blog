@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import LinksItem from "@/components/LinksItem.astro";
+import LinksItem from "@/components/LinksItem";
 
 const items = [
   {
@@ -60,6 +60,15 @@ const items = [
   banner="https://article.biliimg.com/bfs/article/a28bb78a74e60ddb306cd84c365e3d4ab7b2bb63.jpg"
 >
   <div class="w-full my-6 grid grid-cols-1 sm:grid-cols-2 mt-4 gap-4">
-    {items.map((item) => <LinksItem item={item} />)}
+    {
+      items.map((item) => (
+        <LinksItem
+          link={item.link}
+          avatar={item.avatar}
+          name={item.name}
+          description={item.description}
+        />
+      ))
+    }
   </div>
 </Layout>
