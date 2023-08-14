@@ -23,20 +23,6 @@ const issues = issueOrigin.data.issues
 <script>
   import { bindFancybox } from "@/lib/utils";
   document.addEventListener("DOMContentLoaded", () => {
-    const lazyImages = document.querySelectorAll("img.lazyload");
-    const lazyImageObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const image = entry.target as HTMLElement;
-          image.classList.remove("lazyload");
-          image.setAttribute("src", image.dataset.src ? image.dataset.src : "");
-          lazyImageObserver.unobserve(image);
-        }
-      });
-    });
-    lazyImages.forEach((image) => {
-      lazyImageObserver.observe(image);
-    });
     bindFancybox(true);
   });
 </script>

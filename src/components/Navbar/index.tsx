@@ -49,6 +49,7 @@ const Navbar = ({ select }: { select: number }) => {
     >
       {itemList.map((item, index) => (
         <NavbarItem
+          key={item.title}
           title={item.title}
           link={item.link}
           active={index === select ? true : false}

@@ -5,8 +5,8 @@ import More from "@/components/More";
 import { getCollection, getEntry } from "astro:content";
 import { IndexPost } from "@/components/Post";
 import { IndexIssue } from "@/components/Issue";
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
 import { LazyFancyboxImage } from "@/components/LazyImage";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 const posts = await getCollection("blog");
 const issueOrigin = await getEntry("issue", "index");
@@ -28,7 +28,7 @@ const issues = issueOrigin.data.issues
     <div class="grid grid-cols-1 border-b divide-y">
       <IndexIssue client:load issues={issues} />
     </div>
-    <More link="/issue/1" title="所有说说" />
+    <More link="/issue/" title="所有说说" />
   </div>
   <!-- about -->
   <div class="w-full mt-6">
@@ -38,6 +38,7 @@ const issues = issueOrigin.data.issues
         class="h-36 w-36 sm:h-52 sm:w-52 md:w-80 md:h-80 overflow-hidden rounded-sm my-4"
       >
         <LazyFancyboxImage
+          client:load
           width="800"
           height="800"
           src="https://article.biliimg.com/bfs/article/b3c4fab8f53b782a0b4306766bc9af3f93dbfa24.jpg"
@@ -70,20 +71,6 @@ const issues = issueOrigin.data.issues
 <script>
   import { bindFancybox } from "@/lib/utils";
   document.addEventListener("DOMContentLoaded", () => {
-    const lazyImages = document.querySelectorAll("img.lazyload");
-    const lazyImageObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const image = entry.target as HTMLElement;
-          image.classList.remove("lazyload");
-          image.setAttribute("src", image.dataset.src ? image.dataset.src : "");
-          lazyImageObserver.unobserve(image);
-        }
-      });
-    });
-    lazyImages.forEach((image) => {
-      lazyImageObserver.observe(image);
-    });
     bindFancybox(true);
   });
 </script>
