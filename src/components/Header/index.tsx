@@ -9,11 +9,11 @@ const itemList = [
   },
   {
     title: "文章",
-    link: "/post/1",
+    link: "/post/",
   },
   {
     title: "说说",
-    link: "/issue/1",
+    link: "/issue/",
   },
   {
     title: "友链",
