@@ -27,7 +27,7 @@
     @apply w-1 h-1;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-pink rounded-md;
+    background-color: #ff6b81;
   }
   *,
   ::after,
