@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PostCard } from "../PostCard";
 import { cn } from "@/lib/utils";
 import type { CollectionEntry } from "astro:content";
 
 export const PostList = ({ posts }: { posts: CollectionEntry<"blog">[] }) => {
-  const [currentList, setCurrentList] = useState<CollectionEntry<"blog">[]>(
-    posts.slice(0, 7)
-  );
+  const [currentList, setCurrentList] = useState<CollectionEntry<"blog">[]>([]);
+  const [offset, setOffset] = useState<number>(0);
 
-  const [offset, setOffset] = useState<number>(8);
+  useEffect(() => {
+    const postStore = sessionStorage.getItem("post");
+    setCurrentList(posts.slice(0, postStore ? parseInt(postStore) - 1 : 7));
+    setOffset(postStore ? parseInt(postStore) : 8);
+  }, []);
+
   const btnClickHandler = () => {
+    sessionStorage.setItem("post", (offset + 8).toString());
     setOffset((prev) => {
       return prev + 8;
     });

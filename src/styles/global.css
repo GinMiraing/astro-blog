@@ -26,11 +26,8 @@
   ::-webkit-scrollbar {
     @apply w-1 h-1;
   }
-  ::-webkitbg-transparent {
+  ::-webkit-scrollbar-thumb {
     @apply bg-pink rounded-md;
-  }
-  ::-webkit-scrollbar-corner {
-    @apply bg-transparent;
   }
   *,
   ::after,
