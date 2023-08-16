@@ -24,6 +24,10 @@
     background-color: var(--body-bg);
     background-attachment: fixed;
   }
+  main {
+    animation-name: fadeIn;
+    animation-duration: 0.8s;
+  }
   hr {
     background-color: var(--hr-bg);
   }
@@ -86,5 +90,13 @@
   .markdown sup::after {
     color: var(--primary);
     content: "]";
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 }
