@@ -28,6 +28,13 @@
       "author": "胤",
       "avatar": "https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png",
       "message": "在思考用什么评论系统，之前用的 Twikoo 自定义样式太麻烦了。"
+    },
+    {
+      "id": 5,
+      "time": "2023.08.16 22:14",
+      "author": "胤",
+      "avatar": "https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png",
+      "message": "打算对 Twikoo 评论进行二次开发，主要是对样式进行修改。"
     }
   ]
 }
