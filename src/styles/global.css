@@ -13,18 +13,23 @@
     --hover-bg: rgba(0, 0, 0, 0.1);
   }
   html {
-    @apply scroll-smooth antialiased;
-    @apply font-noto;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Noto Serif SC", sans-serif;
   }
   body {
     background-image: url("https://cdn.zengjunyin.com/9B54A4959F1F0AB9DDB324F5CE8195A5.png");
-    @apply bg-repeat bg-fixed bg-body;
+    background-repeat: repeat;
+    background-color: var(--body-bg);
+    background-attachment: fixed;
   }
   hr {
-    @apply bg-hr;
+    background-color: var(--hr-bg);
   }
   ::-webkit-scrollbar {
-    @apply w-1 h-1;
+    width: 4px;
+    height: 4px;
   }
   ::-webkit-scrollbar-thumb {
     background-color: #ff6b81;
@@ -32,32 +37,54 @@
   *,
   ::after,
   ::before {
-    @apply box-border;
+    box-sizing: border-box;
   }
   .markdown * {
-    @apply my-4;
+    margin: 1rem 0;
   }
   .markdown p {
-    @apply sm:text-base/8 text-sm/8 text-justify tracking-wider;
+    text-align: justify;
+    letter-spacing: 0.07em;
+    @apply sm:text-base/8 text-sm/8;
   }
   .markdown a {
-    @apply text-pink;
+    color: var(--primary);
   }
   .markdown .data-footnote-backref {
-    @apply hidden;
+    display: none;
   }
   .markdown .footnotes h2 {
-    @apply hidden;
+    display: none;
   }
   .markdown .footnotes p {
-    @apply text-sm/8;
+    font-size: 0.875rem;
+    line-height: 2rem;
+  }
+  .markdown h2 {
+    @apply text-lg sm:text-xl;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    width: auto;
+    display: inline-block;
+    position: relative;
+  }
+  .markdown h2::after {
+    content: "";
+    position: absolute;
+    opacity: 0.4;
+    bottom: 0.25rem;
+    left: 0px;
+    right: 0px;
+    display: block;
+    height: 0.5rem;
+    background-color: var(--primary);
   }
   .markdown sup::before {
-    @apply text-pink;
+    color: var(--primary);
     content: "[";
   }
   .markdown sup::after {
-    @apply text-pink;
+    color: var(--primary);
     content: "]";
   }
 }
