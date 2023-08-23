@@ -91,6 +91,90 @@
     color: var(--primary);
     content: "]";
   }
+
+  .twikoo p {
+    text-align: justify;
+    letter-spacing: 0.07em;
+    @apply sm:text-base/8 text-sm/8;
+  }
+  .twikoo .tk-submit .el-textarea__inner,
+  .twikoo .tk-submit .el-input__inner,
+  .twikoo .tk-submit .el-input-group__prepend {
+    border-radius: 0;
+  }
+  .twikoo .tk-submit .el-input-group__prepend {
+    @apply bg-gray-50;
+  }
+  .twikoo .el-button,
+  .twikoo .el-button--primary {
+    border-radius: 0.125rem;
+    border: 0;
+  }
+  .twikoo .tk-submit .el-button--primary.is-disabled,
+  .twikoo .tk-submit .el-button--primary.is-disabled:active,
+  .twikoo .tk-submit .el-button--primary.is-disabled:focus,
+  .twikoo .tk-submit .el-button--primary.is-disabled:hover {
+    @apply bg-rose-100;
+  }
+  .twikoo .tk-submit .el-button--primary,
+  .twikoo .tk-submit .el-button--primary:active,
+  .twikoo .tk-submit .el-button--primary:focus,
+  .twikoo .tk-submit .el-button--primary:hover {
+    @apply bg-pink;
+  }
+  .twikoo .tk-cancel .el-button {
+    @apply bg-rose-100 !important;
+  }
+  .twikoo .tk-cancel .el-button:hover {
+    @apply bg-pink text-white !important;
+  }
+  .twikoo .tk-submit .el-input__inner:focus,
+  .twikoo .tk-submit .el-textarea__inner:focus {
+    border-color: var(--primary);
+  }
+  .twikoo .tk-action-link {
+    @apply text-primary hover:text-pink transition-colors sm:text-sm text-xs cursor-pointer;
+  }
+  .twikoo .tk-icon.__comments {
+    color: var(--primary);
+  }
+  .twikoo .tk-nick-link {
+    @apply text-primary hover:text-pink transition-colors cursor-pointer text-base sm:text-lg;
+  }
+  .twikoo .tk-meta::-webkit-scrollbar {
+    display: none;
+  }
+  .twikoo .tk-time {
+    @apply text-xs sm:text-sm;
+  }
+  .twikoo .tk-comments-title {
+    margin-bottom: 0.75rem;
+  }
+  .twikoo .tk-comments-container {
+    @apply mt-6;
+  }
+  .twikoo .tk-submit .tk-row.actions {
+    margin-bottom: 0;
+  }
+  .twikoo .tk-comments-count {
+    @apply text-lg sm:text-xl;
+    font-weight: 600;
+    width: auto;
+    display: inline-block;
+    position: relative;
+  }
+  .twikoo .tk-comments-count::after {
+    content: "";
+    position: absolute;
+    opacity: 0.4;
+    bottom: 0.25rem;
+    left: 0px;
+    right: 0px;
+    display: block;
+    height: 0.5rem;
+    background-color: var(--primary);
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;

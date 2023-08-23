@@ -14,20 +14,12 @@ export const PostCard = ({ post, slug }: { post: Post; slug: string }) => {
   return (
     <div className="flex flex-col justify-between py-4 h-48">
       <h3 className="text-lg sm:text-xl font-semibold">
-        <a
-          className="hover:text-link transition-colors"
-          target="_blank"
-          href={`/p/${slug}`}
-        >
+        <a className="hover:text-link transition-colors" href={`/p/${slug}`}>
           {post.title}
         </a>
       </h3>
       <p className="my-4 flex-grow-0 text-sm/8 sm:text-base/8 line-clamp-2 text-justify">
-        <a
-          className="hover:text-link transition-colors"
-          target="_blank"
-          href={`/p/${slug}`}
-        >
+        <a className="hover:text-link transition-colors" href={`/p/${slug}`}>
           {post.description}
         </a>
       </p>

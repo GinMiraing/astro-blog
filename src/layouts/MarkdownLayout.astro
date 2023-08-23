@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import PostBanner from "@/components/PostBanner";
 import type { CollectionEntry } from "astro:content";
 import "@/styles/global.css";
+import TitleWithUnderline from "@/components/TitleWithUnderline";
 
 interface Props {
   title: string;
@@ -38,6 +39,17 @@ const { title, blog } = Astro.props;
             }
           </p>
         </div>
+      </div>
+      <div class="px-4 pb-4 sm:px-12 mt-6">
+        <TitleWithUnderline title="读者评论" />
+        <div id="twikoo"></div>
+        <script is:inline>
+          twikoo.init({
+            envId: "https://twikoo.zengjunyin.com",
+            el: "#twikoo",
+            lang: "zh-CN",
+          });
+        </script>
       </div>
     </main>
     <BackTop client:load />
