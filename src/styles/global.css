@@ -124,6 +124,7 @@
   }
   .twikoo .tk-cancel .el-button {
     @apply bg-rose-100 !important;
+    margin-top: 1rem;
   }
   .twikoo .tk-cancel .el-button:hover {
     @apply bg-pink text-white !important;
