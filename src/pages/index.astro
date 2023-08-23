@@ -66,6 +66,17 @@ const issues = issueOrigin.data.issues
       </p>
     </div>
   </div>
+  <div class="w-full mt-6">
+    <TitleWithUnderline title="读者评论" />
+    <div id="twikoo"></div>
+    <script is:inline>
+      twikoo.init({
+        envId: "https://twikoo.zengjunyin.com",
+        el: "#twikoo",
+        lang: "zh-CN",
+      });
+    </script>
+  </div>
 </IndexLayout>
 
 <script>
