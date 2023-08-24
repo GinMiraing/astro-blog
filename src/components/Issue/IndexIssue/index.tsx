@@ -11,7 +11,7 @@ type Issue = {
 
 export const IndexIssue = ({ issues }: { issues: Issue[] }) => {
   return (
-    <div className="grid grid-cols-1 border-b divide-y">
+    <div className="grid grid-cols-1 divide-y">
       {issues.slice(0, 5).map((issue) => (
         <IssueCard key={issue.id} issue={issue} />
       ))}

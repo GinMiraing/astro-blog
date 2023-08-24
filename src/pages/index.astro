@@ -25,9 +25,7 @@ const issues = issueOrigin.data.issues
   <!-- issue -->
   <div class="w-full mt-6">
     <TitleWithUnderline title="最新说说" />
-    <div class="grid grid-cols-1 border-b divide-y">
-      <IndexIssue client:load issues={issues} />
-    </div>
+    <IndexIssue client:load issues={issues} />
     <More link="/issue/" title="所有说说" />
   </div>
   <!-- about -->
