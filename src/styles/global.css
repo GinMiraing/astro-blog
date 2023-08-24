@@ -47,9 +47,9 @@
     margin: 1rem 0;
   }
   .markdown p {
+    @apply sm:text-base/8 text-sm/8;
     text-align: justify;
     letter-spacing: 0.07em;
-    @apply sm:text-base/8 text-sm/8;
   }
   .markdown a {
     color: var(--primary);
@@ -93,9 +93,27 @@
   }
 
   .twikoo p {
+    @apply sm:text-base/8 text-sm/8;
     text-align: justify;
     letter-spacing: 0.07em;
-    @apply sm:text-base/8 text-sm/8;
+  }
+  .twikoo .tk-comments-title {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .twikoo .tk-main > .tk-expand {
+    margin-top: 1rem;
+  }
+  .twikoo .tk-comments-container {
+    @apply divide-y;
+    margin-top: 0;
+  }
+  .twikoo .tk-comments-container > .tk-comment {
+    margin-top: 0;
+    padding: 1rem 0;
+  }
+  .twikoo .tk-submit {
+    margin-top: 1rem;
   }
   .twikoo .tk-submit .el-textarea__inner,
   .twikoo .tk-submit .el-input__inner,
@@ -120,10 +138,11 @@
   .twikoo .tk-submit .el-button--primary:active,
   .twikoo .tk-submit .el-button--primary:focus,
   .twikoo .tk-submit .el-button--primary:hover {
-    @apply bg-pink;
+    background-color: var(--primary);
   }
   .twikoo .tk-cancel .el-button {
     @apply bg-rose-100 !important;
+    margin-top: 1rem;
   }
   .twikoo .tk-cancel .el-button:hover {
     @apply bg-pink text-white !important;
@@ -146,12 +165,6 @@
   }
   .twikoo .tk-time {
     @apply text-xs sm:text-sm;
-  }
-  .twikoo .tk-comments-title {
-    margin-bottom: 0.75rem;
-  }
-  .twikoo .tk-comments-container {
-    @apply mt-6;
   }
   .twikoo .tk-submit .tk-row.actions {
     margin-bottom: 0;
