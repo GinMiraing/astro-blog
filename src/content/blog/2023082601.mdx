@@ -1,0 +1,139 @@
+---
+title: React：封装 Context
+date: 2023-08-26
+cover: https://article.biliimg.com/bfs/article/62ebde067dbe4ad8f2310caaba2681686d15496f.png
+description: 最近在公司写项目时，发现有一些可复用的代码没有封装，好多组件中都使用了后端传回的站点数据，这个数据是相同的，但是每个组件在使用这个数据之前都向后端接口发送了请求，明明只要一个请求就能搞定，现在的结果是产生了许多不必要的请求。通过查阅 React 官方文档，我发现使用 Context 可以只请求一次站点数据，并提供给所有组件使用。
+author: 胤
+category: 技术
+id: 19
+---
+
+最近在公司写项目时，发现有一些可复用的代码没有封装，好多组件中都使用了后端传回的站点数据，这个数据是相同的，但是每个组件在使用这个数据之前都向后端接口发送了请求，明明只要一个请求就能搞定，现在的结果是产生了许多不必要的请求。通过查阅 React 官方文档，我发现使用 context 可以只请求一次站点数据，并提供给所有组件使用。
+
+React 官方给出了 context 的[基本用法](https://react.dev/reference/react/createContext)：
+
+```tsx
+import { createContext, useContext } from "react";
+
+const themeContext = createContext<string | null>(null);
+
+export default App = () => {
+  return (
+    <themeContext.Provider value="light">
+      <Body />
+    </themeContext.Provider>
+  );
+};
+
+const Body = () => {
+  const theme = useContext(themeContext);
+  return <div>{theme}</div>;
+};
+```
+
+在这个例子中，context 的值如果是通过 App 组件中 useState 创建的，那么该值的变动会导致所有子组件的重新渲染，因为整个 App 组件重新渲染了：
+
+```tsx
+import { createContext, useContext, useState } from "react";
+
+const themeContext = createContext<string | null>(null);
+
+export default function App() {
+  const [theme, setTheme] = useState("light");
+  const handleClick = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light")
+  }
+  return (
+    <themeContext.Provider value={theme}>
+      <button onClick={handleClick}>Change Theme</button>
+      <Body />
+      <!-- NoRerender still re-render -->
+      <NoRerender />
+    </themeContext.Provider>
+  );
+};
+
+const Body = () => {
+  const theme = useContext(themeContext);
+  return <div>{theme}</div>;
+};
+
+const NoRerender = () => {
+  return <div>No re-render</div>;
+};
+```
+
+更好的办法是单独封装一个 context，在 context 里面处理 useState 的值，并通过 children 添加其他组件。由于 children 来自 App 组件，所以 ThemeProvider 的 props 并没有发生改变，只有使用 context 的组件会重新渲染：
+
+```tsx
+// ThemeContext.tsx
+
+import { ReactNode, createContext, useContext, useState } from "react";
+
+type themeContextProps = {
+  theme: string;
+  setTheme: (v: string) => void;
+};
+
+const themeContext = createContext<themeContextProps | null>(null);
+
+const useTheme = () => {
+  const context = useContext(themeContext);
+
+  if (!context) {
+    throw new Error("You can only use 'useTheme' in ThemeProvider");
+  }
+
+  return context;
+};
+
+const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  const [theme, setTheme] = useState("light");
+
+  return (
+    <themeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </themeContext.Provider>
+  );
+};
+
+export { useTheme, ThemeProvider };
+```
+
+```tsx
+// App.tsx
+
+import { useTheme, ThemeProvider } from "./ThemeContext";
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <Body />
+      <!-- NoRerender not re-render -->
+      <NoRerender />
+    </ThemeProvider>
+  );
+}
+
+const Body = () => {
+  const { theme, setTheme } = useTheme();
+
+  const handleClick = () => {
+    theme === "light" ? setTheme("dark") : setTheme("light");
+  };
+  return (
+    <div>
+      <div>{theme}</div>
+      <button onClick={handleClick}>Change Theme</button>
+    </div>
+  );
+};
+
+const NoRerender = () => {
+  return <div>No re-render</div>;
+};
+```
+
+通过这种改造，能够更好地将 context 的逻辑抽离出来，使它不影响未使用 context 的组件。使用 context 可以更方便在多组件间通讯，但每个 context 的使用范围应当明确界定，如果将 user 和 admin 的数据存在同一个 context 中，对 user 数据的修改会导致所有使用 admin 数据的组件重新渲染。
+
+题外话：之后我也会在博客中更新一些技术类的文章，工作之后发现有些刚学的技术如果不记录下来，没多久就忘了，记录的时候能把相应逻辑的代码重新打一遍，这可以加深理解。

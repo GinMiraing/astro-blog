@@ -91,6 +91,9 @@
     color: var(--primary);
     content: "]";
   }
+  .markdown pre {
+    padding: 0.5rem 1rem;
+  }
 
   .twikoo p {
     @apply sm:text-base/8 text-sm/8;
