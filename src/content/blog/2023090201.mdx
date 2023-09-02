@@ -1,0 +1,98 @@
+---
+title: React：组件的渲染和缓存机制
+date: 2023-09-02
+cover: https://article.biliimg.com/bfs/article/62ebde067dbe4ad8f2310caaba2681686d15496f.png
+description: 我刚开始写 React 的时候，并不知道如何优化组件的性能，直接 useState 一把梭。在后续的开发中，我发现有两个 React Hook 可以对组件进行缓存，useMemo 可以缓存数据，useCallback 可以缓存函数，于是我就把所有的数据和函数都用这两个 Hook 包裹住，这也是所有新手会做的事。
+author: 胤
+category: 技术
+id: 20
+---
+
+我刚开始写 React 的时候，并不知道如何优化组件的性能，直接 useState 一把梭。在后续的开发中，我发现有两个 React Hook 可以对组件进行缓存，useMemo 可以缓存数据，useCallback 可以缓存函数，于是我把全部的数据和函数都用这两个 Hook 包裹住，这也是 React 新手基本都会做的事。
+
+在后续的学习中，我发现过度使用 useMemo 和 useCallback 并不能优化性能，反而适得其反，因为这两个 Hook 在第一次创建缓存的时候会产生额外的开销，如果全部内容都使用这两个 Hook 包裹，应用首屏渲染的时间就会大大延长。我们为什么使用 useMemo 和 useCallback，最根本的一个原因是我们希望父组件在重新渲染的时候，不会导致子组件的重新渲染。明白了最根本的需求后，我们应该从组件渲染的原因入手，合理使用这两个 Hook。
+
+我们先来分析在 React 中组件为何重新渲染。首先，组件的 state 变化会引起重新渲染，这种重渲染是无法通过 useMemo 和 useCallback 优化的。其次，父组件的重新渲染会引起子组件的重渲染，有些文章中写道，组件 props 的变化也会引起重新渲染，这其实是一个很大的误区，子组件 props 变化本质上是因为父组件重新渲染了。看下面这个例子：
+
+```tsx
+export const Parent = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <div>{count}</div>
+      <button onClick={() => setCount((prev) => prev + 1)}>click me</button>
+      <Children />
+    </div>
+  );
+};
+
+const Children = () => {
+  return <div>This is children component</div>;
+};
+```
+
+在这个例子中，父组件有一个按钮，每按一次 count 的数量就会增加，组件也会重新渲染。学过 React 的人肯定都知道，在 Parent 组件重新渲染的时候，Children 组件也重新渲染了。然而，Children 组件根本没有任何 props，谈何 props 变化引起重新渲染？在明白了组件重新渲染的原因后，我们可以对组件进行一些优化，防止不必要的重渲染。看下面这个例子：
+
+```tsx
+export const App = () => {
+  const [count, setCount] = useState(0);
+  const user = useMemo(() => ({ name: "Zhang San", age: 20 }), [count]);
+  return (
+    <div>
+      <div>{count}</div>
+      <button onClick={() => setCount((prev) => prev + 1)}>click me</button>
+      <UserInfo name={user.name} age={user.age} />
+    </div>
+  );
+};
+
+const UserInfo = ({ name, age }) => {
+  return (
+    <div>
+      <div>user name is: {name}</div>
+      <div>user age is: {age}</div>
+    </div>
+  );
+};
+```
+
+那么，在这个例子中，count 的变化是否会引起 UserInfo 组件的重新渲染？答案是会的，虽然 user 使用了 useMemo 进行缓存，但它的依赖项是 count，也就是说每当 count 变化，user 就会重新生成，即便它的值没有变，它也是一个新的对象，并且，这种写法会让 React 产生一个警告：“React Hook useMemo has an unnecessary dependency”。按照通俗的理解，UserInfo 的 props 改变了，肯定也会重新渲染。现在我们对以上代码进行更改：
+
+```tsx
+const user = useMemo(() => ({ name: "Zhang San", age: 20 }), []);
+```
+
+我们删除了 user 的依赖项，那这时候 count 的变化是否会引起 UserInfo 组件的重新渲染呢？如果坚信 props 的变化会引起重新渲染，这时候肯定会认为 UserInfo 并不会重新渲染，因为删除依赖项后，user 得到了缓存，每次 count 更新后 user 指向的地址仍然是之前的地址，换言之，props 没有变。然而实际上 UserInfo 组件仍然重渲染了。在上文中我强调过，props 的变化会引起重新渲染是一个误区，真实的原因是父组件重新渲染导致了子组件重渲染。在这个例子中，count 的变化引起了 App 的重新渲染，UserInfo 作为子组件，必然会重渲染。
+
+在这个例子中，用 useMemo 包裹 user 的作用就只是缓存，并不能阻止子组件重新渲染，并且，像 user 这样的简单对象，React 在每次创建时的开销可以忽略不计，如果这些对象全用 useMemo 进行包裹，反而增大了首次渲染的开销。
+
+这时候肯定有人会问，那要怎样才能保证 UserInfo 组件不会重新渲染呢？答案是使用 memo 对整个组件包裹。使用 memo 包裹的组件会在父组件重渲染时对子组件的 props 进行判断，如果子组件的 props 没有变化，就不重新渲染。整段代码如下：
+
+```tsx
+export const App = () => {
+  const [count, setCount] = useState(0);
+  const user = useMemo(() => ({ name: "Zhang San", age: 20 }), []);
+  return (
+    <div>
+      <div>{count}</div>
+      <button onClick={() => setCount((prev) => prev + 1)}>click me</button>
+      <UserInfoMemo name={user.name} age={user.age} />
+    </div>
+  );
+};
+
+const UserInfo = ({ name, age }) => {
+  return (
+    <div>
+      <div>user name is: {name}</div>
+      <div>user age is: {age}</div>
+    </div>
+  );
+};
+
+const UserInfoMemo = memo(UserInfo);
+```
+
+因此，想要避免子组件重新渲染，光使用 useMemo 和 useCallback 是不够的，子组件必须使用 memo 包裹。所以你的项目中可能存在很多无效的 useMemo 和 useCallback，删除了它们反而有机率让你的项目更好地运行。
+
+Tips：除了 state 的变更和父组件的重新渲染，context 的变更也会引起所有消费该 context 的组件重新渲染，这一点我在上一篇文章中已经提到过了。
