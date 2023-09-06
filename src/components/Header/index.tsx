@@ -9,7 +9,7 @@ const itemList = [
   },
   {
     title: "文章",
-    link: "/post/",
+    link: "/post/1",
   },
   {
     title: "说说",
@@ -53,6 +53,7 @@ const Header = () => {
         {itemList.map((item) => (
           <div key={item.title} className="w-full px-4 py-1">
             <a
+              onClick={() => setToggle((prev) => !prev)}
               className="w-full h-10 rounded-sm leading-10 block text-center transition-colors hover:text-pink hover:bg-hover"
               href={item.link}
             >
