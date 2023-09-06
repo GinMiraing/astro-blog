@@ -1,0 +1,42 @@
+---
+import Pagination from "@/components/Pagination";
+import { PostList } from "@/components/Post";
+import Layout from "@/layouts/Layout.astro";
+import { CollectionEntry, getCollection } from "astro:content";
+
+interface Props {
+  page: {
+    data: CollectionEntry<"blog">[];
+    start: number;
+    end: number;
+    total: number;
+    currentPage: number;
+    size: number;
+    lastPage: number;
+    url: {
+      current: string;
+      prev: string | undefined;
+      next: string | undefined;
+    };
+  };
+}
+
+export async function getStaticPaths({ paginate }: { paginate: Function }) {
+  const posts = await getCollection("blog");
+  const sortPosts = posts.sort((a, b) => b.data.id - a.data.id);
+  return paginate(sortPosts, { pageSize: 8 });
+}
+
+const { page } = Astro.props;
+---
+
+<Layout
+  select={1}
+  title={`胤的博客 - 全部文章 - ${page.currentPage}`}
+  header="全部文章"
+  description="『 那些景 那些事 那些人 』"
+  banner="https://article.biliimg.com/bfs/article/db21424ab03851de47b22d94dc054e4796b04f4c.jpg"
+>
+  <PostList client:load posts={page.data} />
+  <Pagination client:load prevUrl={page.url.prev} nextUrl={page.url.next} />
+</Layout>
