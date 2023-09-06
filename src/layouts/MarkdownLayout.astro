@@ -54,5 +54,21 @@ const { title, blog } = Astro.props;
     </main>
     <BackTop client:load />
     <Footer />
+    <script>
+      import Pjax from "pjax";
+      document.addEventListener("DOMContentLoaded", () => {
+        const pjax = new Pjax({
+          elements: "a",
+          selectors: ["title", "main"],
+        });
+      });
+      document.addEventListener("pjax:complete", () => {
+        twikoo.init({
+          envId: "https://twikoo.zengjunyin.com",
+          el: "#twikoo",
+          lang: "zh-CN",
+        });
+      });
+    </script>
   </body>
 </html>
