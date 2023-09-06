@@ -24,10 +24,10 @@
     background-color: var(--body-bg);
     background-attachment: fixed;
   }
-  main {
+  /* main {
     animation-name: fadeIn;
     animation-duration: 0.8s;
-  }
+  } */
   hr {
     background-color: var(--hr-bg);
   }
