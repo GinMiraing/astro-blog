@@ -1,8 +1,8 @@
 ---
-import { IssueList } from "@/components/Issue";
-import Layout from "@/layouts/Layout.astro";
 import { getEntry } from "astro:content";
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import Layout from "@/layouts/Layout.astro";
+import { IssueList } from "@/components/Issue";
+import PageBanner from "@/components/PageBanner";
 
 const issueOrigin = await getEntry("issue", "index");
 const issues = issueOrigin.data.issues
@@ -10,14 +10,20 @@ const issues = issueOrigin.data.issues
   .sort((a, b) => b.id - a.id);
 ---
 
-<Layout
-  select={2}
-  title={"胤的博客 - 全部说说"}
-  header="全部说说"
-  description="『 简短的一言一语 』"
-  banner="https://article.biliimg.com/bfs/article/0b325f4cee4c7ff1e57661bac6999bfb820227d2.jpg"
->
-  <IssueList client:load issues={issues} />
+<Layout title={"胤的博客 - 全部说说"}>
+  <main
+    class="sm:mt-24 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
+  >
+    <PageBanner
+      title="全部说说"
+      description="『 简短的一言一语 』"
+      imgsrc="https://article.biliimg.com/bfs/article/0b325f4cee4c7ff1e57661bac6999bfb820227d2.jpg"
+      select={2}
+    />
+    <div class="content px-4 sm:px-12 pb-6 w-full">
+      <IssueList client:load issues={issues} />
+    </div>
+  </main>
 </Layout>
 
 <script>

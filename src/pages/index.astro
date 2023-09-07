@@ -1,12 +1,12 @@
 ---
-import IndexLayout from "@/layouts/IndexLayout.astro";
-import TitleWithUnderline from "@/components/TitleWithUnderline";
-import More from "@/components/More";
 import { getCollection, getEntry } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
 import { IndexPost } from "@/components/Post";
 import { IndexIssue } from "@/components/Issue";
 import { LazyFancyboxImage } from "@/components/LazyImage";
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import Navbar from "@/components/Navbar";
+import TitleWithUnderline from "@/components/TitleWithUnderline";
+import More from "@/components/More";
 
 const posts = await getCollection("blog");
 const issueOrigin = await getEntry("issue", "index");
@@ -15,71 +15,108 @@ const issues = issueOrigin.data.issues
   .sort((a, b) => b.id - a.id);
 ---
 
-<IndexLayout title="胤的博客">
-  <!-- post -->
-  <div class="w-full">
-    <TitleWithUnderline title="最新文章" />
-    <IndexPost client:load posts={posts} />
-    <More link="/post/1" title="所有文章" />
-  </div>
-  <!-- issue -->
-  <div class="w-full mt-6">
-    <TitleWithUnderline title="最新说说" />
-    <IndexIssue client:load issues={issues} />
-    <More link="/issue/" title="所有说说" />
-  </div>
-  <!-- about -->
-  <div class="w-full mt-6">
-    <TitleWithUnderline title="关于我" />
-    <div class="flex flex-col items-center">
-      <div
-        class="h-36 w-36 sm:h-52 sm:w-52 md:w-80 md:h-80 overflow-hidden rounded-sm my-4"
-      >
-        <LazyFancyboxImage
-          client:load
-          width="800"
-          height="800"
-          src="https://article.biliimg.com/bfs/article/b3c4fab8f53b782a0b4306766bc9af3f93dbfa24.jpg"
-        />
-      </div>
-      <p class="w-full sm:text-base/8 text-sm/8 text-justify tracking-wider">
-        我是『 胤 @GinMiraing 』，毕业于厦门大学的<span
-          class="text-pink underline underline-offset-4">哲学</span
-        >专业，目前在厦门的互联网公司从事<span
-          class="text-pink underline underline-offset-4">前端开发</span
-        >工作。我这个人挺魔幻的，明明学的是文科专业的知识，工作却是和程序代码有关的；明明是一个男生，却留着长发。在《猫的报恩》中有一句话：“<span
-          class="text-pink underline underline-offset-4"
-          >生命可以随心所欲，但不能随波逐流。</span
-        >”我认为，我所做的事正是我喜欢的，没有必要按照他人的要求充当一个“角色”。
-      </p>
-      <p class="w-full sm:text-base/8 text-sm/8 text-justify tracking-wider">
-        目前我工作使用的框架是 React，因为学习了新的框架，所以我想把之前使用原生
-        CSS 和 JS 编写的博客重构一下。这个博客使用的是 <a
-          href="https://astro.build"
-          class="text-pink underline underline-offset-4">Astro</a
-        > 框架，样式用的是 <a
-          class="text-pink underline underline-offset-4"
-          href="https://tailwindcss.com">tailwind</a
-        > 库。现在的主题还有些简陋，需要后续慢慢优化。
-      </p>
+<Layout title="胤的博客">
+  <main
+    class="sm:mt-24 relative px-4 pb-6 sm:px-12 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
+  >
+    <div class="absolute hidden sm:block right-12 top-6">
+      <Navbar select={0} />
     </div>
-  </div>
-  <div class="w-full mt-6">
-    <TitleWithUnderline title="读者评论" />
-    <div id="twikoo"></div>
-    <script is:inline>
-      twikoo.init({
-        envId: "https://twikoo.zengjunyin.com",
-        el: "#twikoo",
-        lang: "zh-CN",
-      });
-    </script>
-  </div>
-</IndexLayout>
+    <div class="flex pt-12 items-center">
+      <h1 class="font-bold text-2xl sm:text-3xl">胤的博客</h1>
+      <div
+        class="bg-rose-200 ml-2 sm:h-6 h-5 sm:text-sm/6 text-pink text-xs/5 px-2"
+      >
+        🌻
+      </div>
+    </div>
+    <div class="text-sm my-4 text-secondary">『 所念皆星河 』</div>
+    <div class="w-full h-60 bg-white rounded-sm overflow-hidden mb-8">
+      <img
+        src="https://article.biliimg.com/bfs/article/c48c474c5d09425ac07f7f459fc41b4e38e6f642.png@800w_400h_1c.webp"
+        class="w-full h-full object-cover"
+        alt="banner"
+      />
+    </div>
+    <div class="w-full">
+      <TitleWithUnderline title="最新文章" />
+      <IndexPost client:load posts={posts} />
+      <More link="/post/1" title="所有文章" />
+    </div>
+    <div class="w-full mt-6">
+      <TitleWithUnderline title="最新说说" />
+      <IndexIssue client:load issues={issues} />
+      <More link="/issue/" title="所有说说" />
+    </div>
+    <div class="w-full mt-6">
+      <TitleWithUnderline title="关于我" />
+      <div class="flex flex-col items-center">
+        <div
+          class="h-36 w-36 sm:h-52 sm:w-52 md:w-80 md:h-80 overflow-hidden rounded-sm my-4"
+        >
+          <LazyFancyboxImage
+            client:load
+            width="800"
+            height="800"
+            src="https://article.biliimg.com/bfs/article/b3c4fab8f53b782a0b4306766bc9af3f93dbfa24.jpg"
+          />
+        </div>
+        <p class="w-full sm:text-base/8 text-sm/8 text-justify tracking-wider">
+          我是『 胤 @GinMiraing 』，毕业于厦门大学的<span
+            class="text-pink underline underline-offset-4">哲学</span
+          >专业，目前在厦门的互联网公司从事<span
+            class="text-pink underline underline-offset-4">前端开发</span
+          >工作。我这个人挺魔幻的，明明学的是文科专业的知识，工作却是和程序代码有关的；明明是一个男生，却留着长发。在《猫的报恩》中有一句话：“<span
+            class="text-pink underline underline-offset-4"
+            >生命可以随心所欲，但不能随波逐流。</span
+          >”我认为，我所做的事正是我喜欢的，没有必要按照他人的要求充当一个“角色”。
+        </p>
+        <p class="w-full sm:text-base/8 text-sm/8 text-justify tracking-wider">
+          目前我工作使用的框架是
+          React，因为学习了新的框架，所以我想把之前使用原生 CSS 和 JS
+          编写的博客重构一下。这个博客使用的是 <a
+            href="https://astro.build"
+            class="text-pink underline underline-offset-4">Astro</a
+          > 框架，样式用的是 <a
+            class="text-pink underline underline-offset-4"
+            href="https://tailwindcss.com">tailwind</a
+          > 库。现在的主题还有些简陋，需要后续慢慢优化。
+        </p>
+      </div>
+    </div>
+    <div class="w-full mt-6">
+      <TitleWithUnderline title="读者评论" />
+      <div id="twikoo"></div>
+    </div>
+  </main>
+</Layout>
 
 <script>
   import { bindFancybox } from "@/lib/utils";
+  import Pjax from "pjax";
   document.addEventListener("DOMContentLoaded", () => {
     bindFancybox(true);
+    new Pjax({
+      elements: "a:not([data-fancybox])",
+      selectors: ["title", "main"],
+    });
+  });
+</script>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    twikoo.init({
+      envId: "https://twikoo.zengjunyin.com",
+      el: "#twikoo",
+      lang: "zh-CN",
+    });
+  });
+  document.addEventListener("pjax:complete", () => {
+    console.log("pjax complete");
+    twikoo.init({
+      envId: "https://twikoo.zengjunyin.com",
+      el: "#twikoo",
+      lang: "zh-CN",
+    });
   });
 </script>

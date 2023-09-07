@@ -1,20 +1,16 @@
 ---
-interface Props {
-  title: string;
-  header: string;
-  description: string;
-  banner: string;
-  select: number;
-}
-
-const { title, select, header, description, banner } = Astro.props;
-
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import BackTop from "@/components/BackTop";
 import Head from "@/components/Head.astro";
-import PageBanner from "@/components/PageBanner";
 import "@/styles/global.css";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -22,36 +18,8 @@ import "@/styles/global.css";
   <Head title={title} />
   <body class="text-primary tracking-widest">
     <Header client:load />
-    <main
-      class="sm:mt-24 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
-    >
-      <PageBanner
-        title={header}
-        description={description}
-        imgsrc={banner}
-        select={select}
-      />
-      <div class="content px-4 sm:px-12 pb-6 w-full">
-        <slot />
-      </div>
-    </main>
+    <slot />
     <BackTop client:load />
     <Footer />
-    <script>
-      import Pjax from "pjax";
-      document.addEventListener("DOMContentLoaded", () => {
-        const pjax = new Pjax({
-          elements: "a",
-          selectors: ["title", "main"],
-        });
-      });
-      document.addEventListener("pjax:complete", () => {
-        twikoo.init({
-          envId: "https://twikoo.zengjunyin.com",
-          el: "#twikoo",
-          lang: "zh-CN",
-        });
-      });
-    </script>
   </body>
 </html>
