@@ -1,0 +1,29 @@
+---
+import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+interface Props {
+  prevUrl?: string;
+  nextUrl?: string;
+}
+
+const { prevUrl, nextUrl } = Astro.props;
+---
+
+<div class="flex justify-between text-sm transition-colors my-2">
+  <div
+    class={cn("flex items-center hover:text-pink transition-colors", {
+      invisible: !prevUrl,
+    })}
+  >
+    <ChevronLeft className="h-4 w-4" />
+    <a href={prevUrl}>上一页</a>
+  </div>
+  <div
+    class={cn("flex items-center hover:text-pink transition-colors", {
+      invisible: !nextUrl,
+    })}
+  >
+    <a href={nextUrl}>下一页</a>
+    <ChevronRight className="h-4 w-4" />
+  </div>
+</div>

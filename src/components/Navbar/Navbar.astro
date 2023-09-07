@@ -1,0 +1,45 @@
+---
+import { cn } from "@/lib/utils";
+import NavbarItem from "./NavbarItem.astro";
+interface Props {
+  select: number;
+}
+
+const itemList = [
+  {
+    title: "主页",
+    link: "/",
+  },
+  {
+    title: "文章",
+    link: "/post/1",
+  },
+  {
+    title: "说说",
+    link: "/issue/",
+  },
+  {
+    title: "友链",
+    link: "/links/",
+  },
+];
+
+const { select } = Astro.props;
+---
+
+<div
+  class={cn("w-full justify-end flex space-x-4", {
+    "text-white": select > 0,
+    "text-primary": select === 0,
+  })}
+>
+  {
+    itemList.map((item, index) => (
+      <NavbarItem
+        title={item.title}
+        link={item.link}
+        active={index === select ? true : false}
+      />
+    ))
+  }
+</div>

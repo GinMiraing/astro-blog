@@ -1,0 +1,76 @@
+---
+import { Menu } from "lucide-react";
+const itemList = [
+  {
+    title: "主页",
+    link: "/",
+  },
+  {
+    title: "文章",
+    link: "/post/1",
+  },
+  {
+    title: "说说",
+    link: "/issue/",
+  },
+  {
+    title: "友链",
+    link: "/links/",
+  },
+];
+---
+
+<header
+  data-open="false"
+  class="fixed top-0 w-full overflow-hidden shadow-md duration-700 transition-all bg-white z-10 sm:hidden data-[open='false']:max-h-16 data-[open='true']:max-h-screen"
+>
+  <div class="flex items-center px-4 w-full h-16 justify-between">
+    <a class="block" href="/">
+      <div class="w-8 h-8 rounded-full overflow-hidden">
+        <img
+          src="https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png@.webp"
+          alt="avatar"
+        />
+      </div>
+    </a>
+    <div id="toggle" class="cursor-pointer">
+      <Menu className="h-6 w-6 text-primary" />
+    </div>
+  </div>
+  <div class="flex pb-2 flex-col">
+    {
+      itemList.map((item) => (
+        <div class="w-full px-4 py-1">
+          <a
+            class="w-full h-10 rounded-sm leading-10 block text-center transition-colors hover:text-pink hover:bg-hover link-item"
+            href={item.link}
+          >
+            {item.title}
+          </a>
+        </div>
+      ))
+    }
+  </div>
+</header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.querySelector("#toggle") as HTMLDivElement;
+    const linkItems = document.querySelectorAll(
+      ".link-item"
+    ) as NodeListOf<HTMLAnchorElement>;
+    const header = document.querySelector("header") as HTMLDivElement;
+    toggle.addEventListener("click", () => {
+      header.dataset.open === "true"
+        ? header.setAttribute("data-open", "false")
+        : header.setAttribute("data-open", "true");
+    });
+    linkItems.forEach((item) => {
+      item.addEventListener("click", () => {
+        header.dataset.open === "true"
+          ? header.setAttribute("data-open", "false")
+          : header.setAttribute("data-open", "true");
+      });
+    });
+  });
+</script>

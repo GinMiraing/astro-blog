@@ -4,11 +4,11 @@ date: 2023-03-09
 cover: https://article.biliimg.com/bfs/article/a30e8b36281c63807da3400bed96e213d8c5124e.jpg
 description: 前些天看了 HEO 的一篇文章，在这篇文章中他介绍了一些博客设计理念，主要从搭建博客的目的、用户来源和用户体验进行分析。HEO 的博客日访问量比较大，从这些方面考虑进行博客设计无可厚非。然而，像我这样的小博客，也许并不需要考虑用户的来源，也没必要根据搜索引擎做 SEO 优化，说实话，我不希望自己的博客被搜索引擎收录。
 author: 胤
-category: 生活
+category: 随想
 id: 13
 ---
 
-import { LazyFancyboxImage } from "@/components/LazyImage";
+import LazyFancyboxImage from "@/components/LazyImages/LazyFancyboxImage.astro";
 
 前些天看了 HEO 的[一篇文章](https://blog.zhheo.com/p/30c885b3.html)，在这篇文章中他介绍了一些博客设计理念，主要从搭建博客的目的、用户来源和用户体验进行分析。HEO 的博客日访问量比较大，从这些方面考虑进行博客设计无可厚非。然而，像我这样的小博客，也许并不需要考虑用户的来源，也没必要根据搜索引擎做 SEO 优化，说实话，我不希望自己的博客被搜索引擎收录。
 
@@ -19,7 +19,6 @@ import { LazyFancyboxImage } from "@/components/LazyImage";
 “简”的理念其实是基于需求的，我不在博客中插入视频，是因为我没有这个需求。除此之外，我的博客也没有添加 Live2D 模型和即时聊天模块，也没有加入很多加载动画。每次更新一项功能时，我都在问自己：“我对这项功能真的有必要的需求吗？”不根据实际需求在博客中胡乱堆砌功能，只会造成博客卡顿，对所有浏览者都不好。静态博客还好，一些 WP 站点我打开就疯狂掉帧，根本没有继续浏览的欲望。
 
 <LazyFancyboxImage
-  client:load
   src="https://article.biliimg.com/bfs/article/b72eabaa55273a5f6b692346f30aa5f337cfe698.png"
   alt="某个博客中我的帧率"
 />
@@ -31,7 +30,6 @@ import { LazyFancyboxImage } from "@/components/LazyImage";
 我是个有轻微强迫症的人，所以比较在乎一些难以察觉的小细节。就以段落排版为例，我看过很多博客都在使用左对齐，其实左对齐存在一个弊端：右侧文字量明显少于左侧，会感觉左重右轻。我的博客段落全部使用两端对齐，但两端对齐也有一个缺点，在中英文混排的段落里，两端对齐会拉伸文字（如下图）。如果博客文章以中文为主，就像我的博客，那么选择两端对齐阅读观感会比较好，如果博客中存在大量英文，例如程序员博客，那么还是尽量选择左对齐吧。
 
 <LazyFancyboxImage
-  client:load
   src="https://article.biliimg.com/bfs/article/7779a6fddde37b2c29d6f417982de417ace0a574.png"
   alt="拉伸问题"
 />
@@ -39,13 +37,11 @@ import { LazyFancyboxImage } from "@/components/LazyImage";
 统一的边距、阴影和配色方案也是细节的展现。细心的小伙伴肯定发现了，我的博客中所有阴影和圆角大小都是统一的，配色也是统一设置的，就连 Twikoo 评论也被我强行魔改成了粉色。这种统一的设计会给人严谨的感觉，单个站点还不是很能体现，假如有一系列站群，用的都是统一的设计，绝对可以感受到设计者的严谨。其实我有三个网站，分别是主页、博客和网盘，它们的设计几乎是一致的，可能也是因为我有强迫症吧。
 
 <LazyFancyboxImage
-  client:load
   src="https://article.biliimg.com/bfs/article/ad6dc0446c18cb3467cc489fe73a3650331b755b.png"
   alt="主页"
 />
 
 <LazyFancyboxImage
-  client:load
   src="https://article.biliimg.com/bfs/article/192cbac734b84878f3f3d914309c054ed77783f1.png"
   alt="网盘"
 />
@@ -55,13 +51,11 @@ import { LazyFancyboxImage } from "@/components/LazyImage";
 前年人文学院举办第九届逻辑大赛，这个赛事所有的宣传材料都由我来负责，那一届的宣传得到了好评。去年第十届因为没空，宣传材料让学院设计部包了，结果做的成品差点审批都过不了。设计部可不止一个人，一群人能做成这种水平我也不想说什么。
 
 <LazyFancyboxImage
-  client:load
   src="https://article.biliimg.com/bfs/article/bb9b88e6998227b7025eabcab3ffb4ef08740329.png"
   alt="我做的一张入场券"
 />
 
 <LazyFancyboxImage
-  client:load
   src="https://article.biliimg.com/bfs/article/6e9abae543f2c6eeee602609ac07046f8fbd4e45.png"
   alt="新一届做的东西"
 />
@@ -75,7 +69,6 @@ import { LazyFancyboxImage } from "@/components/LazyImage";
 其实静态博客不需要资源分离，但为了能让我的博客响应更快，我博客中所有的资源都做了分离处理。公共的 CSS 和 JS 文件我用字节或 360 提供的 CDN 引入，例如 jQuery、Twikoo、FancyBox 等；博客所有的图片存在 Bilibili 图床；页面文件通过 Vercel 或 Zeabur 平台托管；只有 Twikoo 评论托管在我自己的服务器。这样分离的好处是对我博客的请求能平分给每个服务器，公共 CDN 只需要提供 CSS 和 JS 文件，Bilibili 只需要提供图片。当然，这么做的前提是资源所在的服务器的响应都比较快，如果博客的页面由 Github Page 托管，那进行分离的效果就微乎其微了。
 
 <LazyFancyboxImage
-  client:load
   src="https://article.biliimg.com/bfs/article/6801c2ee56d6cd8ca4aef0c3142bffe05bf4198c.png"
   alt="[Zeabur 的测速"
 />

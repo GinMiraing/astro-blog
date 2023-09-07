@@ -1,0 +1,49 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import PostList from "@/components/Post/PostList.astro";
+import PageBanner from "@/components/Banner/PageBanner.astro";
+import Pagination from "@/components/Pagination.astro";
+
+interface Props {
+  page: {
+    data: CollectionEntry<"blog">[];
+    start: number;
+    end: number;
+    total: number;
+    currentPage: number;
+    size: number;
+    lastPage: number;
+    url: {
+      current: string;
+      prev: string | undefined;
+      next: string | undefined;
+    };
+  };
+}
+
+export async function getStaticPaths({ paginate }: { paginate: Function }) {
+  const posts = await getCollection("blog");
+  const sortPosts = posts.sort((a, b) => b.data.id - a.data.id);
+  return paginate(sortPosts, { pageSize: 8 });
+}
+
+const { page } = Astro.props;
+---
+
+<Layout title={`胤的博客 - 全部文章 - ${page.currentPage}`}>
+  <main
+    class="sm:mt-24 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
+  >
+    <PageBanner
+      title="全部文章"
+      description="『 那些景 那些事 那些人 』"
+      imgsrc="https://article.biliimg.com/bfs/article/db21424ab03851de47b22d94dc054e4796b04f4c.jpg"
+      select={1}
+    />
+    <div class="content px-4 sm:px-12 pb-6 w-full">
+      <PostList posts={page.data} />
+      <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+    </div>
+  </main>
+</Layout>

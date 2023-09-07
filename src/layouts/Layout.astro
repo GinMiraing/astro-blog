@@ -1,41 +1,81 @@
 ---
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+import BackTop from "@/components/BackTop.astro";
+import Head from "@/components/Head.astro";
+import "@/styles/global.css";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+
 interface Props {
   title: string;
-  header: string;
-  description: string;
-  banner: string;
-  select: number;
 }
 
-const { title, select, header, description, banner } = Astro.props;
-
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import BackTop from "@/components/BackTop";
-import Head from "@/components/Head.astro";
-import PageBanner from "@/components/PageBanner";
-import "@/styles/global.css";
+const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="zh-CN">
   <Head title={title} />
   <body class="text-primary tracking-widest">
-    <Header client:load />
-    <main
-      class="sm:mt-24 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
-    >
-      <PageBanner
-        title={header}
-        description={description}
-        imgsrc={banner}
-        select={select}
-      />
-      <div class="content px-4 sm:px-12 pb-6 w-full">
-        <slot />
-      </div>
-    </main>
-    <BackTop client:load />
+    <Header />
+    <slot />
+    <BackTop />
     <Footer />
+    <script>
+      import { bindFancybox } from "@/lib/utils";
+      import Pjax from "pjax";
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const image = entry.target as HTMLImageElement;
+            const imageSrc = image.dataset.src as string;
+            image.classList.remove("lazyload");
+            image.setAttribute("src", imageSrc);
+            observer.unobserve(image);
+          }
+        });
+      });
+      document.addEventListener("DOMContentLoaded", () => {
+        const images = document.querySelectorAll("img.lazyload");
+        images.forEach((image) => {
+          observer.observe(image);
+        });
+        bindFancybox(true);
+        new Pjax({
+          elements: "a:not([data-fancybox])",
+          selectors: ["title", "main"],
+        });
+      });
+      document.addEventListener("pjax:complete", () => {
+        console.log("pjax is completed...");
+        const images = document.querySelectorAll("img.lazyload");
+        images.forEach((image) => {
+          observer.observe(image);
+        });
+        bindFancybox(true);
+      });
+    </script>
+    <script is:inline>
+      document.addEventListener("DOMContentLoaded", () => {
+        const twikooElement = document.querySelector("#twikoo");
+        if (twikooElement) {
+          twikoo.init({
+            envId: "https://twikoo.zengjunyin.com",
+            el: "#twikoo",
+            lang: "zh-CN",
+          });
+        }
+      });
+      document.addEventListener("pjax:complete", () => {
+        const twikooElement = document.querySelector("#twikoo");
+        if (twikooElement) {
+          twikoo.init({
+            envId: "https://twikoo.zengjunyin.com",
+            el: "#twikoo",
+            lang: "zh-CN",
+          });
+        }
+      });
+    </script>
   </body>
 </html>
