@@ -1,12 +1,12 @@
 ---
 import { getCollection, getEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
-import { IndexPost } from "@/components/Post";
-import { IndexIssue } from "@/components/Issue";
-import { LazyFancyboxImage } from "@/components/LazyImage";
-import Navbar from "@/components/Navbar";
-import TitleWithUnderline from "@/components/TitleWithUnderline";
-import More from "@/components/More";
+import IndexPost from "@/components/Post/IndexPost.astro";
+import IndexIssue from "@/components/Issue/IndexIssue.astro";
+import LazyFancyboxImage from "@/components/LazyImages/LazyFancyboxImage.astro";
+import Navbar from "@/components/Navbar/Navbar.astro";
+import TitleWithUnderline from "@/components/TitleWithUnderline.astro";
+import More from "@/components/More.astro";
 
 const posts = await getCollection("blog");
 const issueOrigin = await getEntry("issue", "index");
@@ -40,12 +40,12 @@ const issues = issueOrigin.data.issues
     </div>
     <div class="w-full">
       <TitleWithUnderline title="最新文章" />
-      <IndexPost client:load posts={posts} />
+      <IndexPost posts={posts} />
       <More link="/post/1" title="所有文章" />
     </div>
     <div class="w-full mt-6">
       <TitleWithUnderline title="最新说说" />
-      <IndexIssue client:load issues={issues} />
+      <IndexIssue issues={issues} />
       <More link="/issue/" title="所有说说" />
     </div>
     <div class="w-full mt-6">
@@ -55,7 +55,6 @@ const issues = issueOrigin.data.issues
           class="h-36 w-36 sm:h-52 sm:w-52 md:w-80 md:h-80 overflow-hidden rounded-sm my-4"
         >
           <LazyFancyboxImage
-            client:load
             width="800"
             height="800"
             src="https://article.biliimg.com/bfs/article/b3c4fab8f53b782a0b4306766bc9af3f93dbfa24.jpg"
@@ -90,33 +89,3 @@ const issues = issueOrigin.data.issues
     </div>
   </main>
 </Layout>
-
-<script>
-  import { bindFancybox } from "@/lib/utils";
-  import Pjax from "pjax";
-  document.addEventListener("DOMContentLoaded", () => {
-    bindFancybox(true);
-    new Pjax({
-      elements: "a:not([data-fancybox])",
-      selectors: ["title", "main"],
-    });
-  });
-</script>
-
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    twikoo.init({
-      envId: "https://twikoo.zengjunyin.com",
-      el: "#twikoo",
-      lang: "zh-CN",
-    });
-  });
-  document.addEventListener("pjax:complete", () => {
-    console.log("pjax complete");
-    twikoo.init({
-      envId: "https://twikoo.zengjunyin.com",
-      el: "#twikoo",
-      lang: "zh-CN",
-    });
-  });
-</script>

@@ -1,8 +1,8 @@
 ---
 import { getEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
-import { IssueList } from "@/components/Issue";
-import PageBanner from "@/components/PageBanner";
+import IssueList from "@/components/Issue/IssueList.astro";
+import PageBanner from "@/components/Banner/PageBanner.astro";
 
 const issueOrigin = await getEntry("issue", "index");
 const issues = issueOrigin.data.issues
@@ -21,14 +21,7 @@ const issues = issueOrigin.data.issues
       select={2}
     />
     <div class="content px-4 sm:px-12 pb-6 w-full">
-      <IssueList client:load issues={issues} />
+      <IssueList issues={issues} />
     </div>
   </main>
 </Layout>
-
-<script>
-  import { bindFancybox } from "@/lib/utils";
-  document.addEventListener("DOMContentLoaded", () => {
-    bindFancybox(true);
-  });
-</script>

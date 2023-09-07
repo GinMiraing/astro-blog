@@ -8,7 +8,7 @@ category: 生活
 id: 15
 ---
 
-import { LazyFancyboxImage } from "@/components/LazyImage";
+import LazyFancyboxImage from "@/components/LazyImages/LazyFancyboxImage.astro";
 
 最近打开博客一看，发现已经两个月没有更新文章了。可能我开始变懒了，没有了之前更新博客的热情，是不是所有的博主都会经历这样的阶段呢？明明自己之前对博客那么上心，花大量时间把主题重构了一遍，如今却荒废了博客，这未免太过可笑了。
 
@@ -17,7 +17,6 @@ import { LazyFancyboxImage } from "@/components/LazyImage";
 其实断更这么久，还有别的原因。我今年就要毕业了，这两个月在忙着写论文，准备答辩。光写论文就花费了一个月的时间，因为论文最初的选题遇到了 BUG，没法写下去，中途更换了一次选题。感觉非常好笑，大家都在写哲学论文，我写的是人工智能，还是可解释人工智能 XAI 的方向。导师说我这篇文章写得不错，是很好的归纳和总结，但他告诉我答辩的时候要多吹一点与哲学有关的内容，不然可能过不了答辩，可能哲学系的老师们普遍对人工智能存在偏见吧。
 
 <LazyFancyboxImage
-  client:load
   src="https://article.biliimg.com/bfs/article/4d09eada18e025d993bedff1fe0008c92b4b7f00.png"
   alt="论文封面"
 />
@@ -32,10 +31,7 @@ import { LazyFancyboxImage } from "@/components/LazyImage";
 
 直到今天我的肠胃还没好，只能吃面、馄饨和粥这样的东西。目前距上次大面积新冠感染已经过去了五个月，身体里抗体的效果应该不行了，最近身边有些人又阳了，我在想我的肠胃难道也是感染新冠导致的吗？上周日的时候我还有发烧，不过只是低烧，一天就退了。不得不说，胃疼的时候吃肠炎宁是真的有用，吃完躺床上睡一觉就不疼了。
 
-<LazyFancyboxImage
-  client:load
-  src="https://article.biliimg.com/bfs/article/4266060f6ea36d74e56d34d42b9b0a4aa42c09e4.jpg"
-/>
+<LazyFancyboxImage src="https://article.biliimg.com/bfs/article/4266060f6ea36d74e56d34d42b9b0a4aa42c09e4.jpg" />
 
 但是这玩意好像对腹胀没有用，对腹泻也没用，我吃了反而腹泻更严重，也可能是我个人体质的问题吧。
 
@@ -45,32 +41,17 @@ import { LazyFancyboxImage } from "@/components/LazyImage";
 
 虽然晒伤了，但五一玩得非常开心。唯一的遗憾是没有把两个园的项目全都体验一遍。当时人太多了，每个项目排队都要好久。那天晚上还在方特看了烟花秀，貌似是方特十周年的表演。
 
-<LazyFancyboxImage
-  client:load
-  src="https://article.biliimg.com/bfs/article/862883a9efd72657b77563b16c2b7a93ec855702.jpg"
-/>
+<LazyFancyboxImage src="https://article.biliimg.com/bfs/article/862883a9efd72657b77563b16c2b7a93ec855702.jpg" />
 
-<LazyFancyboxImage
-  client:load
-  src="https://article.biliimg.com/bfs/article/7ebd6eaa9cf50599b6cbfae2788b01a680592808.jpg"
-/>
+<LazyFancyboxImage src="https://article.biliimg.com/bfs/article/7ebd6eaa9cf50599b6cbfae2788b01a680592808.jpg" />
 
-<LazyFancyboxImage
-  client:load
-  src="https://article.biliimg.com/bfs/article/71225babd1729d0b7f54e46e910c2553248b208a.jpg"
-/>
+<LazyFancyboxImage src="https://article.biliimg.com/bfs/article/71225babd1729d0b7f54e46e910c2553248b208a.jpg" />
 
-<LazyFancyboxImage
-  client:load
-  src="https://article.biliimg.com/bfs/article/7487ae3743195c7992af879176709f79f241e4d2.jpg"
-/>
+<LazyFancyboxImage src="https://article.biliimg.com/bfs/article/7487ae3743195c7992af879176709f79f241e4d2.jpg" />
 
 因为方特在厦门同安区，所以我们理所当然地去吃了同安封肉，这还是我来厦门首次吃到同安封肉。要说味道如何，其实就是普通五花肉和梅菜扣肉的融合，只不过它的料里面有放板栗和蘑菇，吃起来比较香。除了封肉，五一期间和慧还吃了很多好吃的东西。听慧说她胖了，谈恋爱会养人实锤了，嘿嘿嘿。
 
-<LazyFancyboxImage
-  client:load
-  src="https://article.biliimg.com/bfs/article/8ed5670d0564c7c47d2d9108ca7747adcad0b3e8.jpg"
-/>
+<LazyFancyboxImage src="https://article.biliimg.com/bfs/article/8ed5670d0564c7c47d2d9108ca7747adcad0b3e8.jpg" />
 
 五一假期结束的时候，我和慧抢到了回漳州的动车票，并且还是同一排的 A 和 C，真是苦了中间那位老哥。从厦门到漳州，一路上最大的感叹就是：人好多！漳州动车站的公交站已经被挤爆了，那队伍不排个两小时绝对上不了公交。最后我们是打车回去的，就用了不到半小时。
 
@@ -80,17 +61,13 @@ import { LazyFancyboxImage } from "@/components/LazyImage";
 
 虽然写论文占用了我很多时间，但平时每周去找慧一次却没断过。大部分时间我们都会在奶茶店点两杯奶茶，我静静改论文，她画画。到了饭点就一起去好灶头吃土豆焖鸡和肉沫茄子，吃完偶尔会陪着她一起去三福逛逛。慧还给我写了信，送了一枚她自己折的小狗戒指。
 
-<LazyFancyboxImage
-  client:load
-  src="https://article.biliimg.com/bfs/article/2fdf17a39ca11aad39143b9bca5f1bff20b1411d.jpg"
-/>
+<LazyFancyboxImage src="https://article.biliimg.com/bfs/article/2fdf17a39ca11aad39143b9bca5f1bff20b1411d.jpg" />
 
 上面这张图好像有名字欸，算了，也没事，毕竟我的域名就是自己的名字，也备案过了，都能查到，算是实名上网了。
 
 和慧在一起的时候还会玩光遇，慧虽然笨笨的，但是打游戏却挺厉害，之前玩双人成行她的操作看起来很流畅，说不定慧有电竞天赋呢。
 
 <LazyFancyboxImage
-  client:load
   src="https://article.biliimg.com/bfs/article/21ba70f5c4106126ccf70d1d08be9dfbdd2d797e.jpg"
   alt="和慧的光遇截图"
 />

@@ -1,8 +1,8 @@
 ---
 import { CollectionEntry, getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
-import PostBanner from "@/components/PostBanner";
-import TitleWithUnderline from "@/components/TitleWithUnderline";
+import PostBanner from "@/components/Banner/PostBanner.astro";
+import TitleWithUnderline from "@/components/TitleWithUnderline.astro";
 
 interface Props {
   entry: CollectionEntry<"blog">;
@@ -45,27 +45,3 @@ const { Content } = await entry.render();
     </div>
   </main>
 </Layout>
-
-<script>
-  import { bindFancybox } from "@/lib/utils";
-  document.addEventListener("DOMContentLoaded", () => {
-    bindFancybox(true);
-  });
-</script>
-
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    twikoo.init({
-      envId: "https://twikoo.zengjunyin.com",
-      el: "#twikoo",
-      lang: "zh-CN",
-    });
-  });
-  document.addEventListener("pjax:complete", () => {
-    twikoo.init({
-      envId: "https://twikoo.zengjunyin.com",
-      el: "#twikoo",
-      lang: "zh-CN",
-    });
-  });
-</script>

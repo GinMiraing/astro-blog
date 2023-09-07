@@ -1,0 +1,20 @@
+---
+import IssueCard from "./IssueCard.astro";
+
+interface Props {
+  issues: {
+    message: string;
+    author: string;
+    id: number;
+    time: string;
+    avatar: string;
+    picture?: string | undefined;
+  }[];
+}
+
+const { issues } = Astro.props;
+---
+
+<div class="grid grid-cols-1 divide-y">
+  {issues.map((issue) => <IssueCard issue={issue} />)}
+</div>

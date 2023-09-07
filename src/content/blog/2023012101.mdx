@@ -8,12 +8,11 @@ category: 随想
 id: 5
 ---
 
-import { LazyFancyboxImage } from "@/components/LazyImage";
+import LazyFancyboxImage from "@/components/LazyImages/LazyFancyboxImage.astro";
 
 最近和慧一起看了《头号玩家》，说来惭愧，这部电影是 2018 年上映的，这么多年了我还是第一次看。整部电影的观感体验还不错，如果是在影院戴上 3D 眼镜看，相信体验会非常棒。电影结束后，我的脑海中冒出了一个词：赛博科幻。
 
 <LazyFancyboxImage
-  client:load
   src="https://article.biliimg.com/bfs/article/1fe2a2a262274684307825cf7edc7db2e91069d0.jpg"
   alt="头号玩家"
 />
@@ -23,13 +22,11 @@ import { LazyFancyboxImage } from "@/components/LazyImage";
 1982 年，诞生了第一部真正意义上的赛博科幻电影：《银翼杀手》。这部电影描绘了 2019 年，洛杉矶变成乌烟障气的九反之地，人类制造了与真人无异的复制人为人类工作的场景。在《银翼杀手》中，整个社会就是自上而下完全受控的封闭系统，而杀手 Deckard 和复制人 Rachael 就象征着虚拟和现实的矛盾。这种基调基本上贯穿了整个赛博科幻电影的历史，好莱坞进一步将这种基调引出的主线叙事固定化，于是就有了今天我们看到的《头号玩家》。其实谈起赛博科幻电影，还有一个系列也能作为里程碑：《黑客帝国》系列。《黑客帝国》将主旨引至一个更加形而上的高度：人如何存在。电影中的“母体”俨然成为了一个超越垄断、超脱意识形态的产物而直接对“存在”产生破坏，但《黑客帝国》和《头号玩家》的主旨还是有很大区别的，今天就先不谈了。
 
 <LazyFancyboxImage
-  client:load
   src="https://article.biliimg.com/bfs/article/66df05330add82a5717ea3d72f9d512e558c5183.jpg"
   alt="银翼杀手"
 />
 
 <LazyFancyboxImage
-  client:load
   src="https://article.biliimg.com/bfs/article/e550934c650320478c1ebc9dc21412a0359a8da1.jpg"
   alt="黑客帝国"
 />
@@ -37,7 +34,6 @@ import { LazyFancyboxImage } from "@/components/LazyImage";
 在多数赛博科幻电影中，“国家”不再是最主要的暴力机构，一大批掌握了时代核心科技的垄断企业获得了最大权力。科技巨头与商业财阀组成了一种新的政治经济联合体，自上而下渗入日常生活的每一个环节，可以认为，这一封闭的社会系统受控于技术理性。发达工业社会统治的合理性源自于技术的更新，泰勒制的科学管理和分工提升了经济、政治和文化事业的生产效率。按照正常逻辑，技术只是一种手段，人们追求的应当是技术更新带来的社会红利，而不是技术本身。赛博科幻电影将技术与启蒙时代发展而来的理性主义相结合，赋予了技术“普世化”的价值，技术理性对社会的控制手段是将人类主体性不断缩减，马尔库塞在《单向度的人》这本书中提及：“科学-技术的合理性和操纵一起被焊接成一种新的社会控制形式”，因此整个社会成为了单向度的社会，在技术控制下，个人别无选择。这点也很好理解，电影中 IOI 的员工并不是自愿在这里工作，甚至可以说，帕西法尔也不是自愿选择寻找钥匙，这一切都源自于“绿洲”的引导，而虚拟世界“绿洲”就是技术理性的象征。
 
 <LazyFancyboxImage
-  client:load
   src="https://article.biliimg.com/bfs/article/665459394bae0e69a34975e6d7353c281e3acc7f.jpg"
   alt="单向度的人 - 马尔库塞"
 />
