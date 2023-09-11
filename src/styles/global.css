@@ -24,10 +24,6 @@
     background-color: var(--body-bg);
     background-attachment: fixed;
   }
-  /* main {
-    animation-name: fadeIn;
-    animation-duration: 0.8s;
-  } */
   hr {
     background-color: var(--hr-bg);
   }
@@ -43,6 +39,7 @@
   ::before {
     box-sizing: border-box;
   }
+
   .markdown * {
     margin: 1rem 0;
   }
@@ -54,9 +51,7 @@
   .markdown a {
     color: var(--primary);
   }
-  .markdown .data-footnote-backref {
-    display: none;
-  }
+  .markdown .data-footnote-backref,
   .markdown .footnotes h2 {
     display: none;
   }
@@ -189,14 +184,5 @@
     display: block;
     height: 0.5rem;
     background-color: var(--primary);
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
   }
 }
