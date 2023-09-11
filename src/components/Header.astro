@@ -1,23 +1,6 @@
 ---
+import { NavigationItems } from "@/config";
 import { Menu } from "lucide-react";
-const itemList = [
-  {
-    title: "主页",
-    link: "/",
-  },
-  {
-    title: "文章",
-    link: "/post/1",
-  },
-  {
-    title: "说说",
-    link: "/issue/",
-  },
-  {
-    title: "友链",
-    link: "/links/",
-  },
-];
 ---
 
 <header
@@ -39,7 +22,7 @@ const itemList = [
   </div>
   <div class="flex pb-2 flex-col">
     {
-      itemList.map((item) => (
+      NavigationItems.map((item) => (
         <div class="w-full px-4 py-1">
           <a
             class="w-full h-10 rounded-sm leading-10 block text-center transition-colors hover:text-pink hover:bg-hover link-item"
