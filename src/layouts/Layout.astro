@@ -44,6 +44,7 @@ const { title } = Astro.props;
         new Pjax({
           elements: "a:not([data-fancybox])",
           selectors: ["title", "main"],
+          cacheBust: false,
         });
       });
       document.addEventListener("pjax:complete", () => {
