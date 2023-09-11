@@ -1,18 +1,18 @@
 ---
-import { LinksItems } from "@/config";
+import { BlogName, LinksItems, LinksPageProps } from "@/config";
 import Layout from "@/layouts/Layout.astro";
 import LinksItem from "@/components/LinksItem.astro";
 import PageBanner from "@/components/Banner/PageBanner.astro";
 ---
 
-<Layout title={"胤的博客 - 友情链接"}>
+<Layout title={`${BlogName} - ${LinksPageProps.title}`}>
   <main
     class="sm:mt-24 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
   >
     <PageBanner
-      title="友情链接"
-      description="『 一些可爱的朋友们 』"
-      imgsrc="https://article.biliimg.com/bfs/article/a28bb78a74e60ddb306cd84c365e3d4ab7b2bb63.jpg"
+      title={LinksPageProps.title}
+      description={LinksPageProps.description}
+      imgsrc={LinksPageProps.banner}
       select={3}
     />
     <div class="content px-4 sm:px-12 pb-6 w-full">

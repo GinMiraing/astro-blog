@@ -1,3 +1,33 @@
+export const BlogName = "胤的博客";
+
+export const IndexProps = {
+  title: "胤的博客",
+  description: "『 所念皆星河 』",
+  banner:
+    "https://article.biliimg.com/bfs/article/c48c474c5d09425ac07f7f459fc41b4e38e6f642.png@800w_400h_1c.webp",
+};
+
+export const PostPageProps = {
+  title: "全部文章",
+  description: "『 那些景 那些事 那些人 』",
+  banner:
+    "https://article.biliimg.com/bfs/article/db21424ab03851de47b22d94dc054e4796b04f4c.jpg",
+};
+
+export const LinksPageProps = {
+  title: "友情链接",
+  description: "『 一些可爱的朋友们 』",
+  banner:
+    "https://article.biliimg.com/bfs/article/a28bb78a74e60ddb306cd84c365e3d4ab7b2bb63.jpg",
+};
+
+export const IssuePageProps = {
+  title: "全部说说",
+  description: "『 简短的一言一语 』",
+  banner:
+    "https://article.biliimg.com/bfs/article/0b325f4cee4c7ff1e57661bac6999bfb820227d2.jpg",
+};
+
 export const NavigationItems = [
   {
     title: "主页",
