@@ -1,4 +1,5 @@
 ---
+import { cn } from "@/lib/utils";
 import LazyFancyboxImage from "../LazyImages/LazyFancyboxImage.astro";
 import LazyImage from "../LazyImages/LazyImage.astro";
 
@@ -9,7 +10,7 @@ interface Props {
     id: number;
     time: string;
     avatar: string;
-    picture?: string | undefined;
+    picture?: string[] | undefined;
   };
 }
 
@@ -26,12 +27,16 @@ const { issue } = Astro.props;
       <div class="text-xs">{`# ${issue.id}`}</div>
     </div>
     <p class="text-sm/8 sm:text-base/8 mt-2">{issue.message}</p>
-    {
-      issue.picture && (
-        <div class="h-32 mt-2 w-32 rounded-sm overflow-hidden">
-          <LazyFancyboxImage src={issue.picture} />
-        </div>
-      )
-    }
+    <div
+      class={cn("grid grid-cols-2 mt-2 sm:grid-cols-3 max-w-[450px] gap-2", {
+        hidden: !issue.picture,
+      })}
+    >
+      {
+        issue.picture?.map((p) => (
+          <LazyFancyboxImage width="400" height="400" src={p} />
+        ))
+      }
+    </div>
   </div>
 </div>

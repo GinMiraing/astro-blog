@@ -20,7 +20,9 @@
       "author": "胤",
       "avatar": "https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png",
       "message": "这是一个渲染图片的测试说说。",
-      "picture": "https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
+      "picture": [
+        "https://article.biliimg.com/bfs/article/4b48fa534e5845e609e100f6168f54739c383677.png"
+      ]
     },
     {
       "id": 4,
@@ -56,6 +58,17 @@
       "author": "胤",
       "avatar": "https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png",
       "message": "果然程序员的日常任务就是找 BUG —— 不管是谁写的。"
+    },
+    {
+      "id": 9,
+      "time": "2023-09-13 22:19",
+      "author": "胤",
+      "avatar": "https://article.biliimg.com/bfs/article/d29fe12c860c2b7a54db6483132fb0cf24d6aeb0.png",
+      "message": "感谢朝朝宝贝给我剪的头发，自从头发留长后，好几次被别人认成妹子，希望多年后我不会变成秃顶程序员。",
+      "picture": [
+        "https://article.biliimg.com/bfs/article/dbd21803ef5dc479068515473cf16eb6c32e91d7.jpg",
+        "https://article.biliimg.com/bfs/article/4d831ddb106af2927fb8ab5b04e785bb538bc4ab.jpg"
+      ]
     }
   ]
 }
