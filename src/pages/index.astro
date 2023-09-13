@@ -8,6 +8,7 @@ import Navbar from "@/components/Navbar/Navbar.astro";
 import TitleWithUnderline from "@/components/TitleWithUnderline.astro";
 import More from "@/components/More.astro";
 import IndexAbout from "@/components/About/IndexAbout.astro";
+import IndexTip from "@/components/IndexTip.astro";
 
 const posts = await getCollection("blog");
 const issueOrigin = await getEntry("issue", "index");
@@ -40,6 +41,9 @@ const issues = issueOrigin.data.issues
       />
     </div>
     <div class="w-full">
+      <IndexTip />
+    </div>
+    <div class="w-full mt-6">
       <TitleWithUnderline title="最新文章" />
       <IndexPost posts={posts} />
       <More link="/post/1" title="所有文章" />
