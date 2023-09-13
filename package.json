@@ -1,7 +1,8 @@
 {
   "name": "ginmiraing_blog",
-  "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Gin Miraing",
   "scripts": {
     "dev": "astro dev --port 7000",
     "start": "astro dev",
