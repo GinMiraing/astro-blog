@@ -24,9 +24,9 @@ interface Props {
 }
 
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
-  const posts = await getCollection("blog");
-  const sortPosts = posts.sort((a, b) => b.data.id - a.data.id);
-  return paginate(sortPosts, { pageSize: 8 });
+  const postlist = await getCollection("blog");
+  const posts = postlist.sort((a, b) => b.data.id - a.data.id);
+  return paginate(posts, { pageSize: 8 });
 }
 
 const { page } = Astro.props;

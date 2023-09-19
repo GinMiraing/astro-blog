@@ -10,9 +10,5 @@ const { posts } = Astro.props;
 ---
 
 <div class="grid grid-cols-1 divide-y">
-  {
-    posts.map((post) => {
-      return <PostCard post={post.data} slug={post.slug} />;
-    })
-  }
+  {posts.map((post) => <PostCard post={post.data} slug={post.slug} />)}
 </div>
