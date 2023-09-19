@@ -39,7 +39,7 @@ export const NavigationItems = [
   },
   {
     title: "说说",
-    link: "/issue/",
+    link: "/issue/1",
   },
   {
     title: "友链",
