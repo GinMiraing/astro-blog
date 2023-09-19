@@ -1,0 +1,94 @@
+---
+title: Next.js 服务端的一个妙用
+date: 2023-09-19
+cover: https://article.biliimg.com/bfs/article/c6643038efefbe1809c153cb69ba9fb5129000357.png
+description: 目前防止盗链的一种方法是判断请求的 referer 值，只对符合条件的请求响应资源。为了方便用户能够直接在浏览器地址栏访问资源，一些图片会允许空值 referer，这时候浏览器可以通过设置 referer policy 置空 referer 达到请求资源的目的......
+author: 胤
+category: 技术
+id: 21
+---
+
+目前防止盗链的一种方法是判断请求的 referer 值，只对符合条件的请求响应资源。为了方便用户能够直接在浏览器地址栏访问资源，一些图片会允许空值 referer，这时候浏览器可以通过设置 referer policy 置空 referer 达到请求资源的目的。我的博客使用的是 Bilibili 图床，B 站图片就允许 referer 为空。
+
+最近我在研究怎么用浏览器前端下载 B 站视频，通过查阅 API 文档，我发现 B 站视频请求的 referer 必须是 bilibili 域下的，并且不能为空。然而，出于安全策略的考虑，浏览器前端无法直接修改 referer 为指定值。首先我想到的一个方法是反向代理，反代可以在服务端设置 referer 请求头，但是 B 站视频解析出的下载地址可能是不同的域名，因此反代要设置 Nginx 规则，对请求进行不同转发。
+
+我在测试的时候用的是 [Next.js](https://nextjs.org/) 框架，这是一个自带服务端的框架，因此，我们可以直接在 Next.js 的服务端修改 referer。在[官方文档](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)中，route.ts 文件可以处理客户端的请求，我们要做的就是使用这个文件转发请求从而获取资源。
+
+```ts
+// api/router.ts
+
+import axios from "axios";
+import type { NextRequest, NextResponse } from "next/server";
+
+export async function POST(req: NextRequest) {
+  // 视频地址
+  const { url } = await req.body.json();
+
+  try {
+    const res = await axios({
+      url,
+      method: "GET",
+      headers: {
+        Referer: "https://www.bilibili.com",
+        Cookie: "XXX",
+      },
+      // 这里需要请求资源的二进制文件流
+      responseType: "arraybuffer",
+    });
+
+    // 直接返回二进制文件流
+    return res.data;
+  } catch (e) {
+    // 出错再次抛出
+    throw e;
+  }
+}
+```
+
+Next.js 服务端返回的是二进制文件流，在客户端需要重新处理：
+
+```tsx
+"use client";
+
+import axios from "axios";
+import { useState } from "react";
+
+export default function Index() {
+  const [downloadUrl, setDownloadUrl] = useState("");
+  const fetchData = async (url: string) => {
+    try {
+      const res = await axios({
+        url: "/api/router.ts",
+        method: "POST",
+        responseType: "arraybuffer",
+        data: {
+          url,
+        },
+      });
+
+      const data = res.data;
+      const blob = new Blob([data], {
+        type: "video/mp4",
+      });
+      setDownloadUrl(URL.createObjectURL(blob));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  return (
+    <div>
+      {downloadUrl && (
+        <a href={downloadUrl} download={"test.mp4"}>
+          {downloadUrl}
+        </a>
+      )}
+      <button onClick={() => fetchData("XXXXX")}>fetch</button>
+    </div>
+  );
+}
+```
+
+上述方法的本质是在服务端转发请求的时候重新设置请求头，从而获取资源的二进制数据，再把二进制数据传给前端，前端通过 blob 将二进制数据保存在内存中，并生成下载链接。
+
+归功于 Next.js 自带的服务端，我们不用去配置额外的 Nginx 规则。但是以上的代码还是存在一些问题，在测试中，客户端要等服务端取得了视频所有的二进制数据后才会得到响应，假如一个视频的大小是上百兆，等待时间会非常久。我看了一些开源的 B 站视频下载工具，他们的做法是请求分段视频，在分段全部拿到后通过 [FFmpeg](https://ffmpeg.org/) 合并成一个视频，但是 FFmpeg 的包真的太大了，我看看还有没有其他的替代品吧。
