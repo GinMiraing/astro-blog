@@ -2,19 +2,19 @@
 import { getCollection, getEntry } from "astro:content";
 import { IndexProps, BlogName } from "@/config";
 import Layout from "@/layouts/Layout.astro";
-import IndexPost from "@/components/Post/IndexPost.astro";
-import IndexIssue from "@/components/Issue/IndexIssue.astro";
+import PostList from "@/components/Post/PostList.astro";
+import IssueList from "@/components/Issue/IssueList.astro";
 import Navbar from "@/components/Navbar/Navbar.astro";
 import TitleWithUnderline from "@/components/TitleWithUnderline.astro";
 import More from "@/components/More.astro";
 import IndexAbout from "@/components/About/IndexAbout.astro";
 import IndexTip from "@/components/IndexTip.astro";
 
-const posts = await getCollection("blog");
-const issueOrigin = await getEntry("issue", "index");
-const issues = issueOrigin.data.issues
-  .map((item) => item)
-  .sort((a, b) => b.id - a.id);
+const postlist = await getCollection("blog");
+const posts = postlist.sort((a, b) => b.data.id - a.data.id).slice(0, 5);
+
+const issuelist = await getEntry("issue", "index");
+const issues = issuelist.data.issues.sort((a, b) => b.id - a.id).slice(0, 5);
 ---
 
 <Layout title={BlogName}>
@@ -45,13 +45,13 @@ const issues = issueOrigin.data.issues
     </div>
     <div class="w-full mt-6">
       <TitleWithUnderline title="最新文章" />
-      <IndexPost posts={posts} />
+      <PostList posts={posts} />
       <More link="/post/1" title="所有文章" />
     </div>
     <div class="w-full mt-6">
       <TitleWithUnderline title="最新说说" />
-      <IndexIssue issues={issues} />
-      <More link="/issue/" title="所有说说" />
+      <IssueList issues={issues} />
+      <More link="/issue/1" title="所有说说" />
     </div>
     <div class="w-full mt-6">
       <TitleWithUnderline title="关于我" />
