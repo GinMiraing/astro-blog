@@ -25,7 +25,9 @@ interface Props {
 
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
   const postlist = await getCollection("blog");
-  const posts = postlist.sort((a, b) => b.data.id - a.data.id);
+  const posts = postlist
+    .filter((post) => !post.data.hide)
+    .sort((a, b) => b.data.id - a.data.id);
   return paginate(posts, { pageSize: 8 });
 }
 

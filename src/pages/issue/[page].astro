@@ -32,7 +32,9 @@ interface Props {
 
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
   const issuelist = await getEntry("issue", "index");
-  const issues = issuelist.data.issues.sort((a, b) => b.id - a.id);
+  const issues = issuelist.data.issues
+    .filter((issue) => !issue.hide)
+    .sort((a, b) => b.id - a.id);
   return paginate(issues, { pageSize: 8 });
 }
 

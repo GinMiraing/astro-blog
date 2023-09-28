@@ -10,6 +10,7 @@ const blogCollection = defineCollection({
     author: z.string(),
     category: z.string(),
     id: z.number(),
+    hide: z.boolean().optional(),
   }),
 });
 
@@ -20,6 +21,7 @@ const issueSchema = z.object({
   avatar: z.string(),
   message: z.string(),
   picture: z.array(z.string()).optional(),
+  hide: z.boolean().optional(),
 });
 
 const IssueCollection = defineCollection({
