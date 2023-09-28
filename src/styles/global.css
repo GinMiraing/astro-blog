@@ -90,6 +90,9 @@
   .markdown pre {
     padding: 0.5rem 1rem;
   }
+  .markdown code {
+    @apply sm:text-base/8 text-sm/6;
+  }
 
   .twikoo p {
     @apply sm:text-base/8 text-sm/8;
