@@ -1,65 +1,31 @@
 ---
-import { getCollection, getEntry } from "astro:content";
-import { IndexProps, BlogName } from "@/config";
+import { getCollection } from "astro:content";
+import { IndexProps, BlogName, PerPage, PostPageProps } from "@/config";
 import Layout from "@/layouts/Layout.astro";
 import PostList from "@/components/Post/PostList.astro";
-import IssueList from "@/components/Issue/IssueList.astro";
-import Navbar from "@/components/Navbar/Navbar.astro";
-import TitleWithUnderline from "@/components/TitleWithUnderline.astro";
-import More from "@/components/More.astro";
-import IndexAbout from "@/components/About/IndexAbout.astro";
-import IndexTip from "@/components/IndexTip.astro";
+import Pagination from "@/components/Pagination.astro";
+import PageBanner from "@/components/Banner/PageBanner.astro";
 
 const postlist = await getCollection("blog");
-const posts = postlist.sort((a, b) => b.data.id - a.data.id).slice(0, 5);
-
-const issuelist = await getEntry("issue", "index");
-const issues = issuelist.data.issues.sort((a, b) => b.id - a.id).slice(0, 5);
+const posts = postlist
+  .filter((post) => !post.data.hide)
+  .sort((a, b) => b.data.id - a.data.id)
+  .slice(0, PerPage);
 ---
 
 <Layout title={BlogName}>
   <main
-    class="sm:mt-24 relative px-4 pb-6 sm:px-12 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
+    class="sm:mt-24 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
   >
-    <div class="absolute hidden sm:block right-12 top-6">
-      <Navbar select={0} />
-    </div>
-    <div class="flex pt-12 items-center">
-      <h1 class="font-bold text-2xl sm:text-3xl">{IndexProps.title}</h1>
-      <div
-        class="bg-rose-200 ml-2 sm:h-6 h-5 sm:text-sm/6 text-pink text-xs/5 px-2"
-      >
-        🌻
-      </div>
-    </div>
-    <div class="text-sm my-4 text-secondary">{IndexProps.description}</div>
-    <div class="w-full h-60 bg-white rounded-sm overflow-hidden mb-8">
-      <img
-        src={IndexProps.banner}
-        class="w-full h-full object-cover"
-        alt="banner"
-      />
-    </div>
-    <div class="w-full">
-      <IndexTip />
-    </div>
-    <div class="w-full mt-6">
-      <TitleWithUnderline title="最新文章" />
+    <PageBanner
+      title={IndexProps.title}
+      description={IndexProps.description}
+      imgsrc={IndexProps.banner}
+      select={0}
+    />
+    <div class="content px-4 py-4 sm:px-12 sm:py-6 w-full">
       <PostList posts={posts} />
-      <More link="/post/1" title="所有文章" />
-    </div>
-    <div class="w-full mt-6">
-      <TitleWithUnderline title="最新说说" />
-      <IssueList issues={issues} />
-      <More link="/issue/1" title="所有说说" />
-    </div>
-    <div class="w-full mt-6">
-      <TitleWithUnderline title="关于我" />
-      <IndexAbout />
-    </div>
-    <div class="w-full mt-6">
-      <TitleWithUnderline title="读者评论" />
-      <div id="twikoo"></div>
+      <Pagination prevUrl={undefined} nextUrl="/post/1" />
     </div>
   </main>
 </Layout>

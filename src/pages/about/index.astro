@@ -1,0 +1,47 @@
+---
+import { BlogName, AboutPageProps } from "@/config";
+import Layout from "@/layouts/Layout.astro";
+import PageBanner from "@/components/Banner/PageBanner.astro";
+import TitleWithUnderline from "@/components/TitleWithUnderline.astro";
+---
+
+<Layout title={`${BlogName} - ${AboutPageProps.title}`}>
+  <main
+    class="sm:mt-24 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
+  >
+    <PageBanner
+      title={AboutPageProps.title}
+      description={AboutPageProps.description}
+      imgsrc={AboutPageProps.banner}
+      select={2}
+    />
+    <div class="content px-4 py-4 sm:px-12 sm:py-6 w-full">
+      <div class="w-full">
+        <p>
+          我是<span class="text-pink font-medium">『 胤 @GinMiraing 』</span
+          >，一个<span class="text-pink"
+            >前端开发者（Front-end Developer 👨‍💻）</span
+          >，毕业于<span class="text-pink">厦门大学</span>，专业是<span
+            class="text-pink">哲学（Philosophy 📙）</span
+          >，目前在<span class="text-pink">厦门</span>工作。
+        </p>
+        <p class="my-4">
+          目前会的框架有：<a
+            target="_blank"
+            href="https://nextjs.org"
+            class="text-pink">Next.js</a
+          >、<a target="_blank" href="https://remix.run" class="text-pink"
+            >Remix</a
+          >、<a target="_blank" href="https://astro.build" class="text-pink"
+            >Astro</a
+          >，常用的编写语言是 <span class="text-pink">TypeScript</span>，
+          常用的样式库是 <span class="text-pink">Tailwind</span>
+        </p>
+      </div>
+    </div>
+    <div class="px-4 pb-6 sm:px-12 mt-6">
+      <TitleWithUnderline title="评论" />
+      <div id="twikoo"></div>
+    </div>
+  </main>
+</Layout>

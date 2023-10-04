@@ -10,26 +10,10 @@ const blogCollection = defineCollection({
     author: z.string(),
     category: z.string(),
     id: z.number(),
-  }),
-});
-
-const issueSchema = z.object({
-  id: z.number(),
-  time: z.string(),
-  author: z.string(),
-  avatar: z.string(),
-  message: z.string(),
-  picture: z.array(z.string()).optional(),
-});
-
-const IssueCollection = defineCollection({
-  type: "data",
-  schema: z.object({
-    issues: z.array(issueSchema),
+    hide: z.boolean().optional(),
   }),
 });
 
 export const collections = {
   blog: blogCollection,
-  issue: IssueCollection,
 };

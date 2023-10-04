@@ -41,13 +41,14 @@
     box-sizing: border-box;
   }
 
-  .markdown * {
-    margin: 1rem 0;
-  }
-  .markdown p {
+  p {
     @apply sm:text-base/8 text-sm/8;
     text-align: justify;
     letter-spacing: 0.07em;
+  }
+
+  .markdown * {
+    margin: 1rem 0;
   }
   .markdown a {
     color: var(--primary);
@@ -90,12 +91,10 @@
   .markdown pre {
     padding: 0.5rem 1rem;
   }
-
-  .twikoo p {
-    @apply sm:text-base/8 text-sm/8;
-    text-align: justify;
-    letter-spacing: 0.07em;
+  .markdown code {
+    @apply sm:text-base/6 text-sm/6;
   }
+
   .twikoo .tk-comments-title {
     margin-top: 1.5rem;
     margin-bottom: 0.75rem;

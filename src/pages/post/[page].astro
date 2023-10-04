@@ -1,6 +1,6 @@
 ---
 import { CollectionEntry, getCollection } from "astro:content";
-import { BlogName, PostPageProps } from "@/config";
+import { BlogName, PerPage, PostPageProps } from "@/config";
 import Layout from "@/layouts/Layout.astro";
 import PostList from "@/components/Post/PostList.astro";
 import PageBanner from "@/components/Banner/PageBanner.astro";
@@ -25,8 +25,11 @@ interface Props {
 
 export async function getStaticPaths({ paginate }: { paginate: Function }) {
   const postlist = await getCollection("blog");
-  const posts = postlist.sort((a, b) => b.data.id - a.data.id);
-  return paginate(posts, { pageSize: 8 });
+  const posts = postlist
+    .filter((post) => !post.data.hide)
+    .sort((a, b) => b.data.id - a.data.id)
+    .slice(PerPage + 1);
+  return paginate(posts, { pageSize: PerPage });
 }
 
 const { page } = Astro.props;
@@ -40,11 +43,14 @@ const { page } = Astro.props;
       title={PostPageProps.title}
       description={PostPageProps.description}
       imgsrc={PostPageProps.banner}
-      select={1}
+      select={0}
     />
-    <div class="content px-4 sm:px-12 pb-6 w-full">
+    <div class="content px-4 py-4 sm:px-12 sm:py-6 w-full">
       <PostList posts={page.data} />
-      <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
+      <Pagination
+        prevUrl={page.url.prev ? page.url.prev : "/"}
+        nextUrl={page.url.next}
+      />
     </div>
   </main>
 </Layout>
