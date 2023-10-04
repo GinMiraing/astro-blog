@@ -39,10 +39,6 @@ export const NavigationItems = [
     title: "友链",
     link: "/links/",
   },
-  // {
-  //   title: "关于",
-  //   link: "/about/",
-  // },
 ];
 
 export const LinksItems = [
