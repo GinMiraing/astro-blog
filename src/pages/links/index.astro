@@ -3,6 +3,7 @@ import { BlogName, LinksItems, LinksPageProps } from "@/config";
 import Layout from "@/layouts/Layout.astro";
 import LinksItem from "@/components/LinksItem.astro";
 import PageBanner from "@/components/Banner/PageBanner.astro";
+import TitleWithUnderline from "@/components/TitleWithUnderline.astro";
 ---
 
 <Layout title={`${BlogName} - ${LinksPageProps.title}`}>
@@ -13,10 +14,10 @@ import PageBanner from "@/components/Banner/PageBanner.astro";
       title={LinksPageProps.title}
       description={LinksPageProps.description}
       imgsrc={LinksPageProps.banner}
-      select={3}
+      select={1}
     />
-    <div class="content px-4 sm:px-12 pb-6 w-full">
-      <div class="w-full my-6 grid grid-cols-1 sm:grid-cols-2 mt-4 gap-4">
+    <div class="content px-4 py-4 sm:px-12 sm:py-6 w-full">
+      <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
         {
           LinksItems.map((item) => (
             <LinksItem
@@ -28,6 +29,10 @@ import PageBanner from "@/components/Banner/PageBanner.astro";
           ))
         }
       </div>
+    </div>
+    <div class="px-4 pb-6 sm:px-12 mt-6">
+      <TitleWithUnderline title="评论" />
+      <div id="twikoo"></div>
     </div>
   </main>
 </Layout>

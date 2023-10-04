@@ -14,24 +14,6 @@ const blogCollection = defineCollection({
   }),
 });
 
-const issueSchema = z.object({
-  id: z.number(),
-  time: z.string(),
-  author: z.string(),
-  avatar: z.string(),
-  message: z.string(),
-  picture: z.array(z.string()).optional(),
-  hide: z.boolean().optional(),
-});
-
-const IssueCollection = defineCollection({
-  type: "data",
-  schema: z.object({
-    issues: z.array(issueSchema),
-  }),
-});
-
 export const collections = {
   blog: blogCollection,
-  issue: IssueCollection,
 };
