@@ -21,28 +21,24 @@ const { Content } = await entry.render();
 ---
 
 <Layout title={entry.data.title}>
-  <main
-    class="sm:mt-24 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
-  >
-    <PostBanner
-      title={entry.data.title}
-      date={entry.data.date}
-      imgsrc={entry.data.cover}
-      category={entry.data.category}
-    />
-    <div class="markdown px-4 pb-4 sm:px-12">
-      <Content />
-      <div class="bg-rose-100 px-4 py-2 rounded-sm">
-        <p class="text-pink">
-          {
-            `本文著作权归作者『 ${entry.data.author} 』所有，未经作者授权禁止转载。`
-          }
-        </p>
-      </div>
+  <PostBanner
+    title={entry.data.title}
+    date={entry.data.date}
+    imgsrc={entry.data.cover}
+    category={entry.data.category}
+  />
+  <div class="markdown px-4 pb-4 sm:px-12">
+    <Content />
+    <div class="bg-rose-100 px-4 py-2 rounded-sm">
+      <p class="text-pink">
+        {
+          `本文著作权归作者『 ${entry.data.author} 』所有，未经作者授权禁止转载。`
+        }
+      </p>
     </div>
-    <div class="px-4 pb-6 sm:px-12 mt-6">
-      <TitleWithUnderline title="评论" />
-      <div id="twikoo"></div>
-    </div>
-  </main>
+  </div>
+  <div class="px-4 pb-6 sm:px-12 mt-6">
+    <TitleWithUnderline title="评论" />
+    <div id="twikoo"></div>
+  </div>
 </Layout>

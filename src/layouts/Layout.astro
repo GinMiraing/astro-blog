@@ -18,12 +18,15 @@ const { title } = Astro.props;
   <Head title={title} />
   <body class="text-primary tracking-widest">
     <Header />
-    <slot />
+    <main
+      class="sm:mt-24 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
+    >
+      <slot />
+    </main>
     <BackTop />
     <Footer />
     <script>
       import { bindFancybox } from "@/lib/utils";
-      import Pjax from "pjax";
       const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -47,27 +50,9 @@ const { title } = Astro.props;
           cacheBust: false,
         });
       });
-      document.addEventListener("pjax:complete", () => {
-        console.log("pjax is completed...");
-        const images = document.querySelectorAll("img.lazyload");
-        images.forEach((image) => {
-          observer.observe(image);
-        });
-        bindFancybox(true);
-      });
     </script>
     <script is:inline>
       document.addEventListener("DOMContentLoaded", () => {
-        const twikooElement = document.querySelector("#twikoo");
-        if (twikooElement) {
-          twikoo.init({
-            envId: "https://twikoo.zengjunyin.com",
-            el: "#twikoo",
-            lang: "zh-CN",
-          });
-        }
-      });
-      document.addEventListener("pjax:complete", () => {
         const twikooElement = document.querySelector("#twikoo");
         if (twikooElement) {
           twikoo.init({
