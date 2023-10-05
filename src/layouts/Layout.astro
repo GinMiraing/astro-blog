@@ -19,6 +19,7 @@ const { title } = Astro.props;
   <body class="text-primary tracking-widest">
     <Header />
     <main
+      id="swup"
       class="sm:mt-24 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
     >
       <slot />
@@ -27,6 +28,9 @@ const { title } = Astro.props;
     <Footer />
     <script>
       import { bindFancybox } from "@/lib/utils";
+      import Swup from "swup";
+      import SwupFadeTheme from "@swup/fade-theme";
+
       const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -38,21 +42,15 @@ const { title } = Astro.props;
           }
         });
       });
+
       document.addEventListener("DOMContentLoaded", () => {
+        console.log("dom load success");
+
         const images = document.querySelectorAll("img.lazyload");
         images.forEach((image) => {
           observer.observe(image);
         });
-        bindFancybox(true);
-        new Pjax({
-          elements: "a:not([data-fancybox])",
-          selectors: ["title", "main"],
-          cacheBust: false,
-        });
-      });
-    </script>
-    <script is:inline>
-      document.addEventListener("DOMContentLoaded", () => {
+
         const twikooElement = document.querySelector("#twikoo");
         if (twikooElement) {
           twikoo.init({
@@ -61,6 +59,36 @@ const { title } = Astro.props;
             lang: "zh-CN",
           });
         }
+
+        bindFancybox(true);
+
+        const swup = new Swup({
+          plugins: [new SwupFadeTheme()],
+        });
+
+        if (swup) {
+          console.log("init swup success");
+        }
+
+        swup.hooks.on("page:view", () => {
+          console.log("page load success");
+
+          const images = document.querySelectorAll("img.lazyload");
+          images.forEach((image) => {
+            observer.observe(image);
+          });
+
+          const twikooElement = document.querySelector("#twikoo");
+          if (twikooElement) {
+            twikoo.init({
+              envId: "https://twikoo.zengjunyin.com",
+              el: "#twikoo",
+              lang: "zh-CN",
+            });
+          }
+
+          bindFancybox(true);
+        });
       });
     </script>
   </body>

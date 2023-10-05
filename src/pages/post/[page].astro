@@ -35,7 +35,7 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
 const { page } = Astro.props;
 ---
 
-<Layout title={`${BlogName} - ${PostPageProps.title} - ${page.currentPage}`}>
+<Layout title={`${BlogName} - ${PostPageProps.title}`}>
   <PageBanner
     title={PostPageProps.title}
     description={PostPageProps.description}
