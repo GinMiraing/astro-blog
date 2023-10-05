@@ -7,32 +7,28 @@ import TitleWithUnderline from "@/components/TitleWithUnderline.astro";
 ---
 
 <Layout title={`${BlogName} - ${LinksPageProps.title}`}>
-  <main
-    class="sm:mt-24 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
-  >
-    <PageBanner
-      title={LinksPageProps.title}
-      description={LinksPageProps.description}
-      imgsrc={LinksPageProps.banner}
-      select={1}
-    />
-    <div class="content px-4 py-4 sm:px-12 sm:py-6 w-full">
-      <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {
-          LinksItems.map((item) => (
-            <LinksItem
-              link={item.link}
-              avatar={item.avatar}
-              name={item.name}
-              description={item.description}
-            />
-          ))
-        }
-      </div>
+  <PageBanner
+    title={LinksPageProps.title}
+    description={LinksPageProps.description}
+    imgsrc={LinksPageProps.banner}
+    select={1}
+  />
+  <div class="content px-4 py-4 sm:px-12 sm:py-6 w-full">
+    <div class="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {
+        LinksItems.map((item) => (
+          <LinksItem
+            link={item.link}
+            avatar={item.avatar}
+            name={item.name}
+            description={item.description}
+          />
+        ))
+      }
     </div>
-    <div class="px-4 pb-6 sm:px-12 mt-6">
-      <TitleWithUnderline title="评论" />
-      <div id="twikoo"></div>
-    </div>
-  </main>
+  </div>
+  <div class="px-4 pb-6 sm:px-12 mt-6">
+    <TitleWithUnderline title="评论" />
+    <div id="twikoo"></div>
+  </div>
 </Layout>

@@ -35,22 +35,18 @@ export async function getStaticPaths({ paginate }: { paginate: Function }) {
 const { page } = Astro.props;
 ---
 
-<Layout title={`${BlogName} - ${PostPageProps.title} - ${page.currentPage}`}>
-  <main
-    class="sm:mt-24 mt-16 sm:min-h-0 min-h-main mx-0 sm:mx-16 lg:mx-auto max-w-4xl shadow-lg rounded-sm bg-primary"
-  >
-    <PageBanner
-      title={PostPageProps.title}
-      description={PostPageProps.description}
-      imgsrc={PostPageProps.banner}
-      select={0}
+<Layout title={`${BlogName} - ${PostPageProps.title}`}>
+  <PageBanner
+    title={PostPageProps.title}
+    description={PostPageProps.description}
+    imgsrc={PostPageProps.banner}
+    select={0}
+  />
+  <div class="content px-4 py-4 sm:px-12 sm:py-6 w-full">
+    <PostList posts={page.data} />
+    <Pagination
+      prevUrl={page.url.prev ? page.url.prev : "/"}
+      nextUrl={page.url.next}
     />
-    <div class="content px-4 py-4 sm:px-12 sm:py-6 w-full">
-      <PostList posts={page.data} />
-      <Pagination
-        prevUrl={page.url.prev ? page.url.prev : "/"}
-        nextUrl={page.url.next}
-      />
-    </div>
-  </main>
+  </div>
 </Layout>
