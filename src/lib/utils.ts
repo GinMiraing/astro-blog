@@ -10,6 +10,15 @@ export const bindFancybox = (groupAll: boolean) => {
   Fancybox.bind("[data-fancybox]", {
     groupAll: groupAll,
     Thumbs: false,
+    Carousel: {
+      transition: "slide",
+    },
+    Images: {
+      zoom: false,
+    },
+    showClass: "f-fadeSlowIn",
+    hideClass: "f-fadeSlowOut",
+    wheel: "slide",
     Toolbar: {
       display: {
         left: [],
