@@ -16,7 +16,7 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: "Noto Serif SC", sans-serif;
+    font-family: "LXGW WenKai", sans-serif;
     font-size: 16px;
   }
   body {
@@ -63,7 +63,7 @@
   }
   .markdown h2 {
     @apply text-lg sm:text-xl;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 0.75rem;
     width: auto;
     display: inline-block;
@@ -169,7 +169,7 @@
   }
   .twikoo .tk-comments-count {
     @apply text-lg sm:text-xl;
-    font-weight: 600;
+    font-weight: 700;
     width: auto;
     display: inline-block;
     position: relative;
