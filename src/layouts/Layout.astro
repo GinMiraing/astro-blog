@@ -56,7 +56,7 @@ const { title } = Astro.props;
         const twikooElement = document.querySelector("#twikoo");
         if (twikooElement) {
           window.twikoo.init({
-            envId: "https://twikoo.zengjunyin.com",
+            envId: `${import.meta.env.PUBLIC_TWIKOO_HOST}`,
             el: "#twikoo",
             lang: "zh-CN",
           });
