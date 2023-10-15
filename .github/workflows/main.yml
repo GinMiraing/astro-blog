@@ -24,6 +24,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
+          build-args: |
+            twikoo_host: ${{ secrets.TWIKOO_HOST }}
           tags: |
             ginmiraing/blog:${{ github.ref_name }}
             ginmiraing/blog:latest
