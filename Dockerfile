@@ -1,8 +1,8 @@
 FROM node:18-slim AS build
 WORKDIR /app
 COPY . .
-ARG twikoo_host ""
-ENV PUBLIC_TWIKOO_HOST $twikoo_host
+ARG twikoo_host=""
+ENV PUBLIC_TWIKOO_HOST=$twikoo_host
 RUN npm i
 RUN npm run build
 
