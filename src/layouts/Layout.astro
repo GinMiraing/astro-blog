@@ -36,7 +36,7 @@ const { title } = Astro.props;
           if (entry.isIntersecting) {
             const image = entry.target as HTMLImageElement;
             const imageSrc = image.dataset.src as string;
-            image.classList.remove("lazyload");
+            image.classList.remove("lazyload", "opacity-0", "blur-lg");
             image.setAttribute("src", imageSrc);
             observer.unobserve(image);
           }

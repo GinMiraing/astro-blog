@@ -20,7 +20,7 @@
     font-size: 16px;
   }
   body {
-    background-image: url("/9B54A4959F1F0AB9DDB324F5CE8195A5.png");
+    background-image: url("https://cdn.zengjunyin.com/9B54A4959F1F0AB9DDB324F5CE8195A5.png");
     background-repeat: repeat;
     background-color: var(--body-bg);
     background-attachment: fixed;
@@ -49,6 +49,9 @@
 
   .markdown * {
     margin: 1rem 0;
+  }
+  .markdown img {
+    margin: 0;
   }
   .markdown a {
     color: var(--primary);

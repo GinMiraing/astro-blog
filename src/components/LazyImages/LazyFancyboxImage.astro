@@ -20,7 +20,7 @@ const placeholder = `https://article.biliimg.com/bfs/article/18d1e2d11b9e00ea443
 
 <div class={cn("h-full w-full overflow-hidden", className)}>
   <a
-    class="hover:brightness-90 transition-all"
+    class="hover:brightness-90 transition-all overflow-hidden"
     data-fancybox
     data-caption={alt ? alt : ""}
     href={src}
@@ -28,7 +28,7 @@ const placeholder = `https://article.biliimg.com/bfs/article/18d1e2d11b9e00ea443
     <img
       data-src=`${src}@${srcSuffix}`
       src={placeholder}
-      class="lazyload object-cover h-full w-full"
+      class="lazyload object-cover h-full w-full blur-lg opacity-0 transition-all duration-700"
       alt={alt ? alt : ""}
     />
   </a>
