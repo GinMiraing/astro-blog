@@ -50,6 +50,9 @@
   .markdown * {
     margin: 1rem 0;
   }
+  .markdown img {
+    margin: 0;
+  }
   .markdown a {
     color: var(--primary);
   }
